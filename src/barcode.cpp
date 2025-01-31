@@ -52,7 +52,7 @@ void checkLuckyReward(const string& barcode) {
 
     bool hasReward = false;  
 
-    cout << "\nCheck Your Lucky Rewards:\n";  
+    cout << "\n"; 
 
     if (lastTwoDigits == luckyTwo) {  
         cout << "Congratulations! You won with the last 2 digits: " << luckyTwo << "!\n";  
