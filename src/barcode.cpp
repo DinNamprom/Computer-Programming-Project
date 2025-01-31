@@ -56,17 +56,20 @@ void checkLuckyReward(const string& barcode) {
 
     if (lastTwoDigits == luckyTwo) {  
         cout << "Congratulations! You won with the last 2 digits: " << luckyTwo << "!\n";  
-        hasReward = true;  
+        hasReward = true;
+        cout << "You won a free softdink!\n";  
     }  
 
     if (lastThreeDigits == luckyThree) {  
         cout << "Congratulations! You won with the last 3 digits: " << luckyThree << "!\n";  
-        hasReward = true;  
+        hasReward = true;
+        cout << "You won a free meal!\n";  
     }  
 
     if (barcode == luckyFull) {  
         cout << "Jackpot! You won with the full barcode: " << luckyFull << "!\n";  
         hasReward = true;  
+        cout << "You won a free 10 meal or you can exchange to 18$!\n";
     }  
 
     if (!hasReward) {  
