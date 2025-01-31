@@ -1,5 +1,5 @@
-# Project_Compro_Hellfire
+# Group name: Project_Compro_Hellfire
  
-# hniiigga
-
-# ninja
+# A project for Computer Programming 261102 from Chiang Mai University 
+# Project Member:
+# 
