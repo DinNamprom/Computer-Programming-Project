@@ -41,8 +41,8 @@ int main() {
     string barcode = generateBarcodeNumber(barcodeLength);  
     string formattedBarcode = convertToBarcodeFormat(barcode);  
 
-    cout << "Generated Barcode Number: " << barcode << endl;  
-    cout << "Barcode Representation: " << formattedBarcode << endl;  
+    cout << formattedBarcode << endl;  
+    cout << barcode << endl;  
 
     return 0;  
 }  
