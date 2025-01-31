@@ -70,7 +70,7 @@ void checkLuckyReward(const string& barcode) {
     }  
 
     if (!hasReward) {  
-        cout << "Sorry, no rewards this time.\n";  
+        cout << "Sorry, you didn't win the rewards.\n";  
     }  
 }  
 
