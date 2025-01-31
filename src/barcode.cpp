@@ -7,7 +7,7 @@ using namespace std;
 string generateBarcodeNumber(int length = 12) {  
     string barcode = "";  
     for (int i = 0; i < length; i++) {  
-        barcode += std::to_string(rand() % 10); 
+        barcode += to_string(rand() % 10); 
     }  
     return barcode;  
 }  
