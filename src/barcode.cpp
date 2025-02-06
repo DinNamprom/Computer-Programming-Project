@@ -44,7 +44,8 @@ string generateLuckyReward(int length) {
 
 void checkLuckyReward(const string& barcode) {  
     string lastTwoDigits = barcode.substr(barcode.length() - 2);  
-    string lastThreeDigits = barcode.substr(barcode.length() - 3);  
+    string lastThreeDigits = barcode.substr(barcode.length() - 3);
+    string FullDigits = barcode.substr(barcode.length() - 12);  
 
     string luckyTwo = generateLuckyReward(2);  
     string luckyThree = generateLuckyReward(3);  
@@ -54,25 +55,32 @@ void checkLuckyReward(const string& barcode) {
 
     cout << "\n"; 
 
-    if (lastTwoDigits == luckyTwo) {  
-        cout << "Congratulations! You won with the last 2 digits: " << luckyTwo << "!\n";  
+    if (lastTwoDigits == luckyTwo) {
+        cout << "            ";  
+        cout << "Congratulations! You won with the last 2 digits: " << luckyTwo << "\n";  
         hasReward = true;
+        cout << "                        ";
         cout << "You won a free softdink!\n";  
     }  
 
     if (lastThreeDigits == luckyThree) {  
-        cout << "Congratulations! You won with the last 3 digits: " << luckyThree << "!\n";  
+        cout << "            ";
+        cout << "Congratulations! You won with the last 3 digits: " << luckyThree << "\n";  
         hasReward = true;
+        cout << "                           ";
         cout << "You won a free meal!\n";  
     }  
 
-    if (barcode == luckyFull) {  
-        cout << "Jackpot! You won with the full barcode: " << luckyFull << "!\n";  
+    if (FullDigits == luckyFull) {
+        cout << "                ";  
+        cout << "Jackpot! You won with the full barcode: " << luckyFull << "\n";  
         hasReward = true;  
+        cout << "            ";
         cout << "You won a free 10 meal or you can exchange to 18$!\n";
     }  
 
-    if (!hasReward) {  
+    if (!hasReward) { 
+        cout << "                    ";
         cout << "Sorry, you didn't win the rewards.\n";  
     }  
 }  
@@ -85,6 +93,7 @@ int main() {
     string formattedBarcode = convertToBarcodeFormat(barcode);  
 
     cout << formattedBarcode << endl;  
+    cout << "                               ";
     cout << barcode << endl;  
     checkLuckyReward(barcode);
     return 0;  
