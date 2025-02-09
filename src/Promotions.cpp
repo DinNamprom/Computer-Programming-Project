@@ -18,28 +18,53 @@ using namespace std;
 //     }
 //    return 0;
 // }
-
-int promotion(string id) {
-    string Test = id;
+string buy1get1(string x) {
+    string id = x;
     cout << "loading data..." << endl;
-    int n = 0;
-    countorder("..\\data\\promotion\\buy1get1.txt", n);
+    int n=0;
+    countorder("..\\data\\promotion\\buy1get1.txt",n);
     string buy1get1[n];
-    readorder("..\\data\\promotion\\buy1get1.txt", n, buy1get1);
-    cout << "loading data succesful" << endl;
-    for (int i = 0; i < n; i++) {
+    readorder("..\\data\\promotion\\buy1get1.txt",n, buy1get1);
+    cout << "loading data succesfull" << endl;
+    for (int i=0;i<n;i++) {
         cout << buy1get1[i] << endl;
-        if (buy1get1[i] == Test) {
+        if (buy1get1[i] == id) {
             cout << "Item " << id << " is eligible for Buy 1 Get 1 promotion." << endl; 
-            return 1; 
+            return id; 
         }
     }
     cout << "Item " << id << " is not eligible for Buy 1 Get 1 promotion." << endl;
-    return 0; 
+    return "";
+
 }
 
+string getPoints(string x) {
+    string id = x;
+    cout << "loading data..." << endl;
+    int n=0;
+    countorder("..\\data\\promotion\\getPoints.txt",n);
+    string getPoints[n];
+    readorder("..\\data\\promotion\\getPoints.txt",n, getPoints);
+    cout << "loading data succesfull" << endl;
+    for (int i=0;i<n;i++) {
+        cout << getPoints[i] << endl;
+        if (getPoints[i] == id) {
+            cout << "Item " << id << " is eligible for Get Points promotion." << endl; 
+            return id; 
+        }
+    }
+    cout << "Item " << id << " is not eligible for Get Points promotion." << endl;
+    return "";
+}
+
+void checkpromotion(string x) {
+    buy1get1(x);
+    cout << "----------------------" << endl;
+    getPoints(x);
+    }
+
 int main() {
-    string id = "S01";
-    promotion(id);
+    string id = "SDDD";
+    checkpromotion(id);
     return 0;
 }
