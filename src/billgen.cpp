@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #include "barcode.cpp"
 #include <windows.h>
-#pragma comment(lib, "winmm.lib")
+// #pragma comment(lib, "winmm.lib")
 using namespace std;
 
     string filePath = "C:\\Users\\mrcat\\Compro\\Computer-Programming-Project\\src\\bill.txt";
@@ -9,14 +9,19 @@ using namespace std;
 
 void playSound(const string& soundPath) {
     string command = "open \"" + soundPath + "\" type mpegvideo alias mySound";
-    mciSendString(command.c_str(), NULL, 0, NULL);
-    mciSendString("play mySound", NULL, 0, NULL); // เล่นเสียงใน Background
+    // mciSendString(command.c_str(), NULL, 0, NULL);
+    // mciSendString("play mySound", NULL, 0, NULL); // เล่นเสียงใน Background
 }
 
 int main(){
     ofstream bill;
     bill.open ("C:\\Users\\mrcat\\Compro\\Computer-Programming-Project\\src\\bill.txt");
-    bill << "This is the bill\n";
+    bill << "██╗   ██╗  ██████╗ ██╗   ██╗██████╗     ██████╗ ██╗██╗     ██╗     \n";
+    bill << "╚██╗ ██╔╝ ██╔═══██╗██║   ██║██╔══██╗    ██╔══██╗██║██║     ██║     \n";
+    bill << " ╚████╔╝  ██║   ██║██║   ██║██████╔╝    ██████╔╝██║██║     ██║     \n";
+    bill << "  ╚██╔╝   ██║   ██║██║   ██║██╔══██╗    ██╔══██╗██║██║     ██║     \n";
+    bill << "   ██║    ╚██████╔╝╚██████╔╝██║  ██║    ██████╔╝██║███████╗███████╗\n";
+    bill << "   ╚═╝     ╚═════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═════╝ ╚═╝╚══════╝╚══════╝\n";
 
     srand(time(0)); 
 
