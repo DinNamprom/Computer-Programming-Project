@@ -14,7 +14,7 @@ struct order{
     double price;
 };
 
-void input_order(vector<order> &list,vector<data> d) {
+void input_order(vector<order> &list,vector<product_data> d) {
     order o;
     unsigned int a,n;
     do{
@@ -33,7 +33,7 @@ void input_order(vector<order> &list,vector<data> d) {
 }
 
 void input_product(string filename,vector<product_data> &list) {
-    data d;
+    product_data d;
     ifstream source;
     string text;
     source.open(filename);
@@ -44,6 +44,7 @@ void input_product(string filename,vector<product_data> &list) {
         d.name = tempn;
         list.push_back(d);
     }
+    
     cout << "reading succesfull..." << endl;
     source.close();
 }
