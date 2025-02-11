@@ -33,7 +33,7 @@ void readorder(string filename, int n, string list[]) {
     source.close();
 }
 
-void input_data(string filename,vector<data> &list) {
+void input_product(string filename,vector<data> &list) {
     data d;
     ifstream source;
     string text;
@@ -51,7 +51,7 @@ void input_data(string filename,vector<data> &list) {
 
 int main() {
     vector<data> product;
-    input_data("..\\data\\products\\product_data.txt",product);
+    input_product("..\\data\\products\\product_data.txt",product);
     cout << "-------------------------------------------------------------" << endl;
     cout << left << setw(35) << "product";
     cout << left << setw(17) << "code";
