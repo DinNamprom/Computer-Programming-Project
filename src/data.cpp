@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct data{
+struct product_data{
     string name;
     int code;
     double price;
@@ -30,10 +30,9 @@ void input_order(vector<order> &list,vector<data> d) {
         o.price *= n;
         list.push_back(o);
     }while (a != 0);
-    
 }
 
-void input_product(string filename,vector<data> &list) {
+void input_product(string filename,vector<product_data> &list) {
     data d;
     ifstream source;
     string text;
@@ -50,7 +49,7 @@ void input_product(string filename,vector<data> &list) {
 }
 
 int main() {
-    vector<data> product;
+    vector<product_data> product;
     vector<order> customer_order;
     input_product("..\\data\\products\\product_data.txt",product);
     cout << "-----------------------------------------------------------" << endl;
@@ -73,7 +72,7 @@ int main() {
     cout << left << setw(5) << "price" << endl;
     for (unsigned int i = 0;i < customer_order.size();i++) {
         cout << left << i+1 << setw(2) << ".";
-        cout << left << setw(30) << customer_order[i].name;
+        cout << left << setw(31) << customer_order[i].name;
         cout << left << setw(15) << customer_order[i].code;
         cout << left << setw(15) << customer_order[i].n;
         cout << left << setw(5) << fixed << setprecision(2) << customer_order[i].price << "$" << endl;
