@@ -3,16 +3,12 @@
 using namespace std;
 
 int main() {
-    cout << "loading data..." << endl;
-    int n=0;
-    countorder("data\\products\\names.txt",n);
-    string name[n],code[n],price[n];
-    readorder("data\\products\\names.txt",n, name);
-    readorder("data\\products\\code.txt",n, code);
-    readorder("data\\products\\price.txt",n, price);
-    cout << "loading data succesfull" << endl;
-    for (int i=0;i<n;i++) {
-        cout << name[i] << ":" << code[i] << " " << price[i] << " baht" << endl;
+    vector<data> product;
+    input_data("data\\products\\product_data.txt",product);
+    for (unsigned int i = 0;i < product.size();i++) {
+        cout << left << setw(20) << product[i].name;
+        cout << left << setw(20) << product[i].code;
+        cout << left << setw(20) << setprecision(2) << product[i].price << endl;
     }
     return 0;
 }
