@@ -43,11 +43,11 @@ string generateLuckyReward(int length) {
 }  
 
 void checkLuckyReward(const string& barcode) {  
-    string lastTwoDigits = barcode.substr(barcode.length() - 2);  
+    string lastTwoDigits = barcode.substr(barcode.length() - 1);  
     string lastThreeDigits = barcode.substr(barcode.length() - 3);
     string FullDigits = barcode.substr(barcode.length() - 12);  
 
-    string luckyTwo = generateLuckyReward(2);  
+    string luckyTwo = generateLuckyReward(1);  
     string luckyThree = generateLuckyReward(3);  
     string luckyFull = generateLuckyReward(12);  
 
@@ -93,7 +93,7 @@ int main() {
     string formattedBarcode = convertToBarcodeFormat(barcode);  
 
     cout << formattedBarcode << endl;  
-    cout << "                               ";
+    cout << "                              ";
     cout << barcode << endl;  
     checkLuckyReward(barcode);
     return 0;  
