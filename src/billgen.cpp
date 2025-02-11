@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #include "barcode.cpp"
 #include <windows.h>
+#include "..\calculator\calculate.cpp"
 // #pragma comment(lib, "winmm.lib")
 using namespace std;
 
@@ -24,6 +25,11 @@ int main(){
     bill << "   ╚═╝     ╚═════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═════╝ ╚═╝╚══════╝╚══════╝\n";
 
     srand(time(0)); 
+
+    //จาก cal
+    bill << "Total:                                                             " << sumProduct(goods,arrSize) << "\n";
+    bill << "vat:                                                               " << vat7(sumProduct(goods,arrSize)) << "\n";
+    bill << "Total+vat:                                                         " << calculator(goods,arrSize) << endl;
 
     //จาก barcode.cpp
     int barcodeLength = 12; 
