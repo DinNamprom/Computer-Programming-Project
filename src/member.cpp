@@ -9,21 +9,41 @@ struct member{
 
 
 void login(vector<member> x){
-
+    int tel;
+    int i = 0;
+    cin >> tel;
+    while(tel == x[i].tel){
+        i++;
+        if(i > x.size()){
+            cout << "Not found";
+            break;
+        }
+    }
+    cout << x[i].name;
 }
 
-// void sign_in(int tel, string name){
-//     cout << "Enter your phone number : " << endl;
-//     cin >> tel;
-//     cout << "Emter your name : " << endl;
-//     cin >> name;
-// }
+void input_member(string filename,vector<member> &list) {
+    member d;
+    ifstream source;
+    string text;
+    source.open(filename);
+    cout << "reading file..." << endl;
+    while (getline(source, text)) {
+        char tempn[99];
+		sscanf(text.c_str(),"%d,%99[^,],%d",&d.tel,tempn,&d.point);
+        d.name = tempn;
+        list.push_back(d);
+    }
+    cout << "reading succesfull..." << endl;
+    source.close();
+}
+
 
 void signin(vector<member> x){
     member d;
     cout << "Enter your phone number : " << endl;
     cin >> d.tel;
-    cout << "Emter your name : " << endl;
+    cout << "Enter your name : " << endl;
     cin >> d.name;
 
     x.push_back(d);
@@ -33,8 +53,8 @@ void signin(vector<member> x){
 
 int main(){
     string ans;
-    member y;
-    vector<member> x;
+    vector<member> x ;
+    input_member("..\\data\\membersN.txt",x);
 
         cout << "Do you have membership ?" << endl;
         cin >> ans;
@@ -45,10 +65,8 @@ int main(){
     }
 
     if(ans == "Yes" || ans == "yes"){
-        cout << "Enter your phone number : " << endl;
-        cin >> y.tel;
-        cout << "Enter your name : " << endl;
-        cin >> y.name;
+
+        
         //----------- แสดงแต้มหลังจากบรรทัดนี้ ------------
 
 
@@ -65,5 +83,12 @@ int main(){
             cout << "OK"; // cancelled
         }
     
+    }
+
+    for (unsigned int i = 0;i < x.size();i++) {
+        cout << left << i+1 << setw(2) << ".";
+        cout << left << setw(15) << x[i].tel;
+        cout << left << setw(15) << x[i].name;
+        cout << left << setw(15)  << x[i].point << endl;
     }
 }
