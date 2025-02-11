@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-#include "barcode.cpp"
-#include <windows.h>
-#include "..\calculator\calculate.cpp"
+// #include <windows.h>
+// #include "..\calculator\calculate.cpp"
+// #include "..\data\order.txt"
 // #pragma comment(lib, "winmm.lib")
 using namespace std;
 
@@ -15,8 +15,18 @@ void playSound(const string& soundPath) {
 }
 
 int main(){
+
+    int N = 70;
+
+    ifstream source;
+    source.open("C:\\Users\\mrcat\\Compro\\Computer-Programming-Project\\data\\order.txt");
+
+    string textline;
+    int textlength = textline.length();
+
     ofstream bill;
-    bill.open ("C:\\Users\\mrcat\\Compro\\Computer-Programming-Project\\src\\bill.txt");
+    bill.open("C:\\Users\\mrcat\\Compro\\Computer-Programming-Project\\src\\bill.txt");
+
     bill << "██╗   ██╗  ██████╗ ██╗   ██╗██████╗     ██████╗ ██╗██╗     ██╗     \n";
     bill << "╚██╗ ██╔╝ ██╔═══██╗██║   ██║██╔══██╗    ██╔══██╗██║██║     ██║     \n";
     bill << " ╚████╔╝  ██║   ██║██║   ██║██████╔╝    ██████╔╝██║██║     ██║     \n";
@@ -24,21 +34,32 @@ int main(){
     bill << "   ██║    ╚██████╔╝╚██████╔╝██║  ██║    ██████╔╝██║███████╗███████╗\n";
     bill << "   ╚═╝     ╚═════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═════╝ ╚═╝╚══════╝╚══════╝\n";
 
-    srand(time(0)); 
+    while(getline(source,textline)){
+        cout << "1";
+        bill << "|";
+        int textlength = textline.length();
+        bill << textline;
+        for(int i = 0; i < N-textlength; i++){
+            bill << " ";
+
+        }
+        bill << "|\n";
+    }
 
     //จาก cal
-    bill << "Total:                                                             " << sumProduct(goods,arrSize) << "\n";
-    bill << "vat:                                                               " << vat7(sumProduct(goods,arrSize)) << "\n";
-    bill << "Total+vat:                                                         " << calculator(goods,arrSize) << endl;
+    // bill << "Total:                                                             " << sumProduct(goods,arrSize) << "\n";
+    // bill << "vat:                                                               " << vat7(sumProduct(goods,arrSize)) << "\n";
+    // bill << "Total+vat:                                                         " << calculator(goods,arrSize) << endl;
 
     //จาก barcode.cpp
-    int barcodeLength = 12; 
-    string barcode = generateBarcodeNumber(barcodeLength);  
-    string formattedBarcode = convertToBarcodeFormat(barcode);  
-    bill << formattedBarcode << endl;  
-    bill << "                               ";
-    bill << barcode << endl;  
-    checkLuckyReward(barcode);
+    // srand(time(0)); 
+    // int barcodeLength = 12; 
+    // string barcode = generateBarcodeNumber(barcodeLength);  
+    // string formattedBarcode = convertToBarcodeFormat(barcode);  
+    // bill << formattedBarcode << endl;  
+    // bill << "                               ";
+    // bill << barcode << endl;  
+    // checkLuckyReward(barcode);
 
     bill.close();
     
@@ -46,7 +67,7 @@ int main(){
     system(("code " + filePath).c_str());
 
     // เล่นเสียงเอฟเฟกต์
-    playSound(soundPath);
+    // playSound(soundPath);
 
     cout << "Texted!";
     return 0;
