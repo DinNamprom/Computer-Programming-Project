@@ -18,11 +18,11 @@ int main(){
 
     int N = 70;
 
-    ifstream source;
-    source.open("C:\\Users\\mrcat\\Compro\\Computer-Programming-Project\\data\\order.txt");
+    ifstream source1,source2;
+    source1.open("C:\\Users\\mrcat\\Compro\\Computer-Programming-Project\\data\\products\\names.txt");
+    source2.open("C:\\Users\\mrcat\\Compro\\Computer-Programming-Project\\data\\products\\price.txt");
 
-    string textline;
-    int textlength = textline.length();
+    string textline1,textline2;
 
     ofstream bill;
     bill.open("C:\\Users\\mrcat\\Compro\\Computer-Programming-Project\\src\\bill.txt");
@@ -34,15 +34,17 @@ int main(){
     bill << "   ██║    ╚██████╔╝╚██████╔╝██║  ██║    ██████╔╝██║███████╗███████╗\n";
     bill << "   ╚═╝     ╚═════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═════╝ ╚═╝╚══════╝╚══════╝\n";
 
-    while(getline(source,textline)){
-        cout << "1";
+    while(getline(source1,textline1)){
         bill << "|";
-        int textlength = textline.length();
-        bill << textline;
-        for(int i = 0; i < N-textlength; i++){
+        getline(source2,textline2);
+        int namelength = textline1.length();
+        int pricelength = textline2.length();
+        bill << textline1;
+        for(int i = 0; i < N-(namelength+pricelength); i++){
             bill << " ";
 
         }
+        bill << textline2;
         bill << "|\n";
     }
 
