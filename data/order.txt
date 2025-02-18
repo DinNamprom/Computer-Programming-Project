@@ -1,3 +1,5 @@
-Lays Original
-Lays Sea Weed
-Lays Sourcream
+Lays Original,2
+Lays Sea Weed,1
+Lays Sourcream,1
+Lays Larb,1
+Lay Prick Noom,1

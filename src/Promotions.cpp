@@ -26,8 +26,9 @@ string buy1get1(string x) {
     string buy1get1[n];
     readorder("..\\data\\promotion\\buy1get1.txt",n, buy1get1);
     cout << "loading data succesfull" << endl;
+    cout << "Promotion: Buy 1 Get 1" << endl;
     for (int i=0;i<n;i++) {
-        cout << buy1get1[i] << endl;
+        cout << i+1 << ". " << buy1get1[i] << endl;
         if (buy1get1[i] == id) {
             cout << "Item " << id << " is eligible for Buy 1 Get 1 promotion." << endl; 
             return id; 
@@ -46,8 +47,9 @@ string getPoints(string x) {
     string getPoints[n];
     readorder("..\\data\\promotion\\getPoints.txt",n, getPoints);
     cout << "loading data succesfull" << endl;
+    cout << "Promotion getpoints" << endl;
     for (int i=0;i<n;i++) {
-        cout << getPoints[i] << endl;
+        cout << i+1<< ". "<< getPoints[i] << endl;
         if (getPoints[i] == id) {
             cout << "Item " << id << " is eligible for Get Points promotion." << endl; 
             return id; 
@@ -64,7 +66,9 @@ void checkpromotion(string x) {
     }
 
 int main() {
-    string id = "SDDD";
+    string id;
+    cout << "Enter product id: ";
+    cin >> id;
     checkpromotion(id);
     return 0;
 }
