@@ -38,9 +38,13 @@ void input_order(vector<order> &list,vector<product_data> d) {
     order o;
     unsigned int a,n;
     do{
-        cout << "input number of product you want: ";
+        cout << "input number of product you want (key 0 to exite): ";
         cin >> a;
         if (a == 0) continue;
+        if (a > d.size()) {
+            cout << "Please input number in range of " << d.size() << endl;
+            continue;
+        }
         o.name = d[a-1].name;
         o.code = d[a-1].code;
         o.price = double(d[a-1].price);
