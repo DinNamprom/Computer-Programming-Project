@@ -2,35 +2,3 @@
 ╚██╗ ██╔╝ ██╔═══██╗██║   ██║██╔══██╗    ██╔══██╗██║██║     ██║     
  ╚████╔╝  ██║   ██║██║   ██║██████╔╝    ██████╔╝██║██║     ██║     
   ╚██╔╝   ██║   ██║██║   ██║██╔══██╗    ██╔══██╗██║██║     ██║     
-   ██║    ╚██████╔╝╚██████╔╝██║  ██║    ██████╔╝██║███████╗███████╗
-   ╚═╝     ╚═════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═════╝ ╚═╝╚══════╝╚══════╝
-|Lays Original                                                       15|
-|Lays Sea Weed                                                       15|
-|Lays Sourcream                                                      15|
-|Lays BBQ                                                            15|
-|Dozo Original                                                       13|
-|Dozo Corn & Cheese                                                  13|
-|Dozo Sea Weed                                                       13|
-|Pringles Original                                                   20|
-|Pringles Sea Weed                                                   20|
-|Pringles BBQ                                                        20|
-|Coke Original                                                       12|
-|Coke Coffee                                                         12|
-|Coke Zero                                                           12|
-|Papsi Original                                                      12|
-|Papsi Zero                                                          12|
-|Ichitun Original                                                    14|
-|Ichitun Honey Lemon                                                 14|
-|Ichitun Rice                                                        14|
-|Origami Spicy Salmon                                                20|
-|Origami Salt Salmon                                                 20|
-|Origami Shrimp Eggs                                                 20|
-|Bolgogi Original                                                    27|
-|Bolgogi Gimji                                                       27|
-|Mama Tom yum                                                         9|
-|Mama Moo sub                                                         9|
-|Knor Pork porridge                                                  12|
-|Knor Pork congee                                                    12|
-|Knor Chicken porridge                                               12|
-|Knor Chicken porridge                                               12|
-|Knor Mash Potato                                                    24|
