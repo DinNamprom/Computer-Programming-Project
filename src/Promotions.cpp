@@ -3,6 +3,12 @@
 
 using namespace std;
 
+struct point_data {
+    string name;
+    int code;
+    int poins;
+};
+
 struct Item {
     int id;
     string name;
@@ -16,7 +22,7 @@ struct Item {
 
 // ฟังก์ชันแสดงรายการสินค้า
 void display(const vector<Item>& items) {
-    cout << "ID\tName\tQuantity\tValue\tB1G1\tpoints\tDisco\tfreeItem\n";
+    cout << "ID\tName\tQuantity\tValue\tB1G1\tpoints\tdiscount\tfreeItem\n";
     for (const auto& item : items) {
         cout << item.id << "\t" << item.name << "\t" 
              << item.quantity << "\t\t" << item.value << "\t"
@@ -63,6 +69,23 @@ unordered_set<int> readBuyOneGetOneFile(const string& filename) {
     return eligibleItems;
 }
 
+// ฟังก์ชันอ่านไฟล์เพื่อหาไอดีสินค้าที่มีคะแนน
+vector<point_data> readGetPoinsFile(const string& filename) {
+    vector<point_data> pointList;
+    ifstream source(filename);
+    string text;
+    cout << "reading file..." << endl;
+    while (getline(source, text)) {
+        point_data d;
+        sscanf(text.c_str(), "%d,%d", &d.code, &d.poins);
+        pointList.push_back(d);
+    }
+    for (const auto& point : pointList) {
+        cout << point.code << " " << point.poins << endl;
+    }
+    return pointList;
+}
+
 // ฟังก์ชัน Buy 1 Get 1
 void buyOneGetOne(vector<Item>& items, const unordered_set<int>& eligibleItems) {
     for (auto& item : items) {
@@ -74,20 +97,30 @@ void buyOneGetOne(vector<Item>& items, const unordered_set<int>& eligibleItems) 
 }
 
 // ฟังก์ชันรับ std::vector<Item> และแสดงผล
-void processItems(vector<Item>& items, const unordered_set<int>& eligibleItems) {
+void processItems(vector<Item>& items, const unordered_set<int>& eligibleItems, const vector<point_data>& pointList) {
     cout << "\nProcessing Items...\n";
     display(items);
 
     // ใช้โปรโมชั่น Buy 1 Get 1
     buyOneGetOne(items, eligibleItems);
 
-    cout << "\nAfter Buy 1 Get 1 Promotion:\n";
+    // กำหนดคะแนนให้กับสินค้า
+    for (auto& item : items) {
+        for (const auto& point : pointList) {
+            if (item.id == point.code) {
+                item.points = point.poins;
+                break;
+            }
+        }
+    }
+
+    cout << "\nAfter Promotions:\n";
     display(items);
 }
 
 int main() {
     vector<Item> items = {
-        {106, "Apple", 3, 21, false, 0, 0, 0},
+        {101, "Apple", 3, 21, false, 0, 0, 0},
         {102, "Banana", 1, 12, false, 0, 0, 0},
         {103, "Orange", 2, 15, false, 0, 0, 0},
         {104, "Grapes", 4, 30, false, 0, 0, 0},
@@ -96,8 +129,10 @@ int main() {
 
     // อ่านไฟล์ไอดีสินค้าที่เข้าร่วมโปรโมชัน
     unordered_set<int> eligibleItems = readBuyOneGetOneFile("..\\data\\promotion\\buy1get1.txt");
+    vector<point_data> pointList = readGetPoinsFile("..\\data\\promotion\\getpoints.txt");
+
     // ส่ง items เข้าไปในฟังก์ชัน
-    processItems(items, eligibleItems);
+    processItems(items, eligibleItems, pointList);
 
     return 0;
 }
