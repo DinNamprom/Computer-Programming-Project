@@ -2,6 +2,7 @@
 #include <cstdlib>  
 #include <ctime>  
 #include <unordered_map>  
+#include <time.h>
 using namespace std;
 
 string generateBarcodeNumber(int length = 12) {  
@@ -34,11 +35,15 @@ string convertToBarcodeFormat(const string& barcode) {
     return formattedBarcode;  
 }  
 
-string generateLuckyReward(int length) {  
-    string luckyNumber = "";  
-    for (int i = 0; i < length; i++) {  
-        luckyNumber += to_string(rand() % 10);  
-    }  
+// string generateLuckyReward(int length) {  
+//     string luckyNumber = "";  
+//     for (int i = 0; i < length; i++) {  
+//         luckyNumber += to_string(rand() % 10);  
+//     }  
+//     return luckyNumber;  
+// }  
+
+string luckyReward(const string& luckyNumber) {  
     return luckyNumber;  
 }  
 
@@ -47,10 +52,9 @@ void checkLuckyReward(const string& barcode) {
     string lastThreeDigits = barcode.substr(barcode.length() - 3);
     string FullDigits = barcode.substr(barcode.length() - 12);  
 
-    string luckyTwo = generateLuckyReward(2);  
-    string luckyThree = generateLuckyReward(3);  
-    string luckyFull = generateLuckyReward(12);  
-
+    string luckyTwo = luckyReward("55");  
+    string luckyThree = luckyReward("759");  
+    string luckyFull = luckyReward("123456789012");
     bool hasReward = false;  
 
     cout << "\n"; 
@@ -144,7 +148,7 @@ void randomPic(){
         cout << "                               `-. .:'  .-'                               \n";
         cout << "                                  \\    /                                  \n";
         cout << "                                   \\  /                                   \n";
-        cout << "                                    \\/                                    \n";
+        cout << "                                    \\/                                    ";
         
     }else if (rand()%10 == 2){
        cout << "\n"; 
@@ -276,9 +280,16 @@ void randomPic(){
     
     
 }
+
+int timenow(){
+    time_t now;
+    time(&now);
+    printf("\n%s", ctime(&now));
+    return 0;
+}
+
 int main() {  
     srand(time(0)); 
-
     int barcodeLength = 12; 
     string barcode = generateBarcodeNumber(barcodeLength);  
     string formattedBarcode = convertToBarcodeFormat(barcode);  
@@ -287,6 +298,8 @@ int main() {
     cout << "                              ";
     cout << barcode << endl;  
     checkLuckyReward(barcode);
-    randomPic();   
+    // randomPic();
+    timenow();
+
     return 0;  
 }  
