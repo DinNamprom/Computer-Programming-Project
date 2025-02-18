@@ -14,13 +14,37 @@ struct order{
     double price;
 };
 
+string toUpperCase(string str) {
+    transform(str.begin(), str.end(), str.begin(), ::toupper);
+    return str;
+}
+
+bool similar(const string a, const string b) {
+    double point=0;
+    for (int i=0;i<a.length();i++) {
+        char x = a[i];
+        for (int j=0;j<b.length();j++) {
+            if (x == b[i]) {
+                point += 1;
+                break;
+            }
+        }
+    }
+    if (point/b.length() >= 0.6) return true;
+    return false;
+}
+
 void input_order(vector<order> &list,vector<product_data> d) {
     order o;
     unsigned int a,n;
     do{
-        cout << "input number of product you want: ";
+        cout << "input number of product you want (key 0 to exite): ";
         cin >> a;
         if (a == 0) continue;
+        if (a > d.size()) {
+            cout << "Please input number in range of " << d.size() << endl;
+            continue;
+        }
         o.name = d[a-1].name;
         o.code = d[a-1].code;
         o.price = double(d[a-1].price);
@@ -37,23 +61,33 @@ void input_order_byfile(vector<order> &list,vector<product_data> d,string filepa
     ifstream source;
     string text;
     source.open(filepath);
+    if (!source) {
+        cerr << "Error: Unable to open file " << filepath << endl;
+        return;
+    }
     while (getline(source, text)) {
         char tempn[99];
-		sscanf(text.c_str(),"%99[^,],%d",tempn,&o.n);
+        if (sscanf(text.c_str(), "%99[^,],%d", tempn, &o.n) != 2) {
+            cerr << "Warning: Invalid line format -> " << text << endl;
+            continue;
+        }
         o.name = tempn;
         list.push_back(o);
     }
-    for (int i=0;i<list.size();i++) {
-        for (int j=0;j<d.size();j++) {
-            if (list[i].name == d[j].name) {
-                list[i].code = d[j].code;
-                list[i].price = d[j].price;
-                continue;
-            }else {
-                if (j == d.size()) {
-                    delete list[i].name.erase();
-                }
+    source.close();
+    for (int i = list.size() - 1; i >= 0; --i) {
+        bool found = false;
+        for (const auto& p : d) {
+            if (similar(toUpperCase(list[i].name),toUpperCase(p.name))) {
+                list[i].code = p.code;
+                list[i].price = p.price * list[i].n;
+                found = true;
+                break;
             }
+        }
+        if (!found) {
+            cout << "No match found. Removing order: " << list[i].name << endl;
+            list.erase(list.begin() + i);
         }
     }
 }
@@ -63,6 +97,10 @@ void input_product(string filename,vector<product_data> &list) {
     ifstream source;
     string text;
     source.open(filename);
+    if (!source) {
+        cerr << "Error: Unable to open file " << filename << endl;
+        return;
+    }
     cout << "reading file..." << endl;
     while (getline(source, text)) {
         char tempn[99];
@@ -75,45 +113,12 @@ void input_product(string filename,vector<product_data> &list) {
     source.close();
 }
 
-// int main() {
-//     vector<product_data> product;
-//     vector<order> customer_order;
-//     input_product("..\\data\\products\\product_data.txt",product);
-//     cout << "-----------------------------------------------------------" << endl;
-//     cout << left << setw(35) << "product";
-//     cout << left << setw(15) << "code";
-//     cout << left << setw(5) << "price" << endl;
-//     cout << "-----------------------------------------------------------" << endl;
-//     for (unsigned int i = 0;i < product.size();i++) {
-//         cout << left << i+1 << setw(2) << ".";
-//         cout << left << setw(35) << product[i].name;
-//         cout << left << setw(15) << product[i].code;
-//         cout << left << setw(5) << fixed << setprecision(2) << product[i].price << "$" << endl;
-//     }
-//     cout << "-----------------------------------------------------------" << endl;
-//     input_order(customer_order, product);
-//     cout << "--------------------------ORDER----------------------------" << endl;
-//     cout << left << setw(35) << "product";
-//     cout << left << setw(15) << "code";
-//     cout << left << setw(15) << "quantity";
-//     cout << left << setw(5) << "price" << endl;
-//     for (unsigned int i = 0;i < customer_order.size();i++) {
-//         cout << left << i+1 << setw(2) << ".";
-//         cout << left << setw(31) << customer_order[i].name;
-//         cout << left << setw(15) << customer_order[i].code;
-//         cout << left << setw(15) << customer_order[i].n;
-//         cout << left << setw(5) << fixed << setprecision(2) << customer_order[i].price << "$" << endl;
-//     }
-//     cout << "-----------------------------------------------------------" << endl;
-//     return 0;
-// }
 
 
 
-
-
-
+//////////////////////////////////////
 //////////////TERMINATED//////////////
+//////////////////////////////////////
 void countorder(string filename,int &n) {
     ifstream source;
     source.open(filename);
