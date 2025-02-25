@@ -23,12 +23,15 @@ struct Item {
 
 // ฟังก์ชันแสดงรายการสินค้า
 void display(const vector<Item>& items) {
-    cout << "Code\tName\tQuantity\tValue\tB1G1\tpoints\tdisco\tfreeItem\n";
+    cout << left << setw(10) << "Code" << left << setw(19) << "Name";
+    cout << left << setw(12)<< "Quantity" << left << setw(10) << "Value";
+    cout << left << setw(10)<< "B1G1" << left << setw(10) << "points"; 
+    cout << left << setw(10)<< "discount" << left << setw(10) << "freeItem" << "\n";
     for (const auto& item : items) {
-        cout << item.code << "\t" << item.name << "\t" 
-             << item.quantity << "\t\t" << item.value << "\t"
-             << item.BOGO << "\t" << item.points << "\t" 
-             << item.discount << "\t" << item.freeItem << "\n";
+        cout << left << setw(7) << item.code << left << setw(25) << item.name;
+        cout << left << setw(10)<< item.quantity << left << setw(10) << item.value;
+        cout << left << setw(10)<< item.BOGO << left << setw(10) << item.points; 
+        cout << left << setw(10)<< item.discount << left << setw(10) << item.freeItem << "\n";
     }
 }
 
@@ -56,7 +59,7 @@ unordered_set<int> readBuyOneGetOneFile(const string& filename) {
     countorder(filename, n);
     vector<string> buy1get1(n);
     readorder(filename, n, buy1get1.data());
-    cout << "Promotion: Buy 1 Get 1" << endl;
+    //cout << "Promotion: Buy 1 Get 1" << endl;
     for (int i = 0; i < n; ++i) {
         cout << i + 1 << ". " << buy1get1[i] << endl;
     }
@@ -75,15 +78,15 @@ vector<promotions_data> readGetPoinsFile(const string& filename) {
     vector<promotions_data> pointList;
     ifstream source(filename);
     string text;
-    cout << "reading file..." << endl;
+    //cout << "reading file..." << endl;
     while (getline(source, text)) {
         promotions_data d;
         sscanf(text.c_str(), "%d,%d", &d.code, &d.poins);
         pointList.push_back(d);
     }
-    for (const auto& point : pointList) {
-        cout << point.code << " " << point.poins << endl;
-    }
+    // for (const auto& point : pointList) {
+    //     cout << point.code << " " << point.poins << endl;
+    // }
     return pointList;
 }
 
@@ -92,15 +95,15 @@ vector<promotions_data> readDiscountFile(const string& filename) {
     vector<promotions_data> discountList;
     ifstream source(filename);
     string text;
-    cout << "reading file..." << endl;
+    //cout << "reading file..." << endl;
     while (getline(source, text)) {
         promotions_data Dis;
         sscanf(text.c_str(), "%d,%d", &Dis.code, &Dis.discount);
         discountList.push_back(Dis);
     }
-    for (const auto& discount : discountList) {
-        cout << discount.code << " " << discount.discount << endl;
-    }
+    // for (const auto& discount : discountList) {
+    //     cout << discount.code << " " << discount.discount << endl;
+    // }
     return discountList;
 }
 
@@ -109,15 +112,15 @@ vector<promotions_data> readFreeItemFile(const string& filename) {
     vector<promotions_data> freeList;
     ifstream source(filename);
     string text;
-    cout << "reading file..." << endl;
+    //cout << "reading file..." << endl;
     while (getline(source, text)) {
         promotions_data Fr;
         sscanf(text.c_str(), "%d,%d", &Fr.code, &Fr.freeItem);
         freeList.push_back(Fr);
     }
-    for (const auto& freeItem : freeList) {
-        cout << freeItem.code << " " << freeItem.freeItem << endl;
-    }
+    // for (const auto& freeItem : freeList) {
+    //     cout << freeItem.code << " " << freeItem.freeItem << endl;
+    // }
     return freeList;
 }
 

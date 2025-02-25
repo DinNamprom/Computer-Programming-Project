@@ -26,5 +26,5 @@ Mama Moo sub,7,125
 Knor Pork porridge,9,126
 Knor Pork congee,9,127
 Knor Chicken porridge,9,128
-Knor Chicken porridge,9,129
+Knor Chicken porridge plus Protein 95g,9,129
 Knor Mash Potato,20,130

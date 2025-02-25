@@ -104,7 +104,7 @@ void input_product(string filename,vector<product_data> &list) {
         cerr << "Error: Unable to open file " << filename << endl;
         return;
     }
-    cout << "reading file..." << endl;
+    //cout << "reading file..." << endl;
     while (getline(source, text)) {
         char tempn[99];
 		sscanf(text.c_str(),"%99[^,],%lf,%d",tempn,&d.price,&d.code);
@@ -112,7 +112,7 @@ void input_product(string filename,vector<product_data> &list) {
         list.push_back(d);
     }
     
-    cout << "reading succesfull..." << endl;
+    // cout << "reading succesfull..." << endl;
     source.close();
 }
 
