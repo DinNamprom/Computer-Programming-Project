@@ -212,26 +212,26 @@ vector<Item> convertOrdersToItems(const vector<order>& order) {
     return items;
 }
 
-int main() {
-    vector<order> orders = {
-        {"Apple", 101, 3, 21.0},
-        {"Banana", 102, 1, 12.0},
-        {"Orange", 103, 2, 15.0},
-        {"Grapes", 104, 4, 30.0},
-        {"Pine", 105, 1, 25.0},
-        {"Cat", 112, 1, 250.0}
-    };
+// int main() {
+//     vector<order> orders = {
+//         {"Apple", 101, 3, 21.0},
+//         {"Banana", 102, 1, 12.0},
+//         {"Orange", 103, 2, 15.0},
+//         {"Grapes", 104, 4, 30.0},
+//         {"Pine", 105, 1, 25.0},
+//         {"Cat", 112, 1, 250.0}
+//     };
 
-    vector<Item> items = convertOrdersToItems(orders);
+//     vector<Item> items = convertOrdersToItems(orders);
 
-    // อ่านไฟล์ไอดีสินค้าที่เข้าร่วมโปรโมชัน
-    vector<promotions_data> eligibleItems = readBuyOneGetOneFile("..\\data\\promotion\\buy1get1.txt");
-    vector<promotions_data> pointList = readGetPoinsFile("..\\data\\promotion\\getpoints.txt");
-    vector<promotions_data> discountList = readDiscountFile("..\\data\\promotion\\discount.txt");
-    vector<promotions_data> freeList = readFreeItemFile("..\\data\\promotion\\freeitem.txt");
+//     // อ่านไฟล์ไอดีสินค้าที่เข้าร่วมโปรโมชัน
+//     vector<promotions_data> eligibleItems = readBuyOneGetOneFile("..\\data\\promotion\\buy1get1.txt");
+//     vector<promotions_data> pointList = readGetPoinsFile("..\\data\\promotion\\getpoints.txt");
+//     vector<promotions_data> discountList = readDiscountFile("..\\data\\promotion\\discount.txt");
+//     vector<promotions_data> freeList = readFreeItemFile("..\\data\\promotion\\freeitem.txt");
 
-    // ส่ง items เข้าไปในฟังก์ชัน
-    processItems(items, eligibleItems, pointList, discountList, freeList);
+//     // ส่ง items เข้าไปในฟังก์ชัน
+//     processItems(items, eligibleItems, pointList, discountList, freeList);
 
-    return 0;
-}
+//     return 0;
+// }

@@ -10,7 +10,7 @@ int main() {
     vector<promotions_data> pointList = readGetPoinsFile(".\\data\\promotion\\getpoints.txt");
     vector<promotions_data> discountList = readDiscountFile(".\\data\\promotion\\discount.txt");
     vector<promotions_data> freeList = readFreeItemFile(".\\data\\promotion\\freeitem.txt");
-    unordered_set<int> eligibleItems = readBuyOneGetOneFile("..\\data\\promotion\\buy1get1.txt");
+    vector<promotions_data> eligibleItems = readBuyOneGetOneFile(".\\data\\promotion\\buy1get1.txt");
     char choice;
     input_product(".\\data\\products\\product_data.txt",product);
     system("cls");
