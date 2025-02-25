@@ -1,4 +1,5 @@
  #include <bits/stdc++.h>
+ #include "promotions.cpp"
 using namespace std;
 
 void login();
