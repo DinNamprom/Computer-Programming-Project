@@ -30,12 +30,14 @@ int main() {
         cin >> choice;
 
         if (choice == '1'){
+            customer_order.clear();
             system("cls");
             showdata(product);
             input_order(customer_order, product);
             items = convertOrdersToItems(customer_order);
             processItems(items, eligibleItems, pointList, discountList, freeList);
         }else if (choice == '2') {
+            customer_order.clear();
             system("cls");
             string file;
             cout << "input file name (.txt not included): ";
