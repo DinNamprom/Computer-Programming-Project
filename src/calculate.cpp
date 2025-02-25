@@ -136,33 +136,33 @@ void displayFreeItems(const vector<string>& freeItems) {
     }
 }
 
-int main() {
+// int main() {
 
-   vector<order> order = {
-       {"Apple", 101, 3, 21.0},
-        {"Banana", 102, 1, 12.0},
-        {"Orange", 103, 2, 15.0},
-         {"Grapes", 104, 4, 30.0},
-         {"Pine", 105, 1, 25.0},
-        {"Cat", 112, 1, 250.0}
-     };
+//    vector<order> order = {
+//        {"Apple", 101, 3, 21.0},
+//         {"Banana", 102, 1, 12.0},
+//         {"Orange", 103, 2, 15.0},
+//          {"Grapes", 104, 4, 30.0},
+//          {"Pine", 105, 1, 25.0},
+//         {"Cat", 112, 1, 250.0}
+//      };
      
-     vector<Item> items = convertOrdersToItems(order);
-     vector<promotions_data> eligibleItems = readBuyOneGetOneFile("..\\data\\promotion\\buy1get1.txt");
-     vector<promotions_data> pointList = readGetPoinsFile("..\\data\\promotion\\getpoints.txt");
-     vector<promotions_data> discountList = readDiscountFile("..\\data\\promotion\\discount.txt");
-     vector<promotions_data> freeList = readFreeItemFile("..\\data\\promotion\\freeitem.txt");
+//      vector<Item> items = convertOrdersToItems(order);
+//      vector<promotions_data> eligibleItems = readBuyOneGetOneFile("..\\data\\promotion\\buy1get1.txt");
+//      vector<promotions_data> pointList = readGetPoinsFile("..\\data\\promotion\\getpoints.txt");
+//      vector<promotions_data> discountList = readDiscountFile("..\\data\\promotion\\discount.txt");
+//      vector<promotions_data> freeList = readFreeItemFile("..\\data\\promotion\\freeitem.txt");
 
-     // ส่ง items เข้าไปในฟังก์ชัน
-    processItems(items, eligibleItems, pointList, discountList, freeList);
+//      // ส่ง items เข้าไปในฟังก์ชัน
+//     processItems(items, eligibleItems, pointList, discountList, freeList);
 
-    cout << "\n";
-    displayResults(Itemprocessor(items));
+//     cout << "\n";
+//     displayResults(Itemprocessor(items));
 
-    vector<double> z = calculateSummary(Itemprocessor(items));
-    displaySummary(z);
-    displayFreeItems(freeItems(items));
+//     vector<double> z = calculateSummary(Itemprocessor(items));
+//     displaySummary(z);
+//     displayFreeItems(freeItems(items));
     
-     return 0;
+//      return 0;
 
-}
+// }

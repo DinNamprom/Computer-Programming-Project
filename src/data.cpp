@@ -51,7 +51,6 @@ void input_order(vector<order> &list,vector<product_data> d) {
         cout << "How much do you want: ";
         cin >> n;
         o.n = n;
-        o.price *= n;
         list.push_back(o);
     }while (a != 0);
 }
@@ -82,7 +81,7 @@ void input_order_byfile(vector<order> &list,vector<product_data> d,string filepa
                 if (similar(toUpperCase(list[i].name),toUpperCase(p.name))) {
                     list[i].name = p.name;
                     list[i].code = p.code;
-                    list[i].price = p.price * list[i].n;
+                    list[i].price = p.price;
                     found = true;
                     break;
                 }

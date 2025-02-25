@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
-//#include ".\src\data.cpp"
-#include ".\src\Promotions.cpp"
+#include ".\src\calculate.cpp"
 using namespace std;
 
 int main() {
@@ -46,6 +45,13 @@ int main() {
             input_order_byfile(customer_order ,product , filen);
             items = convertOrdersToItems(customer_order);
             processItems(items, eligibleItems, pointList, discountList, freeList);
+            processItems(items, eligibleItems, pointList, discountList, freeList);
+            cout << "\n";
+            displayResults(Itemprocessor(items));
+
+            vector<double> z = calculateSummary(Itemprocessor(items));
+            displaySummary(z);
+            displayFreeItems(freeItems(items));
         }else if (choice == '3'){
 
         }else if (choice == '4') {
