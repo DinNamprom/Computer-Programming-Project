@@ -121,6 +121,6 @@ int main() {
 
     vector<string> freeItemNames; //เก็บชื่อสินค้า freeItem 
 
-    //
+    
     return 0;
 }
