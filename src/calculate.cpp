@@ -3,16 +3,6 @@
 
 using namespace std;
 
-// โครงสร้างข้อมูลสินค้า
-//struct Item {
-//    int id;
- //   string name;
-  //  int quantity;
-  //  int value; // ราคาต่อชิ้น
-  //  bool buyOneGetOne;
-  //  int points;
-   // int discount; // ส่วนลดเป็นเปอร์เซ็นต์
-//};
 
 // โครงสร้างข้อมูลสินค้าที่ถูกคำนวณแล้ว
 struct ItemResult {
@@ -31,24 +21,15 @@ struct Summary {
     double all; // ราคารวมสุทธิ (รวม VAT)
 };
 
-// อาร์เรย์สินค้า
-//vector<Item> items = {
-   // {106, "Apple", 3, 21, true, 5, 20},
-   // {102, "Banana", 1, 12, false, 1, 0},
-   // {103, "Orange", 2, 15, true, 0, 0},
-   // {104, "Grapes", 4, 30, false, 3, 10},
-   // {105, "Pine", 1, 25, false, 4, 0}
-//};
-
 // ฟังก์ชันคำนวณรายละเอียดสินค้า
-vector<ItemResult> processItems(const vector<Item>& s) {
+vector<ItemResult> Itemprocessor(const vector<Item>& orders) {
     vector<ItemResult> results;
-    for (const auto& item : s) {
-        int newQuantity = item.buyOneGetOne ? item.quantity * 2 : item.quantity;
-        int totalValue = item.value * newQuantity; // ราคาทั้งหมดก่อนหักส่วนลด
+    for (const auto& item : orders) { 
+        int newQuantity = item.BOGO ? item.quantity * 2 : item.quantity;
+        double totalValue = item.value * newQuantity; // ราคาทั้งหมดก่อนหักส่วนลด
         double discountValue = totalValue * (1 - item.discount / 100.0); // ราคาหลังหักส่วนลด
-        
-        results.push_back({item.name, newQuantity, item.value, totalValue, item.points, discountValue});
+
+        results.push_back({item.name, newQuantity, (int)item.value, (int)totalValue, item.points, discountValue});
     }
     return results;
 }
@@ -89,38 +70,49 @@ void loadProductNames(const string& filename) {
     }
     file.close();
 }
-void free(){
-    for (const auto& item : items) {
-        if (item.freeItem != 0 && productNames.count(item.freeItem)) {
-            freeItemNames.push_back(productNames[item.freeItem]);
-        }
+
+void displayResults(const vector<ItemResult>& results) {
+    cout << fixed << setprecision(2); // กำหนดให้แสดงทศนิยม 2 ตำแหน่ง
+    cout << "------------------------------------------------------------\n";
+    cout << "| Name     | Qty | Price/Unit | Total  | Points | Discount  |\n";
+    cout << "------------------------------------------------------------\n";
+    
+    for (const auto& item : results) {
+        cout << "| " << setw(8) << left << item.name 
+             << "| " << setw(3) << right << item.quantity
+             << " | " << setw(10) << right << item.value1
+             << " | " << setw(6) << right << item.value2
+             << " | " << setw(6) << right << item.points
+             << " | " << setw(9) << right << item.discount << " |\n";
     }
+    
+    cout << "------------------------------------------------------------\n";
 }
 
+
 int main() {
-    // คำนวณรายละเอียดสินค้า
-    vector<Item> items = {
-        {106, "Apple", 3, 21, false, 5,15, 101},
-        {102, "Banana", 1, 12, true, 6, 0, 0},
-        {103, "Orange", 2, 15, false, 5, 30, 103},
-        {104, "Grapes", 4, 30, true, 7, 0, 0},
-        {105, "Pine", 1, 25, true, 4, 21, 15}
-    };
 
-    loadProductNames("products.txt");
+   vector<order> order = {
+       {"Apple", 101, 3, 21.0},
+        {"Banana", 102, 1, 12.0},
+        {"Orange", 103, 2, 15.0},
+         {"Grapes", 104, 4, 30.0},
+         {"Pine", 105, 1, 25.0},
+        {"Cat", 112, 1, 250.0}
+     };
+     
+     vector<Item> items = convertOrdersToItems(order);
+     unordered_set<int> eligibleItems = readBuyOneGetOneFile("..\\data\\promotion\\buy1get1.txt");
+     vector<promotions_data> pointList = readGetPoinsFile("..\\data\\promotion\\getpoints.txt");
+     vector<promotions_data> discountList = readDiscountFile("..\\data\\promotion\\discount.txt");
+     vector<promotions_data> freeList = readFreeItemFile("..\\data\\promotion\\freeitem.txt");
 
-    // อ่านไฟล์ไอดีสินค้าที่เข้าร่วมโปรโมชัน
-    unordered_set<int> eligibleItems = readBuyOneGetOneFile("..\\data\\promotion\\buy1get1.txt");
-    // ส่ง items เข้าไปในฟังก์ชัน
-    processItems(items, eligibleItems);
+     // ส่ง items เข้าไปในฟังก์ชัน
+    processItems(items, eligibleItems, pointList, discountList, freeList);
 
-    vector<ItemResult> processedItems = processItems(items);
-    
-    // คำนวณราคารวม
-    vector<double> summary = calculateSummary(processedItems);
+    cout << "\n";
+    displayResults(Itemprocessor(items));
 
-    vector<string> freeItemNames; //เก็บชื่อสินค้า freeItem 
+     return 0;
 
-    
-    return 0;
 }
