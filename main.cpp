@@ -1,12 +1,12 @@
 #include <bits/stdc++.h>
 #include ".\src\data.cpp"
-#include ".\src\Promotions.cpp"
+//#include ".\src\Promotions.cpp"
 using namespace std;
 
 int main() {
     vector<product_data> product; 
     vector<order> customer_order;
-    vector<Item> order_promote;
+    //vector<Item> order_promote;
     char choice;
     input_product(".\\data\\products\\product_data.txt",product);
     do {
@@ -34,7 +34,7 @@ int main() {
             cin >> file;
             string filen = ".\\" + file + ".txt";
             input_order_byfile(customer_order ,product , filen);
-            
+            showorder(customer_order);
         }else if (choice == '3'){
 
         }else if (choice == '4') {
