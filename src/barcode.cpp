@@ -48,11 +48,11 @@ string luckyReward(const string& luckyNumber) {
 }  
 
 void checkLuckyReward(const string& barcode) {  
-    string lastTwoDigits = barcode.substr(barcode.length() - 0);  
+    string lastTwoDigits = barcode.substr(barcode.length() - 2);  
     string lastThreeDigits = barcode.substr(barcode.length() - 3);
     string FullDigits = barcode.substr(barcode.length() - 12);  
 
-    string luckyTwo = luckyReward("");  
+    string luckyTwo = luckyReward("55");  
     string luckyThree = luckyReward("759");  
     string luckyFull = luckyReward("123456789012");
     bool hasReward = false;  
