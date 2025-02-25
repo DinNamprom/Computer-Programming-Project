@@ -1,9 +1,17 @@
-#include <bits/stdc++.h>
+ #include <bits/stdc++.h>
 using namespace std;
 
 void login();
 void signup();
 void forgot();
+bool isValidPassword(const string& password) {
+    for (char ch : password) {
+        if (!isdigit(ch)) {  // Check if character is NOT a digit
+            return false;    // Return false if a letter or non-digit is found
+        }
+    }
+    return true;  // Return true if all characters are digits
+}
 
 
 int main(){
@@ -76,6 +84,7 @@ void login(){
     cout << "PASSWORD : ";
     cin >> password;
 
+
     ifstream input("..\\data\\membersN.txt");
 
     while(input>>id>>pass){
@@ -102,32 +111,62 @@ void signup(){
     int count;
     int c,op;
     string ruserID, rpassword, rid ,rpass;
+    string l = "01234567890";
+   
     system("cls");
-    cout << "--------- SIGN UP ---------" << endl;
+
+    cout << "------------- SIGN UP --------------" << endl;
+    cout << "!! Usernames can only use letters !!" << endl 
+         << "!! Passwords can only use numbers !!" << endl;
+    cout << "------------------------------------" << endl << endl;
     cout << "USERNAME : ";
     cin >> ruserID;
     cout << "PASSWORD : ";
     cin >> rpassword;
+    int z = ruserID.find_first_of(l);
 
-    ifstream input("..\\data\\membersN.txt");
-    while(input>>rid){
-        if(rid == ruserID){
-            count = 1;
+    if (z == string::npos){  // Username is valid if no digits are found
+
+
+        // Validate password (only digits allowed)
+        if (!isValidPassword(rpassword)) {
             system("cls");
+            cout << "!! Password can only contain numbers !!" << endl;
+            cout << "Press 1 to try again" << endl;
+            cin >> op;
+            if (op == 1) signup();  // Restart signup if password is invalid
         }
-    }
-    if(count == 1){
-        cout << "The username already exists" << endl << "[1] Try again" << endl << "[2] Back to menu" <<endl;
-        cin >> c;
-        if(c == 1) signup();
-        if(c == 2) main();
+    
+    
+
+        ifstream input("..\\data\\membersN.txt");
+
+        while(input>>rid){
+            if(rid == ruserID){
+                count = 1;
+                system("cls");
+            }
+        }
+        if(count == 1){
+            cout << "The username already exists" << endl << "[1] Try again" 
+                 << endl << "[2] Back to menu" <<endl;
+            cin >> c;
+            if(c == 1) signup();
+            if(c == 2) main();
+        }else{
+            ofstream f1("..\\data\\membersN.txt", ios::app);
+            f1 << ruserID <<' '<< rpassword << endl;
+            cout << "Your SIGN UP is completed!" << endl;
+            cout << "[1] Back to menu" << endl;
+            cin >> op;
+            if(op == 1) main();
+        }
     }else{
-        ofstream f1("..\\data\\membersN.txt", ios::app);
-        f1 << ruserID <<' '<< rpassword << endl;
-        cout << "Your SIGN UP is completed!" << endl;
-        cout << "[1] Back to menu" << endl;
+        cout <<  "!! Usernames can only contain letters !!" << endl;
+        cout << "Press 1 to sign in again" <<endl;
         cin >> op;
-        if(op == 1) main();
+        if(op == 1) signup();
+    
     }
 }
 
@@ -170,3 +209,5 @@ void forgot(){
         
     }if(option == 2) main();
 }
+
+
