@@ -30,7 +30,7 @@ bool similar(const string a, const string b) {
             }
         }
     }
-    if (point/b.length() >= 0.6) return true;
+    if (point/b.length() >= 0.7) return true;
     return false;
 }
 
@@ -78,11 +78,14 @@ void input_order_byfile(vector<order> &list,vector<product_data> d,string filepa
     for (int i = list.size() - 1; i >= 0; --i) {
         bool found = false;
         for (const auto& p : d) {
-            if (similar(toUpperCase(list[i].name),toUpperCase(p.name))) {
-                list[i].code = p.code;
-                list[i].price = p.price * list[i].n;
-                found = true;
-                break;
+            if (list[i].n > 0) {
+                if (similar(toUpperCase(list[i].name),toUpperCase(p.name))) {
+                    list[i].name = p.name;
+                    list[i].code = p.code;
+                    list[i].price = p.price * list[i].n;
+                    found = true;
+                    break;
+                }
             }
         }
         if (!found) {
@@ -113,7 +116,39 @@ void input_product(string filename,vector<product_data> &list) {
     source.close();
 }
 
+void showdata(vector<product_data> product) {
+    cout << "-----------------------------------------------------------------" << endl;
+        cout << left << setw(40) << "product";
+        cout << left << setw(15) << "code";
+        cout << left << setw(5) << "price" << endl;
+        cout << "-----------------------------------------------------------------" << endl;
+        for (unsigned int i = 0;i < product.size();i++) {
+            cout << left << setw(2) << i+1 ;
+            cout << left << setw(1) << ".";
+            cout << left << setw(40) << product[i].name;
+            cout << left << setw(15) << product[i].code;
+            cout << left << setw(5) << fixed << setprecision(2) << product[i].price << "$" << endl;
+        }
+        cout << "0 .exite \n";
+        cout << "-----------------------------------------------------------------" << endl;
+}
 
+void showorder(vector<order> order) {
+    cout << "-----------------------------ORDER-------------------------------" << endl;
+    cout << left << setw(43) << "product";
+    cout << left << setw(7) << "code";
+    cout << left << setw(10) << "quantity";
+    cout << left << setw(5) << "price" << endl;
+    for (unsigned int i = 0;i < order.size();i++) {
+        cout << left << setw(2) << i+1 ;
+        cout << left << setw(1) << ".";
+        cout << left << setw(40) << order[i].name;
+        cout << left << setw(10) << order[i].code;
+        cout << left << setw(6) << order[i].n;
+        cout << left << setw(5) << fixed << setprecision(2) << order[i].price << "$" << endl;
+    }
+    cout << "-----------------------------------------------------------------" << endl;
+}
 
 
 //////////////////////////////////////

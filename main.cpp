@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include ".\src\data.cpp"
+#include ".\src\Promotions.cpp"
 using namespace std;
 
 int main() {
@@ -7,49 +8,39 @@ int main() {
     vector<order> customer_order;
     char choice;
     input_product(".\\data\\products\\product_data.txt",product);
+    do {
+        cout << right << setw(40) << "CUSTOMER SERVICE" << endl;
+        cout << "-----------------------------------------------------------------" << endl;
+        cout << endl;
+        cout << left << setw(15) << " ";
+        cout << left << setw(25) << "(1) Self";
+        cout << left << setw(20) << "(2) File" << endl;
+        cout << left << setw(15) << " ";
+        cout << left << setw(25) << "(3) Member";
+        cout << left << setw(20) << "(4) Exit" << endl;
+        cout << endl;
+        cout << "-----------------------------------------------------------------" << endl;
+        cout << "Command: ";
+        cin >> choice;
 
-    cout << "--------------------------ORDER----------------------------" << endl;
-    cout << left << setw(10) << " ";
-    cout << left << setw(25) << "(1) By Self";
-    cout << left << setw(20) << "(2) By File" << endl;
-    cout << "-----------------------------------------------------------" << endl;
-    cout << "Logs: ";
-    cin >> choice;
+        if (choice == '1'){
+            showdata(product);
+            input_order(customer_order, product);
+            showorder(customer_order);
+        }else if (choice == '2') {
+            string file;
+            cout << "input file name (.txt not included): ";
+            cin >> file;
+            string filen = ".\\" + file + ".txt";
+            input_order_byfile(customer_order ,product , filen);
+            showorder(customer_order);
+        }else if (choice == '3'){
 
-    if (choice == '1'){
-        cout << "-----------------------------------------------------------" << endl;
-        cout << left << setw(35) << "product";
-        cout << left << setw(15) << "code";
-        cout << left << setw(5) << "price" << endl;
-        cout << "-----------------------------------------------------------" << endl;
-        for (unsigned int i = 0;i < product.size();i++) {
-            cout << left << i+1 << setw(2) << ".";
-            cout << left << setw(35) << product[i].name;
-            cout << left << setw(15) << product[i].code;
-            cout << left << setw(5) << fixed << setprecision(2) << product[i].price << "$" << endl;
+        }else if (choice == '4') {
+            break;
         }
-        cout << "-----------------------------------------------------------" << endl;
-        input_order(customer_order, product);
-    }else if (choice == '2') {
-        string file;
-        cout << "input file name (.txt not included): ";
-        cin >> file;
-        string filen = ".\\" + file + ".txt";
-        input_order_byfile(customer_order ,product , filen);
-    }
-    
-    cout << "--------------------------ORDER----------------------------" << endl;
-    cout << left << setw(35) << "product";
-    cout << left << setw(15) << "code";
-    cout << left << setw(15) << "quantity";
-    cout << left << setw(5) << "price" << endl;
-    for (unsigned int i = 0;i < customer_order.size();i++) {
-        cout << left << i+1 << setw(2) << ".";
-        cout << left << setw(31) << customer_order[i].name;
-        cout << left << setw(15) << customer_order[i].code;
-        cout << left << setw(15) << customer_order[i].n;
-        cout << left << setw(5) << fixed << setprecision(2) << customer_order[i].price << "$" << endl;
-    }
-    cout << "-----------------------------------------------------------" << endl;
+
+    }while(true);
+        
     return 0;
 }
