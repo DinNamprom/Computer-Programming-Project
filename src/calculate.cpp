@@ -28,7 +28,7 @@ vector<ItemResult> Itemprocessor(const vector<Item>& orders) {
     vector<ItemResult> results;
     for (const auto& item : orders) { 
         int newQuantity = item.BOGO ? item.quantity * 2 : item.quantity;
-        double totalValue = item.value * newQuantity; // ราคาทั้งหมดก่อนหักส่วนลด
+        double totalValue = item.value * item.quantity; // ราคาทั้งหมดก่อนหักส่วนลด
         double worth = totalValue * (item.discount / 100.0); // คำนวณส่วนลดที่ถูกหักไป
         double discountValue = totalValue - worth; // ราคาหลังหักส่วนลด
 
