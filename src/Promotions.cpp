@@ -3,23 +3,12 @@
 
 using namespace std;
 
-struct point_data {
+struct promotions_data {
     int code;
     int poins;
-};
-
-struct Discount_data {
-    int code;
     int discount;
-};
-
-struct Freeitem {
-    string name;
-    int code;
     int freeItem;
 };
-
-
 
 struct Item {
     int id;
@@ -83,13 +72,13 @@ unordered_set<int> readBuyOneGetOneFile(const string& filename) {
 }
 
 // ฟังก์ชันอ่านไฟล์เพื่อหาไอดีสินค้าที่มีคะแนน
-vector<point_data> readGetPoinsFile(const string& filename) {
-    vector<point_data> pointList;
+vector<promotions_data> readGetPoinsFile(const string& filename) {
+    vector<promotions_data> pointList;
     ifstream source(filename);
     string text;
     cout << "reading file..." << endl;
     while (getline(source, text)) {
-        point_data d;
+        promotions_data d;
         sscanf(text.c_str(), "%d,%d", &d.code, &d.poins);
         pointList.push_back(d);
     }
@@ -100,15 +89,15 @@ vector<point_data> readGetPoinsFile(const string& filename) {
 }
 
 // ฟังก์ชันอ่านไฟล์เพื่อหาไอดีสินค้าที่มีส่วนลด
-vector<Discount_data> readDiscountFile(const string& filename) {
-    vector<Discount_data> discountList;
+vector<promotions_data> readDiscountFile(const string& filename) {
+    vector<promotions_data> discountList;
     ifstream source(filename);
     string text;
     cout << "reading file..." << endl;
     while (getline(source, text)) {
-        Discount_data d;
-        sscanf(text.c_str(), "%d,%d", &d.code, &d.discount);
-        discountList.push_back(d);
+        promotions_data Dis;
+        sscanf(text.c_str(), "%d,%d", &Dis.code, &Dis.discount);
+        discountList.push_back(Dis);
     }
     for (const auto& discount : discountList) {
         cout << discount.code << " " << discount.discount << endl;
@@ -117,15 +106,15 @@ vector<Discount_data> readDiscountFile(const string& filename) {
 }
 
 // ฟังก์ชันอ่านไฟล์เพื่อหาไอดีสินค้าที่มีสินค้าฟรี
-vector<Freeitem> readFreeItemFile(const string& filename) {
-    vector<Freeitem> freeList;
+vector<promotions_data> readFreeItemFile(const string& filename) {
+    vector<promotions_data> freeList;
     ifstream source(filename);
     string text;
     cout << "reading file..." << endl;
     while (getline(source, text)) {
-        Freeitem d;
-        sscanf(text.c_str(), "%d,%d", &d.code, &d.freeItem);
-        freeList.push_back(d);
+        promotions_data Fr;
+        sscanf(text.c_str(), "%d,%d", &Fr.code, &Fr.freeItem);
+        freeList.push_back(Fr);
     }
     for (const auto& freeItem : freeList) {
         cout << freeItem.code << " " << freeItem.freeItem << endl;
@@ -135,18 +124,18 @@ vector<Freeitem> readFreeItemFile(const string& filename) {
 
 // ฟังก์ชัน Buy 1 Get 1
 void buyOneGetOne(vector<Item>& items, const unordered_set<int>& eligibleItems) {
+    cout << "\n----------------------------------\n";
     for (auto& item : items) {
         if (eligibleItems.find(item.id) != eligibleItems.end() && item.quantity >= 1) {
             item.BOGO = true; // ตั้งค่า Boolean เป็น true
-            cout << "Buy 1 Get 1 applied to item with ID " << item.id << ". New quantity: " << item.quantity << "\n";
+            cout << "Buy 1 Get 1 applied to item ID " << item.id <<"\n";
         }
     }
+    cout << "----------------------------------\n";
 }
 
-void addpoints(std::vector<Item> &items, const std::vector<point_data> &pointList);
 
-void addpoints(std::vector<Item> &items, const std::vector<point_data> &pointList)
-{
+void addpoints(std::vector<Item> &items, const std::vector<promotions_data> &pointList){
     for (auto &item : items)
     {
         for (const auto &point : pointList)
@@ -154,16 +143,15 @@ void addpoints(std::vector<Item> &items, const std::vector<point_data> &pointLis
             if (item.id == point.code)
             {
                 item.points = point.poins;
+                cout << "Item with ID " << item.id << " has " << item.points << " points\n";
                 break;
             }
         }
     }
+    cout << "----------------------------------\n";
 }
 
-void adddiscount(std::vector<Item> &items, const std::vector<Discount_data> &discountList);
-
-void adddiscount(std::vector<Item> &items, const std::vector<Discount_data> &discountList)
-{
+void adddiscount(std::vector<Item> &items, const std::vector<promotions_data> &discountList){
     for (auto &item : items)
     {
         for (const auto &discount : discountList)
@@ -171,15 +159,15 @@ void adddiscount(std::vector<Item> &items, const std::vector<Discount_data> &dis
             if (item.id == discount.code)
             {
                 item.discount = discount.discount;
+                cout << "Item with ID " << item.id << " has " << item.discount << " discount\n";
                 break;
             }
         }
     }
+    cout << "----------------------------------\n";
 }
 
-void addfreeitem(std::vector<Item> &items, const std::vector<Freeitem> &freeList);
-
-void addfreeitem(std::vector<Item> &items, const std::vector<Freeitem> &freeList)
+void addfreeitem(std::vector<Item> &items, const std::vector<promotions_data> &freeList)
 {
     for (auto &item : items)
     {
@@ -194,7 +182,7 @@ void addfreeitem(std::vector<Item> &items, const std::vector<Freeitem> &freeList
     }
 }
 // ฟังก์ชันรับ std::vector<Item> และแสดงผล
-void processItems(vector<Item>& items, const unordered_set<int>& eligibleItems, const vector<point_data>& pointList,const vector<Discount_data>& discountList, const vector<Freeitem>& freeList) {
+void processItems(vector<Item>& items, const unordered_set<int>& eligibleItems, const vector<promotions_data>& pointList,const vector<promotions_data>& discountList, const vector<promotions_data>& freeList) {
     cout << "\nProcessing Items...\n";
     display(items);
 
@@ -210,7 +198,6 @@ void processItems(vector<Item>& items, const unordered_set<int>& eligibleItems, 
     // กำหนดสินค้าฟรี
     addfreeitem(items, freeList);
     
-
     cout << "\nAfter Promotions:\n";
     display(items);
 }
@@ -230,9 +217,9 @@ int main() {
 
     // อ่านไฟล์ไอดีสินค้าที่เข้าร่วมโปรโมชัน
     unordered_set<int> eligibleItems = readBuyOneGetOneFile("..\\data\\promotion\\buy1get1.txt");
-    vector<point_data> pointList = readGetPoinsFile("..\\data\\promotion\\getpoints.txt");
-    vector<Discount_data> discountList = readDiscountFile("..\\data\\promotion\\discount.txt");
-    vector<Freeitem> freeList = readFreeItemFile("..\\data\\promotion\\freeitem.txt");
+    vector<promotions_data> pointList = readGetPoinsFile("..\\data\\promotion\\getpoints.txt");
+    vector<promotions_data> discountList = readDiscountFile("..\\data\\promotion\\discount.txt");
+    vector<promotions_data> freeList = readFreeItemFile("..\\data\\promotion\\freeitem.txt");
     
 
     // ส่ง items เข้าไปในฟังก์ชัน
