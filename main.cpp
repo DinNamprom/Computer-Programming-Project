@@ -35,6 +35,12 @@ int main() {
             input_order(customer_order, product);
             items = convertOrdersToItems(customer_order);
             processItems(items, eligibleItems, pointList, discountList, freeList);
+            cout << "\n";
+            displayResults(Itemprocessor(items));
+
+            vector<double> z = calculateSummary(Itemprocessor(items));
+            displaySummary(z);
+            displayFreeItems(freeItems(items));
         }else if (choice == '2') {
             customer_order.clear();
             system("cls");
@@ -44,7 +50,6 @@ int main() {
             string filen = ".\\" + file + ".txt";
             input_order_byfile(customer_order ,product , filen);
             items = convertOrdersToItems(customer_order);
-            processItems(items, eligibleItems, pointList, discountList, freeList);
             processItems(items, eligibleItems, pointList, discountList, freeList);
             cout << "\n";
             displayResults(Itemprocessor(items));
