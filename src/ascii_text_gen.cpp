@@ -298,8 +298,12 @@ map<char, vector<string>> asciiFont = {
     }}
 };
 
-void printAsciiArt(const string& text, ofstream& bill) {
-    for (size_t row = 0; row < 6; ++row) { // 6 rows for each character
+void CreateAsciiArt(const string& text, ofstream& bill, int spacing) {
+    for (int row = 0; row < 6; row++) { // 6 rows for each character
+        bill << left << setw(spacing) << "|";
+        // for (int i = 0; i < spacing; i++) {
+        //     bill << " ";
+        // }
         for (char c : text) {
             c = toupper(c); // Convert character to uppercase
             if (asciiFont.find(c) != asciiFont.end()) {
@@ -308,19 +312,19 @@ void printAsciiArt(const string& text, ofstream& bill) {
                 bill << "    "; // Space if character not found
             }
         }
-        bill << endl;
+        bill << right << setw(spacing) << "|" << endl; // Adjust right border to match upper border
     }
 }
 
-int main() {
-    string input = "TUM"; // Example input
-    ofstream bill;
-    bill.open("test.txt");
-    if (bill.is_open()) {
-        printAsciiArt(input, bill);
-        bill.close();
-    } else {
-        cerr << "Unable to open file for writing." << endl;
-    }
-    return 0;
-}
+// int main() {
+//     string input = "TUM"; // Example input
+//     ofstream bill;
+//     bill.open("test.txt");
+//     if (bill.is_open()) {
+//         printAsciiArt(input, bill);
+//         bill.close();
+//     } else {
+//         cerr << "Unable to open file for writing." << endl;
+//     }
+//     return 0;
+// }
