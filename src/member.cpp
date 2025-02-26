@@ -1,17 +1,22 @@
  #include <bits/stdc++.h>
  #include "promotions.cpp"
+ #include <vector>
 using namespace std;
+
+struct User{
+    string username;
+    string password;
+};
+
+vector<User> U;
 
 void login();
 void signup();
 void forgot();
+
+
 bool isValidPassword(const string& password) {
-    for (char ch : password) {
-        if (!isdigit(ch)) {  // Check if character is NOT a digit
-            return false;    // Return false if a letter or non-digit is found
-        }
-    }
-    return true;  // Return true if all characters are digits
+    return all_of(password.begin(), password.end(), ::isdigit);
 }
 
 
@@ -75,38 +80,70 @@ int main(){
    
 }
 
-void login(){
-    int count,op;
-    string userID, password, id ,pass;
-    system("cls");
-    cout << "--------- LOGIN ---------" << endl;
-    cout << "USERNAME : ";
-    cin >> userID;
-    cout << "PASSWORD : ";
-    cin >> password;
-
-
+void loadUsersFromFile() {
+    U.clear(); // Clear existing data before loading
     ifstream input("..\\data\\membersN.txt");
+    string line;
 
-    while(input>>id>>pass){
-        if(id == userID && pass == password){
-            count = 1;
-            system("cls");
+    if (!input.is_open()) {
+        cout << "Error: Unable to open file.\n";
+        return;
+    }
+
+    while (getline(input, line)) {
+        stringstream ss(line);
+        string user, pass;
+
+        // Read username and password, which are separated by a comma
+        if (getline(ss, user, ',') && getline(ss, pass, ',')) {
+            U.push_back({user, pass});  // Store the username and password in the vector
+        } else {
+            cout << "Error: Invalid line format: " << line << endl;
         }
     }
-    input.close();
 
-    if(count == 1){
-        cout << userID << "\nYour LOGIN is successful\n";
-        
-    }else{
-        cout << "LOGIN failed."<< endl << "Please try again." <<endl;
-        cout << "[1] Try again" << endl << "[2] Back to menu" <<endl;
-        cin >> op;
-        if(op == 1) login();
-        if(op == 2) main();
-    }
+    input.close();
 }
+
+void login(){
+    
+    system("cls");
+    string userID, password;
+    
+    cout << "--------- LOGIN ---------" << endl;
+    cout << "USERNAME: ";
+    cin >> userID;
+    cout << "PASSWORD: ";
+    cin >> password;
+
+    // Load users from file into vector before searching
+    loadUsersFromFile();
+
+    // Find user in vector
+    // auto it = find_if(U.begin(), U.end(), [&](const User& user) { 
+    //     return user.username == userID && user.password == password; 
+    // });
+
+    // if (it != U.end()) {
+    //     cout << "Login successful! Welcome, " << userID << "!\n";
+
+    // } else {
+
+    for (const auto& user : U) {
+        if (user.username == userID && user.password == password) {
+            cout << "Login successful! Welcome, " << userID << "!\n";
+            system("pause");
+            return;  // Exit the function once a match is found
+        }
+    }
+        system("cls");
+        cout << "Login failed. Incorrect username or password.\n";
+        system("pause");
+        login();
+
+}
+
+    
 
 void signup(){
     int count;

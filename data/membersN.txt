@@ -1,10 +1,8 @@
-Alex 3727 138
-Nick 0809 999
-TayG 4324 235
-Tong 1209 483
-nihao 1234 125
-SaoSao22 8890 873
-Zeline 1409 624
-TJ 3123 562
-yrru 9786 188
-Asap 1990 352
+Alex,3727
+Nick,0809
+Zeline,1409
+Dinn,8793
+Tjay,3412
+Punn,7893
+AeKk,6546
+AScI,3457
