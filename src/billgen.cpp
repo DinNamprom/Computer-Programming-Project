@@ -7,17 +7,17 @@ using namespace std;
 // string filePath = "C:\\Users\\mrcat\\Compro\\Computer-Programming-Project\\src\\bill.txt";
 string filePath = "..\\src\\test.txt";
 
-vector<order> order = {
-    {"Apple", 101, 3, 21.0},
-    {"Banana", 102, 1, 12.0},
-    {"Orange", 103, 2, 15.0},
-    {"Grapes", 104, 4, 30.0},
-    {"Pine", 105, 1, 25.0},
-    {"Cat", 112, 1, 250.0}
-};
-vector<Item> items = convertOrdersToItems(order);
-vector<double> z = calculateSummary(Itemprocessor(items));
-vector<ItemResult> results = Itemprocessor(items);
+// vector<order> order = {
+//     {"Apple", 101, 3, 21.0},
+//     {"Banana", 102, 1, 12.0},
+//     {"Orange", 103, 2, 15.0},
+//     {"Grapes", 104, 4, 30.0},
+//     {"Pine", 105, 1, 25.0},
+//     {"Cat", 112, 1, 250.0}
+// };
+// vector<Item> items = convertOrdersToItems(order);
+// vector<double> z = calculateSummary(Itemprocessor(items));
+// vector<ItemResult> results = Itemprocessor(items);
 
 void CreateTopborder(const string& text, ofstream& bill) {
     bill << " _________________________________________________________________________________\n";
@@ -53,22 +53,24 @@ void CreateBottomborder(ofstream& bill) {
     system(("code " + filePath).c_str());
 }
 
-int main() {
-    ofstream bill(filePath);
+void createbill(string path,double amount,vector<ItemResult> itemr,vector<double> z) {
+    ofstream bill(path);
     if (!bill.is_open()) {
         cerr << "Failed to open the file." << endl;
-        return 1;
     }
 
     if (z.size() < 3) {
         cerr << "Insufficient data in summary vector." << endl;
-        return 1;
     }
 
-    double totalAmount = z[2];
     string text = "The Bill";
     CreateTopborder(text, bill);
-    CreateItemList(bill, results, totalAmount);
+    CreateItemList(bill, itemr, amount);
     CreateBottomborder(bill);
-    return 0;
 }
+
+// int main() {
+//     double totalAmount = z[2];
+//     createbill(filePath,totalAmount,results);
+//     return 0;
+// }

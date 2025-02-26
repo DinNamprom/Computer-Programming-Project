@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
-#include ".\src\calculate.cpp"
+//#include ".\src\calculate.cpp"
+#include ".\src\billgen.cpp"
 using namespace std;
 
 int main() {
@@ -35,12 +36,16 @@ int main() {
             input_order(customer_order, product);
             items = convertOrdersToItems(customer_order);
             processItems(items, eligibleItems, pointList, discountList, freeList);
+            vector<ItemResult> result = Itemprocessor(items);
             cout << "\n";
-            displayResults(Itemprocessor(items));
+            displayResults(result);
 
-            vector<double> z = calculateSummary(Itemprocessor(items));
+            vector<double> z = calculateSummary(result);
             displaySummary(z);
             displayFreeItems(freeItems(items));
+
+            double totalAmount = z[2];
+            createbill(".\\bill.txt",totalAmount,result,z);
         }else if (choice == '2') {
             customer_order.clear();
             system("cls");
@@ -51,12 +56,16 @@ int main() {
             input_order_byfile(customer_order ,product , filen);
             items = convertOrdersToItems(customer_order);
             processItems(items, eligibleItems, pointList, discountList, freeList);
+            vector<ItemResult> result = Itemprocessor(items);
             cout << "\n";
-            displayResults(Itemprocessor(items));
+            displayResults(result);
 
-            vector<double> z = calculateSummary(Itemprocessor(items));
+            vector<double> z = calculateSummary(result);
             displaySummary(z);
             displayFreeItems(freeItems(items));
+
+            double totalAmount = z[2];
+            createbill(".\\bill.txt",totalAmount,result,z);
         }else if (choice == '3'){
 
         }else if (choice == '4') {
