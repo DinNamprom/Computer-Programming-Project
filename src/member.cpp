@@ -6,6 +6,7 @@ using namespace std;
 struct User{
     string username;
     string password;
+    int points;
 };
 
 vector<User> U;
@@ -13,6 +14,7 @@ vector<User> U;
 void login();
 void signup();
 void forgot();
+void exit();
 
 
 bool isValidPassword(const string& password) {
@@ -93,16 +95,56 @@ void loadUsersFromFile() {
     while (getline(input, line)) {
         stringstream ss(line);
         string user, pass;
+        int point;
 
         // Read username and password, which are separated by a comma
-        if (getline(ss, user, ',') && getline(ss, pass, ',')) {
-            U.push_back({user, pass});  // Store the username and password in the vector
+        if (getline(ss, user, ',') && getline(ss, pass, ',') && ss >> point) {
+            U.push_back({user, pass, point});  // Store the username and password in the vector
         } else {
             cout << "Error: Invalid line format: " << line << endl;
+            
         }
     }
 
     input.close();
+}
+
+// Load new points from `getPoints.txt`
+void updatePointsFromFile(string username) {
+    ifstream pointsFile("getPoints.txt");
+    string line;
+    int code, earnedPoints;
+
+    if (!pointsFile) {
+        cout << "Error: Cannot open getPoints.txt!\n";
+        return;
+    }
+
+    while (getline(pointsFile, line)) {
+        stringstream ss(line);
+        if (ss >> code && ss.ignore() && ss >> earnedPoints) {
+            // Find user and update points
+            for (auto& user : U) {
+                if (user.username == username) {
+                    user.points += earnedPoints;
+                    cout << earnedPoints << " points added to " << user.username << endl;
+                    break;
+                }
+            }
+        }
+    }
+    pointsFile.close();
+}
+
+// Save updated user data back to `membersN.txt`
+void saveUsersToFile() {
+    ofstream output("membersN.txt");
+
+    for (const auto& user : U) {
+        output << user.username << "," << user.password << "," << user.points << endl;
+    }
+
+    output.close();
 }
 
 void login(){
@@ -110,7 +152,7 @@ void login(){
     system("cls");
     string userID, password;
     
-    cout << "--------- LOGIN ---------" << endl;
+    cout << "--------- LOGIN ---------\n" << endl;
     cout << "USERNAME: ";
     cin >> userID;
     cout << "PASSWORD: ";
@@ -119,21 +161,17 @@ void login(){
     // Load users from file into vector before searching
     loadUsersFromFile();
 
-    // Find user in vector
-    // auto it = find_if(U.begin(), U.end(), [&](const User& user) { 
-    //     return user.username == userID && user.password == password; 
-    // });
-
-    // if (it != U.end()) {
-    //     cout << "Login successful! Welcome, " << userID << "!\n";
-
-    // } else {
-
     for (const auto& user : U) {
-        if (user.username == userID && user.password == password) {
-            cout << "Login successful! Welcome, " << userID << "!\n";
+        if (user.username == userID && user.password == password ) {
+            cout << "\nLogin successful! Welcome, " << user.username << "!\n";
+
+            updatePointsFromFile(user.username);
+            saveUsersToFile();
+
+            cout << "Your current points: " << user.points << " points.\n\n";
+            
             system("pause");
-            return;  // Exit the function once a match is found
+            exit();  // Exit the function once a match is found
         }
     }
         system("cls");
@@ -146,8 +184,7 @@ void login(){
     
 
 void signup(){
-    int count;
-    int c,op;
+    int initialPoints = 0;
     string ruserID, rpassword, rid ,rpass;
     string l = "01234567890";
    
@@ -170,82 +207,62 @@ void signup(){
         if (!isValidPassword(rpassword)) {
             system("cls");
             cout << "!! Password can only contain numbers !!" << endl;
-            cout << "Press 1 to try again" << endl;
-            cin >> op;
-            if (op == 1) signup();  // Restart signup if password is invalid
+            system("pause");
+            signup();
         }
     
-    
-
-        ifstream input("..\\data\\membersN.txt");
-
-        while(input>>rid){
-            if(rid == ruserID){
-                count = 1;
-                system("cls");
+        // Load users from file into vector before searching
+        loadUsersFromFile();
+            
+        for(const auto& user : U){
+            if(user.username == ruserID){
+                cout << "The username already exists" << endl ;
+                system("pause");
+                signup();
+            
             }
         }
-        if(count == 1){
-            cout << "The username already exists" << endl << "[1] Try again" 
-                 << endl << "[2] Back to menu" <<endl;
-            cin >> c;
-            if(c == 1) signup();
-            if(c == 2) main();
-        }else{
-            ofstream f1("..\\data\\membersN.txt", ios::app);
-            f1 << ruserID <<' '<< rpassword << endl;
-            cout << "Your SIGN UP is completed!" << endl;
-            cout << "[1] Back to menu" << endl;
-            cin >> op;
-            if(op == 1) main();
-        }
+            U.push_back({ruserID, rpassword, initialPoints});
+            saveUsersToFile();
+            cout << "Your signup is COMPLETED! Welcome, " << ruserID << "\n\n";
+            system("pause");
+            exit();
+        
+            
     }else{
-        cout <<  "!! Usernames can only contain letters !!" << endl;
-        cout << "Press 1 to sign in again" <<endl;
-        cin >> op;
-        if(op == 1) signup();
-    
+        cout <<  "!! Usernames can only contain letters !!\n" << endl;
+        system("pause");
+        signup();
+            
     }
 }
 
+
 void forgot(){
-    int option,op;
+    string suserID,spass;
     system("cls");
     cout << "-- Trouble logging in? --" <<endl;
-    cout << "[1] Enter your username " << endl;
-    cout << "[2] Back to menu" <<endl;
-    cout << "Please enter your choice : ";
-    cin >> option;
+    cout << "Please Enter your username \n" <<endl;
+    cout << "Username : ";
+    cin >> suserID;
 
-    if(option == 1){
-        int count;
-        string suserID,sid,spass;
-        system("cls");
-        cout << "-- Enter your username --" <<endl;
-        cout << "Username : ";
-        cin >> suserID;
+    loadUsersFromFile();
 
-        ifstream f2("..\\data\\membersN.txt");
-        while(f2 >> sid >> spass){
-            if(sid == suserID){
-                count = 1;
-            }
-        }
-        f2.close();
-        if(count == 1){
+    for(const auto& user : U){
+        if(user.username == suserID){
             cout << "Your account is found!" << endl;
-            cout << "Your password is : " << spass << endl;
-            cout << "[1] Back to menu" << endl;
-            cin >> op;
-            if(op == 1) main();
-        }else {
-            cout << "Sorry! Your account is not found" << endl;
-            cout << "[1] Back to menu" << endl;
-            cin >> op;
-            if(op == 1) main();
-        }if(option == 2) main();
+            cout << "Your password is : " << user.password << endl << endl;
+            system("pause");
+            main();
+        }
+    }
+        cout << "Sorry! Your account is not found.\n" << endl;
+        system("pause");
+        forgot();
         
-    }if(option == 2) main();
 }
 
-
+void exit(){
+    system("cls");
+    cout << "Thank You for using our service.";
+}
