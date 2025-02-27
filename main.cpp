@@ -1,20 +1,24 @@
 #include <bits/stdc++.h>
 //#include ".\src\calculate.cpp"
 #include ".\src\billgen.cpp"
+#include ".\src\member.cpp"
 using namespace std;
 
 int main() {
     vector<product_data> product; 
     vector<order> customer_order;
     vector<Item> items;
+    vector<User> U;
     vector<promotions_data> pointList = readGetPoinsFile(".\\data\\promotion\\getpoints.txt");
     vector<promotions_data> discountList = readDiscountFile(".\\data\\promotion\\discount.txt");
     vector<promotions_data> freeList = readFreeItemFile(".\\data\\promotion\\freeitem.txt");
     vector<promotions_data> eligibleItems = readBuyOneGetOneFile(".\\data\\promotion\\buy1get1.txt");
+    loadUsersFromFile(".\\data\\membersN.txt", U);
     char choice;
     input_product(".\\data\\products\\product_data.txt",product);
-    system("cls");
+    system("pause");
     do {
+        system("cls");
         cout << right << setw(40) << "CUSTOMER SERVICE" << endl;
         cout << "-----------------------------------------------------------------" << endl;
         cout << endl;
@@ -44,6 +48,23 @@ int main() {
             displaySummary(z);
             displayFreeItems(freeItems(items));
 
+            char ans;
+            cout << "\nDo you have member?(1)yes (2)no: ";
+            cin >> ans;
+            if (ans == '1') {
+                string uuser;
+                cout << "username: ";
+                cin >> uuser;
+                for (auto& user : U) {
+                    if (toUpperCase(user.username) == toUpperCase(uuser)) {
+                        cout << "Login successful! Welcome, " << user.username << "!\n";
+                        user.point += calculatetpoint(result);
+                        cout << "You have " << user.point << " point \n";
+                    }
+                }
+                rewrite(".\\data\\membersN.txt", U);
+            }
+            system("pause");
             double totalAmount = z[2];
             createbill(".\\bill.txt",totalAmount,result,z);
         }else if (choice == '2') {
@@ -64,6 +85,23 @@ int main() {
             displaySummary(z);
             displayFreeItems(freeItems(items));
 
+            char ans;
+            cout << "\nDo you have member?(1)yes (2)no: ";
+            cin >> ans;
+            if (ans == '1') {
+                string uuser;
+                cout << "username: ";
+                cin >> uuser;
+                for (auto& user : U) {
+                    if (toUpperCase(user.username) == toUpperCase(uuser)) {
+                        cout << "Login successful! Welcome, " << user.username << "!\n";
+                        user.point += calculatetpoint(result);
+                        cout << "You have " << user.point << " point \n";
+                    }
+                }
+                rewrite(".\\data\\membersN.txt", U);
+            }
+            system("pause");
             double totalAmount = z[2];
             createbill(".\\bill.txt",totalAmount,result,z);
         }else if (choice == '3'){
