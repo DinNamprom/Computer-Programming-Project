@@ -37,6 +37,13 @@ vector<ItemResult> Itemprocessor(const vector<Item>& orders) {
     return results;
 }
 
+int calculatetpoint(const vector<ItemResult> &items) {
+    int sum = 0;
+    for (const auto& item: items) {
+        sum += item.points;
+    }
+    return sum;
+}
 
 // ฟังก์ชันคำนวณราคารวม
 vector<double> calculateSummary(const vector<ItemResult>& items) {

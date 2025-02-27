@@ -1,8 +1,9 @@
-Alex,3727
-Nick,0809
-Zeline,1409
-Dinn,8793
-Tjay,3412
-Punn,7893
-AeKk,6546
-AScI,3457
+Alex,3727,11
+Nick,0809,3
+Zeline,1409,10
+Dinn,8793,101
+Tjay,3412,9
+Punn,7893,14
+AeKk,6546,16
+AScI,3457,13
+Char,0079,33
