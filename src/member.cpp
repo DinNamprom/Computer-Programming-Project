@@ -9,11 +9,13 @@ struct User{
     int points;
 };
 
-void login(vector<User> &);
-void signup(vector<User> &);
-void forgot(vector<User> &);
-void exit(vector<User> &);
-void displaymem(vector<User>& U); 
+void login(vector<User> &,int );
+void signup(vector<User> &,int );
+void forgot(vector<User> &,int );
+void exit(vector<User> &,int );
+void displaymem(vector<User>& U,int );
+
+
 
 
 void exit(vector<User> &U){
@@ -80,10 +82,9 @@ void addUser(vector<User>& U, const string& username, const string& password, in
 }
 
 
-void login(vector<User> &U){
+void login(vector<User> &U, int point){
     
     system("cls");
-    int point;
     string userID, password;
     
     cout << "--------- LOGIN ---------\n" << endl;
@@ -98,9 +99,6 @@ void login(vector<User> &U){
     for (auto& user : U) {
         if (user.username == userID && user.password == password ) {
             cout << "\nLogin successful! Welcome, " << user.username << "!\n";
-            // user.points += calculatetpoint();
-            cout << "input point : " << endl;
-            cin >> point;
             user.points += point;
             cout << "Your current points: " << user.points << " points.\n\n";
             saveUsersToFile("..\\data\\membersN.txt",U);
@@ -113,14 +111,14 @@ void login(vector<User> &U){
         system("cls");
         cout << "Login failed. Incorrect username or password.\n";
         system("pause");
-        login(U);
+        displaymem(U,point);
+        
 
 }
 
     
 
-void signup(vector<User> &U){
-    int points = 0;
+void signup(vector<User> &U,int point){
     string ruserID, rpassword;
     string l = "01234567890";
    
@@ -144,12 +142,12 @@ void signup(vector<User> &U){
             system("cls");
             cout << "!! Password can only contain numbers !!" << endl;
             system("pause");
-            signup(U);
+            signup(U,point);
         }
     
         // Load users from file into vector before searching
         loadUsersFromFile("..\\data\\membersN.txt",U);
-        addUser(U,ruserID,rpassword,points);
+        addUser(U,ruserID,rpassword,point);
         saveUsersToFile("..\\data\\membersN.txt",U);
 
             cout << "Your signup is COMPLETED! Welcome, " << ruserID << "\n\n";
@@ -160,13 +158,13 @@ void signup(vector<User> &U){
     }else{
         cout << "!! Usernames can only contain letters !!\n" << endl;
         system("pause");
-        signup(U);
+        signup(U,point);
             
     }
 }
 
 
-void forgot(vector<User> &U){
+void forgot(vector<User> &U,int point){
     string suserID,spass;
     system("cls");
     cout << "-- Trouble logging in? --" <<endl;
@@ -181,18 +179,18 @@ void forgot(vector<User> &U){
             cout << "Your account is found!" << endl;
             cout << "Your password is : " << user.password << endl << endl;
             system("pause");
-            displaymem(U);
+            displaymem(U,point);
         }
     }
         cout << "Sorry! Your account is not found.\n" << endl;
         system("pause");
-        forgot(U);
+        forgot(U,point);
         
 }
 
 
 
-void displaymem(vector<User> &U){
+void displaymem(vector<User> &U,int point){
     system("cls");
     char ch;
     cout << "-------------------------" <<endl;
@@ -207,13 +205,13 @@ void displaymem(vector<User> &U){
     cout << "\n";
 
     if(ch == '1'){ // login
-        login(U);
+        login(U,point);
     }
     if(ch == '2'){ // sign up
-        signup(U);   
+        signup(U,point);   
     }
     if(ch == '3'){ // forgot pass
-        forgot(U);   
+        forgot(U,point);   
     }
     if(ch == '4'){ // exit
         system("cls");
@@ -232,15 +230,15 @@ void displaymem(vector<User> &U){
         cout << "Please enter your choice : ";
         cin >> ch;
         if(ch == '1'){ // login
-            login(U);
+            login(U,point);
             break;
         }
         if(ch == '2'){ // sign up
-            signup(U);
+            signup(U,point);
             break;
         }
         if(ch == '3'){ // forgot pass
-            forgot(U);
+            forgot(U,point);
             break;
         }
         if(ch == '4'){ // exit
@@ -254,5 +252,6 @@ void displaymem(vector<User> &U){
 
 int main(){
     vector<User> U;
-    displaymem(U);
+    int point = 20;
+    displaymem(U,point);
 }
