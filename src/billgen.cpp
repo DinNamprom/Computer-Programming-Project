@@ -2,6 +2,7 @@
 #include "calculate.cpp"
 #include "ascii_text_gen.cpp"
 #include "barcode.cpp"
+#include "member.cpp"
 
 using namespace std;
 
@@ -9,18 +10,35 @@ using namespace std;
 string filePath = "..\\src\\test.txt";
 
 //จาก barcode
-int barcodeLength = 12;  
-string barcode = generateBarcodeNumber(barcodeLength);  
-string formattedBarcode = convertToBarcodeFormat(barcode); 
+int barcodeLength = 12;
+string barcode = generateBarcodeNumber(barcodeLength);
+string formattedBarcode = convertToBarcodeFormat(barcode);
 
 void CreateBarcode(string formattedBarcode, string barcode, ofstream& bill) {
     bill <<"|    " << formattedBarcode << "    |" << endl;
-    bill << "| " << setw(45) << barcode << setw(36) << " |" << endl;    
+    bill << "| " << setw(45) << barcode << setw(36) << " |" << endl;
     checkLuckyReward(barcode);
     timenow();
 }
 
+void displayFreeItems(const vector<string>& freeItems, ofstream& bill) {
+    if (freeItems.empty()) {
+        bill << "- |\n";
+    }
+    for (const auto& item : freeItems) {
+        bill << item << " /// ";
+    }
+}
 
+//member test case
+
+vector<User> user = {
+    {"Tum", "1234", 1},
+    {"Cat", "1234", 200},
+    {"Mook", "1234", 300},
+    {"Ploy", "1234", 400},
+    {"Ploy", "1234", 500}
+};
 //จาก calculate
 vector<order> order = {
     {"Apple", 101, 3, 21.0},
@@ -35,22 +53,21 @@ vector<double> z = calculateSummary(Itemprocessor(items));
 vector<ItemResult> results = Itemprocessor(items);
 
 
-void CreateTopborder(const string& text, ofstream& bill) {
+void CreateTopborder(ofstream& bill) {
     bill << " _________________________________________________________________________________\n";
     bill << "|                                                                                 |\n";
-    CreateAsciiArt(text, bill, 10); // Add spacing parameter
+    CreateAsciiArt("TJ", bill); // Add spacing parameter
     bill << "|                                                                                 |\n";
     bill << "| _______________________________________________________________________________ |\n";
 }
 
 void CreateMiddle(ofstream& bill, const vector<ItemResult>& results, const vector<double>& summary) {
-    bill << "|                                                                                 |\n";
     bill << "| Item Name        | Quantity      | Price/Unit    | Discount    | Total Price    |\n";
     bill << "|---------------------------------------------------------------------------------|\n";
-    
+
     for (const auto& item : results) {
         // Print item line
-        bill << "| " << left << setw(17) << item.name 
+        bill << "| " << left << setw(17) << item.name
              << "| " << setw(14) << item.quantity
              << "| " << setw(14) << item.value1
              << "| " << setw(11) << item.howdis << "%"
@@ -58,8 +75,14 @@ void CreateMiddle(ofstream& bill, const vector<ItemResult>& results, const vecto
     }
     bill << "|---------------------------------------------------------------------------------|\n";
     bill << "| Total Amount:" << right << setw(66) << summary[0] << " |\n";
-    bill << "| VAT 7% :" << right << setw(71) << summary[1] << " |\n";  
+    bill << "| VAT 7% :" << right << setw(71) << summary[1] << " |\n";
     bill << "| Total Amount (Including VAT):" << right << setw(50) << summary[2] << " |\n";
+    bill << "| Point Remaining:" << setw(63) << user[0].point << " |\n";
+    bill << "| Freebie:" <<setw(74);
+    displayFreeItems(freeItems(items), bill);
+    bill << "|                                                                                 |\n";
+    CreateAsciiArt(user[1].username, bill);
+    CreateAsciiArt(user[2].username, bill);
 }
 
 void CreateBottomborder(ofstream& bill) {
@@ -82,14 +105,13 @@ void createbill(string path,vector<ItemResult> item,vector<double> z) {
         cerr << "Insufficient data in summary vector." << endl;
     }
 
-    string text = "The Bill";
-    CreateTopborder(text, bill);
+    CreateTopborder(bill);
     CreateMiddle(bill, item, z);
     CreateBottomborder(bill);
 }
 
 int main() {
-    srand(time(0)); 
+    srand(time(0));
     // double totalAmount = z[2];
     // double Vat = z[1];
     createbill(filePath,results,z);
