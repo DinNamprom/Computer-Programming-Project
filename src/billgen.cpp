@@ -7,7 +7,7 @@
 using namespace std;
 
 // string filePath = "C:\\Users\\mrcat\\Compro\\Computer-Programming-Project\\src\\bill.txt";
-string filePath = "..\\src\\test.txt";
+//string filePath = "..\\src\\test.txt";
 
 //จาก barcode
 int barcodeLength = 12;
@@ -30,27 +30,27 @@ void displayFreeItems(const vector<string>& freeItems, ofstream& bill) {
     }
 }
 
-//member test case
+// //member test case
 
-vector<User> user = {
-    {"Tum", "1234", 1},
-    {"Cat", "1234", 200},
-    {"Mook", "1234", 300},
-    {"Ploy", "1234", 400},
-    {"Ploy", "1234", 500}
-};
-//จาก calculate
-vector<order> order = {
-    {"Apple", 101, 3, 21.0},
-    {"Banana", 102, 1, 12.0},
-    {"Orange", 103, 2, 15.0},
-    {"Grapes", 104, 4, 30.0},
-    {"Pine", 105, 1, 25.0},
-    {"Cat", 112, 1, 250.0}
-};
-vector<Item> items = convertOrdersToItems(order);
-vector<double> z = calculateSummary(Itemprocessor(items));
-vector<ItemResult> results = Itemprocessor(items);
+// vector<User> user = {
+//     {"Tum", "1234", 1},
+//     {"Cat", "1234", 200},
+//     {"Mook", "1234", 300},
+//     {"Ploy", "1234", 400},
+//     {"Ploy", "1234", 500}
+// };
+// //จาก calculate
+// vector<order> order = {
+//     {"Apple", 101, 3, 21.0},
+//     {"Banana", 102, 1, 12.0},
+//     {"Orange", 103, 2, 15.0},
+//     {"Grapes", 104, 4, 30.0},
+//     {"Pine", 105, 1, 25.0},
+//     {"Cat", 112, 1, 250.0}
+// };
+// vector<Item> items = convertOrdersToItems(order);
+// vector<double> z = calculateSummary(Itemprocessor(items));
+// vector<ItemResult> results = Itemprocessor(items);
 
 
 void CreateTopborder(ofstream& bill) {
@@ -61,7 +61,7 @@ void CreateTopborder(ofstream& bill) {
     bill << "| _______________________________________________________________________________ |\n";
 }
 
-void CreateMiddle(ofstream& bill, const vector<ItemResult>& results, const vector<double>& summary) {
+void CreateMiddle(ofstream& bill, const vector<ItemResult>& results, const vector<double>& summary,const User U,const vector<Item> items) {
     bill << "| Item Name        | Quantity      | Price/Unit    | Discount    | Total Price    |\n";
     bill << "|---------------------------------------------------------------------------------|\n";
 
@@ -77,12 +77,11 @@ void CreateMiddle(ofstream& bill, const vector<ItemResult>& results, const vecto
     bill << "| Total Amount:" << right << setw(66) << summary[0] << " |\n";
     bill << "| VAT 7% :" << right << setw(71) << summary[1] << " |\n";
     bill << "| Total Amount (Including VAT):" << right << setw(50) << summary[2] << " |\n";
-    bill << "| Point Remaining:" << setw(63) << user[0].points << " |\n";
+    bill << "| Point Remaining:" << setw(63) << U.points << " |\n";
     bill << "| Freebie:" <<setw(74);
     displayFreeItems(freeItems(items), bill);
     bill << "|                                                                                 |\n";
-    CreateAsciiArt(user[1].username, bill);
-    CreateAsciiArt(user[2].username, bill);
+    CreateAsciiArt(U.username, bill);
 }
 
 void CreateBottomborder(ofstream& bill) {
@@ -92,10 +91,10 @@ void CreateBottomborder(ofstream& bill) {
     bill << "|                                *** Thank You ***                                |\n";
     bill << "|_________________________________________________________________________________|\n";
     bill.close();
-    system(("code " + filePath).c_str());
+    //system(("code " + filePath).c_str());
 }
 
-void createbill(string path,vector<ItemResult> item,vector<double> z) {
+void createbill(string path,vector<ItemResult> item,vector<double> z,const User U,const vector<Item> items) {
     ofstream bill(path);
     if (!bill.is_open()) {
         cerr << "Failed to open the file." << endl;
@@ -106,14 +105,14 @@ void createbill(string path,vector<ItemResult> item,vector<double> z) {
     }
 
     CreateTopborder(bill);
-    CreateMiddle(bill, item, z);
+    CreateMiddle(bill, item, z, U, items);
     CreateBottomborder(bill);
 }
 
-int main() {
-    srand(time(0));
-    // double totalAmount = z[2];
-    // double Vat = z[1];
-    createbill(filePath,results,z);
-    return 0;
-}
+// int main() {
+//     srand(time(0));
+//     // double totalAmount = z[2];
+//     // double Vat = z[1];
+//     createbill(filePath,results,z);
+//     return 0;
+// }

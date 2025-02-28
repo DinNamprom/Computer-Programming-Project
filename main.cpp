@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 //#include ".\src\calculate.cpp"
 #include ".\src\billgen.cpp"
-#include ".\src\member.cpp"
+//#include ".\src\member.cpp"
 using namespace std;
 
 int main() {
@@ -51,22 +51,17 @@ int main() {
             char ans;
             cout << "\nDo you have member?(1)yes (2)no: ";
             cin >> ans;
+            User luser;
             if (ans == '1') {
-                string uuser;
-                cout << "username: ";
-                cin >> uuser;
-                for (auto& user : U) {
-                    if (toUpperCase(user.username) == toUpperCase(uuser)) {
-                        cout << "Login successful! Welcome, " << user.username << "!\n";
-                        user.point += calculatetpoint(result);
-                        cout << "You have " << user.point << " point \n";
-                    }
-                }
-                rewrite(".\\data\\membersN.txt", U);
+                displaymem(U, calculatetpoint(result),".\\data\\membersN.txt",luser);
+            }else {
+                luser.username = "";
+                luser.points = calculatetpoint(result);
             }
             system("pause");
+
             double totalAmount = z[2];
-            createbill(".\\bill.txt",totalAmount,result,z);
+            createbill(".\\bill.txt",result,z,luser,items);
         }else if (choice == '2') {
             customer_order.clear();
             system("cls");
@@ -88,24 +83,19 @@ int main() {
             char ans;
             cout << "\nDo you have member?(1)yes (2)no: ";
             cin >> ans;
+            User luser;
             if (ans == '1') {
-                string uuser;
-                cout << "username: ";
-                cin >> uuser;
-                for (auto& user : U) {
-                    if (toUpperCase(user.username) == toUpperCase(uuser)) {
-                        cout << "Login successful! Welcome, " << user.username << "!\n";
-                        user.point += calculatetpoint(result);
-                        cout << "You have " << user.point << " point \n";
-                    }
-                }
-                rewrite(".\\data\\membersN.txt", U);
+                displaymem(U, calculatetpoint(result),".\\data\\membersN.txt",luser);
+            }else {
+                luser.username = "";
+                luser.points = calculatetpoint(result);
             }
             system("pause");
             double totalAmount = z[2];
-            createbill(".\\bill.txt",totalAmount,result,z);
+            createbill(".\\bill.txt",result,z,luser,items);
         }else if (choice == '3'){
-
+            User luser;
+            displaymem(U, 0,".\\data\\membersN.txt",luser);
         }else if (choice == '4') {
             break;
         }
