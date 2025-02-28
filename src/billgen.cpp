@@ -77,7 +77,7 @@ void CreateMiddle(ofstream& bill, const vector<ItemResult>& results, const vecto
     bill << "| Total Amount:" << right << setw(66) << summary[0] << " |\n";
     bill << "| VAT 7% :" << right << setw(71) << summary[1] << " |\n";
     bill << "| Total Amount (Including VAT):" << right << setw(50) << summary[2] << " |\n";
-    bill << "| Point Remaining:" << setw(63) << user[0].point << " |\n";
+    bill << "| Point Remaining:" << setw(63) << user[0].points << " |\n";
     bill << "| Freebie:" <<setw(74);
     displayFreeItems(freeItems(items), bill);
     bill << "|                                                                                 |\n";
