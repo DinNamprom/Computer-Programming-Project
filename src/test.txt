@@ -17,22 +17,42 @@
 | Coke Coffee               | 2               | 17              | 17            %| 17              |
 | Ichitun Original          | 1               | 12              | 0             %| 12              |
 | Dozo Original             | 3               | 12              | 0             %| 36              |
+| Dozo Sea Weed             | 1               | 12              | 0             %| 12              |
+| Pringles BBQ              | 1               | 20              | 0             %| 20              |
+| Lays BBQ                  | 1               | 15              | 0             %| 15              |
+| Lays Sourcream            | 1               | 15              | 0             %| 15              |
+| Knor Chicken porridge     | 3               | 9               | 0             %| 27              |
+| Coke Coffee               | 2               | 17              | 17            %| 17              |
+| Ichitun Original          | 1               | 12              | 0             %| 12              |
+| Dozo Original             | 3               | 12              | 0             %| 36              |
+| Dozo Sea Weed             | 1               | 12              | 0             %| 12              |
+| Pringles BBQ              | 1               | 20              | 0             %| 20              |
+| Lays Original             | 4               | 15              | 0             %| 30              |
+| Lays BBQ                  | 1               | 15              | 0             %| 15              |
+| Lays Sourcream            | 1               | 15              | 0             %| 15              |
+| Knor Chicken porridge     | 3               | 9               | 0             %| 27              |
+| Coke Coffee               | 2               | 17              | 17            %| 17              |
+| Ichitun Original          | 1               | 12              | 0             %| 12              |
+| Dozo Original             | 3               | 12              | 0             %| 36              |
+| Dozo Sea Weed             | 1               | 12              | 0             %| 12              |
+| Pringles BBQ              | 1               | 20              | 0             %| 20              |
 |--------------------------------------------------------------------------------------------------|
-| Total Amount:                                                                                152 |
-| VAT 7% :                                                                                   10.64 |
-| Total Amount (Including VAT):                                                             162.64 |
+| Total Amount:                                                                                522 |
+| VAT 7% :                                                                                   36.54 |
+| Total Amount (Including VAT):                                                             558.54 |
 | Point Remaining:                                                                              20 |
-| Freebie:                                                                      - |
+| Freebie: Lays Sea Weed, Knor Mash Potato, Pringles BBQ, Lays Sea Weed, Knor Mash Potato          |
+|          Pringles BBQ, Lays Sea Weed, Knor Mash Potato, Pringles BBQ                             |
 |                                                                                                  |
-|      ███╗   ███╗ ██╗ ██╗      ███████╗                                                           |
-|      ████╗ ████║ ██║ ██║      ██╔════╝                                                           |
-|      ██╔████╔██║ ██║ ██║      █████╗                                                             |
-|      ██║╚██╔╝██║ ██║ ██║      ██╔══╝                                                             |
-|      ██║ ╚═╝ ██║ ██║ ███████╗ ███████╗                                                           |
-|      ╚═╝     ╚═╝ ╚═╝ ╚══════╝ ╚══════╝                                                           |
+|                                           /\____/\                                               |
+|                                          /  o   o  \                                             |
+|                                         ( ==  ^  == )                                            |
+|                                          )         (                                             |
+|                                         (           )                                            |
+|                                        (_(__)___(__)_)                                           |
 |                                                                                                  |
-|    |   ||||   || |  ||||   || |  | |  |||  | ||  | |  | || |  || | | | | | |    |
-|                                  174094882455                                   |
+|             |   ||||   || |  ||||   || |  | |  |||  | ||  | |  | || |  || | | | | | |            |
+|                                           174094882455                                           |
 |                                                                                                  |
-|                                         *** Thank You ***                                        |
+|                                        *** Thank You ***                                         |
 |__________________________________________________________________________________________________|

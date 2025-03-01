@@ -218,86 +218,6 @@ map<char, vector<string>> asciiFont = {
         "███████╗ ",
         "╚══════╝ "
     }},
-    {'0', {
-        " ██████╗  ",
-        "██╔═████╗ ",
-        "██║██╔██║ ",
-        "████╔╝██║ ",
-        "╚██████╔╝ ",
-        " ╚═════╝  "
-    }},
-    {'1', {
-        " ██╗ ",
-        "███║ ",
-        "╚██║ ",
-        " ██║ ",
-        " ██║ ",
-        " ╚═╝ "
-    }},
-    {'2', {
-        "██████╗  ",
-        "╚════██╗ ",
-        " █████╔╝ ",
-        "██╔═══╝  ",
-        "███████╗ ",
-        "╚══════╝ "
-    }},
-    {'3', {
-        "██████╗  ",
-        "╚════██╗ ",
-        " █████╔╝ ",
-        " ╚═══██╗ ",
-        "██████╔╝ ",
-        "╚═════╝  "
-    }},
-    {'4', {
-        "██╗  ██╗ ",
-        "██║  ██║ ",
-        "███████║ ",
-        "╚════██║ ",
-        "     ██║ ",
-        "     ╚═╝ "
-    }},
-    {'5', {
-        "███████╗ ",
-        "██╔════╝ ",
-        "███████╗ ",
-        "╚════██║ ",
-        "███████║ ",
-        "╚══════╝ "
-    }},
-    {'6', {
-        " ██████╗ ",
-        "██╔════╝ ",
-        "███████╗ ",
-        "██╔═══██╗",
-        "╚██████╔╝",
-        " ╚═════╝ "
-    }},
-    {'7', {
-        "███████╗ ",
-        "╚════██║ ",
-        "    ██╔╝ ",
-        "   ██╔╝  ",
-        "   ██║   ",
-        "   ╚═╝   "
-    }},
-    {'8', {
-        " █████╗  ",
-        "██╔══██╗ ",
-        "╚█████╔╝ ",
-        "██╔══██╗ ",
-        "╚█████╔╝ ",
-        " ╚════╝  "
-    }},
-    {'9', {
-        " █████╗  ",
-        "██╔══██╗ ",
-        "╚██████║ ",
-        " ╚═══██║ ",
-        " █████╔╝ ",
-        " ╚════╝  "
-    }},
     {'*', {
         " ██╗  ",
         " ██║  ",
@@ -305,6 +225,89 @@ map<char, vector<string>> asciiFont = {
         "      ",
         "      ",
         "      "
+    }}
+};
+
+map<char, vector<string>> pics = {
+    {'1',{
+        "      ______ ______",
+        "    _/      Y      \\_",
+        "   // ~~ ~~ | ~~ ~  \\",
+        "  // ~ ~ ~~ | ~~~ ~~ \\",
+        " //________.|.________\\",
+        "`----------`-'----------'"
+    }},
+    {'2',{
+        ".--.",
+        "|__| .-------.",
+        "|=.| |.-----.|",
+        "|--| || KCK ||",
+        "|  | |'-----'|",
+        "|__|~')_____('"
+    }},
+    {'3',{
+        "     __",
+        "    (  )",
+        "     ||",
+        " ___|''|__.._",
+        "/____________\\",
+        "\\____________/~~~"
+    }},
+    {'4',{
+        "   /\\____/\\",
+        "  /  o   o  \\",
+        " ( ==  ^  == )",
+        "  )         (",
+        " (           )",
+        "(_(__)___(__)_)"
+    }},
+    {'5',{
+        "           .==============.",
+        " __________||_/########\\_||__________",
+        "|(O)____ : [FM 103.7] ooooo : ____(O)|",
+        "|  /::::\\:  _________  +|+  :/::::\\  |",
+        "|  \\;;;;/: |    |    | |+|  :\\;;;;/  |",
+        "|________:_ooooo+==ooo______:________|"
+    }},
+    {'6',{
+        "      _        ,..",
+        " ,--._\\_.--, (-00)",
+        "; #         _:(  -)",
+        ":          (_____/",
+        ":            :",
+        " '.___..___.`"
+    }},
+    {'7',{
+        " _____________,-.___     _",
+        "|____        { {]_]_]   [_]",
+        "|___ `-----.__\\ \\_]_]_    . `",
+        "|   `-----.____} }]_]_]_   ,",
+        "|_____________/ {_]_]_]_] , `",
+        "              `-'            "
+    }},
+    {'8',{
+        "---------------+---------------",
+        "          ___ /^^[___              _",
+        "        /|^+----+   |#___________//",
+        "      ( -+ |____|    ______-----+/",
+        "       ==_________--'            \\",
+        "         ~_|___|__"
+    }},
+    {'9',{
+        "         _____A_",
+        "        /      /\\",
+        "     __/__/\\__/  \\___",
+        "----/__|' '' '| /___/\\----",
+        "    |''|''||''| |' '||",
+        "    `''`''))''`'`''''`"
+    }},
+    {'0',{
+        "   $$  $$  $$",
+        " __||__||__||__",
+        "| * * * * * * *|",
+        "|* * * * * * * |",
+        "| * * * * * * *|",
+        "|______________|"
     }}
 };
 
@@ -318,40 +321,108 @@ int countUnicodeCharacters(const string& str) {
     return count;
 }
 
-void CreateAsciiArt(string text, ofstream& bill) { 
-    //text += "*s Bill";
-    for (int row = 0; row < 6; row++) { // 6 rows for each character
-        bill << "|";
-        bill << right << setw(5) << " "; 
 
-        stringstream line;
-        for (char c : text) {
-            c = toupper(c);
-            if (asciiFont.find(c) != asciiFont.end()) {
-                line << asciiFont[c][row];
-            } else {
-                line << "      ";  // Add space for missing characters
+void CreateAsciiArt(string text, ofstream& bill, bool type) { 
+    string originalText = text; // Preserve original text
+    string billText = "*s Bill";
+
+    if(type == true){
+        if(text.length() > 4 && text !=  "*s Bill") {
+            for (int row = 0; row < 6; row++) { 
+                bill << "|";
+                bill << right << setw(5) << " "; 
+        
+                stringstream line;
+                for (char c : originalText) {
+                    c = toupper(c);
+                    if (asciiFont.find(c) != asciiFont.end()) {
+                        line << asciiFont[c][row];
+                    } else {
+                        line << "      ";  // Add space for missing characters
+                    }
+                }
+                string asciiLine = line.str();
+                int charCount = countUnicodeCharacters(asciiLine);
+    
+                if (charCount < 88) {
+                asciiLine.append(88 - charCount, ' ');
+                } else if (charCount > 88) {
+                asciiLine = asciiLine.substr(0, 88);
+                }
+    
+                bill << asciiLine;
+                bill << right << setw(6) << "|" << endl;
+            }
+            CreateAsciiArt("*s Bill", bill, NULL);
+        }else {
+            for (int row = 0; row < 6; row++) { 
+                bill << "|";
+                bill << right << setw(5) << " "; 
+        
+                stringstream line;
+                for (char c : originalText) {
+                    c = toupper(c);
+                    if (asciiFont.find(c) != asciiFont.end()) {
+                        line << asciiFont[c][row];
+                    } else {
+                        line << "      ";  // Add space for missing characters
+                    }
+                }
+                if(text != "*s Bill"){
+                    for (char c : billText) {
+                        c = toupper(c);
+                        if (asciiFont.find(c) != asciiFont.end()) {
+                            line << asciiFont[c][row];
+                        } else {
+                            line << "      ";  // Add space for missing characters
+                        }
+                    }
+            
+                }
+        
+                string asciiLine = line.str();
+                int charCount = countUnicodeCharacters(asciiLine);
+        
+                if (charCount < 88) {
+                    asciiLine.append(88 - charCount, ' ');
+                } else if (charCount > 88) {
+                    asciiLine = asciiLine.substr(0, 88);
+                }
+        
+                bill << asciiLine;
+                bill << right << setw(6) << "|" << endl;
             }
         }
-
-        // Convert stream to string
-        string asciiLine = line.str();
-
-        // Count actual characters (not bytes)
-        int charCount = countUnicodeCharacters(asciiLine);
-
-        // Ensure the string is exactly 63 characters long
-        if (charCount < 88) {
-            asciiLine.append(88 - charCount, ' '); // Add spaces
-        } else if (charCount > 88) {
-            asciiLine = asciiLine.substr(0, 88); // Trim if too long
+    }else{
+        for (int row = 0; row < 6; row++) { 
+            bill << "|";
+            bill << right << setw(40) << " "; 
+    
+            stringstream line;
+            for (char c : originalText) {
+                c = toupper(c);
+                if (pics.find(c) != pics.end()) {
+                    line << pics[c][row];
+                } else {
+                    line << "      ";  // Add space for missing characters
+                }
+            }
+            string asciiLine = line.str();
+            int charCount = countUnicodeCharacters(asciiLine);
+    
+            if (charCount < 52) {
+            asciiLine.append(52 - charCount, ' ');
+            } else if (charCount > 52) {
+            asciiLine = asciiLine.substr(0, 52);
+            }
+    
+            bill << asciiLine;
+            bill << right << setw(7) << "|" << endl;
         }
-
-        // Output with proper alignment
-        bill << asciiLine;
-        bill << right << setw(6) << "|" << endl; // Adjust right border to match upper border
     }
+
 }
+
 
 // int main() {
 //     string input = "TUM"; // Example input
