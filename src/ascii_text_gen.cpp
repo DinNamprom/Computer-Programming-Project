@@ -299,18 +299,18 @@ map<char, vector<string>> asciiFont = {
         " ╚════╝  "
     }},
     {'*', {
-        "  "
-        "█╗"
-        "▀╝"
-        "  "
-        "  "
-        "  "
+        " ██╗  ",
+        " ██║  ",
+        " ╚═╝  ",
+        "      ",
+        "      ",
+        "      "
     }}
 };
 
 int countUnicodeCharacters(const string& str) {
     int count = 0;
-    for (size_t i = 0; i < str.length(); i++) {
+    for (int i = 0; i < str.length(); i++) {
         if ((str[i] & 0xC0) != 0x80) {  // Count only UTF-8 leading bytes
             count++;
         }
@@ -318,10 +318,11 @@ int countUnicodeCharacters(const string& str) {
     return count;
 }
 
-void CreateAsciiArt(const string& text, ofstream& bill) { 
+void CreateAsciiArt(string text, ofstream& bill) { 
+    //text += "*s Bill";
     for (int row = 0; row < 6; row++) { // 6 rows for each character
         bill << "|";
-        bill << right << setw(9) << " "; 
+        bill << right << setw(5) << " "; 
 
         stringstream line;
         for (char c : text) {
@@ -329,7 +330,7 @@ void CreateAsciiArt(const string& text, ofstream& bill) {
             if (asciiFont.find(c) != asciiFont.end()) {
                 line << asciiFont[c][row];
             } else {
-                line << "    ";  // Add space for missing characters
+                line << "      ";  // Add space for missing characters
             }
         }
 
@@ -340,15 +341,15 @@ void CreateAsciiArt(const string& text, ofstream& bill) {
         int charCount = countUnicodeCharacters(asciiLine);
 
         // Ensure the string is exactly 63 characters long
-        if (charCount < 63) {
-            asciiLine.append(63 - charCount, ' '); // Add spaces
-        } else if (charCount > 63) {
-            asciiLine = asciiLine.substr(0, 63); // Trim if too long
+        if (charCount < 88) {
+            asciiLine.append(88 - charCount, ' '); // Add spaces
+        } else if (charCount > 88) {
+            asciiLine = asciiLine.substr(0, 88); // Trim if too long
         }
 
         // Output with proper alignment
         bill << asciiLine;
-        bill << right << setw(10) << "|" << endl; // Adjust right border to match upper border
+        bill << right << setw(6) << "|" << endl; // Adjust right border to match upper border
     }
 }
 

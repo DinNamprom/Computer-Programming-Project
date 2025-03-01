@@ -10,20 +10,15 @@
 | _______________________________________________________________________________ |
 | Item Name        | Quantity      | Price/Unit    | Discount    | Total Price    |
 |---------------------------------------------------------------------------------|
-| Lays Original    | 2             | 15            | 0          %| 30             |
-| Lays BBQ         | 1             | 15            | 0          %| 15             |
-| Coke Coffee      | 2             | 17            | 17         %| 17             |
-| Ichitun Original | 1             | 12            | 0          %| 12             |
-| Dozo Original    | 1             | 12            | 0          %| 12             |
-| Dozo Sea Weed    | 2             | 12            | 0          %| 24             |
-| Pringles BBQ     | 2             | 20            | 0          %| 40             |
-| Dozo Sea Weed    | 1             | 12            | 0          %| 12             |
+| Lays Sea Weed    | 3             | 15            | 0          %| 45             |
+| Pringles Original| 1             | 20            | 0          %| 20             |
+| Coke Zero        | 2             | 17            | 17         %| 17             |
 |---------------------------------------------------------------------------------|
-| Total Amount:                                                               162 |
-| VAT 7% :                                                                  11.34 |
-| Total Amount (Including VAT):                                            173.34 |
-| Point Remaining:                                                             10 |
-| Freebie:                          Lays Sea Weed, Knor Mash Potato, Pringles BBQ |
+| Total Amount:                                                                82 |
+| VAT 7% :                                                                   5.74 |
+| Total Amount (Including VAT):                                             87.74 |
+| Point Remaining:                                                             28 |
+| Freebie:                                                          Lays Sea Weed |
 |                                                                                 |
 |    |   ||||   || |  ||||   || |  | |  |||  | ||  | |  | || |  || | | | | | |    |
 |                                  174094882455                                   |
