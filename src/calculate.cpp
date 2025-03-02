@@ -115,7 +115,7 @@ vector<string> freeItems(const vector<Item>& items) {
     vector<product_data> productList;
     
     // โหลดข้อมูลสินค้า
-    input_product("..\\data\\products\\product_data.txt", productList);
+    input_product(".\\data\\products\\product_data.txt", productList);
     
     // ตรวจสอบสินค้าที่มีของแถม
     for (const auto& item : items) {

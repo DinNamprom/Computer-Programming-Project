@@ -170,6 +170,7 @@ void signup(vector<User> &U,int point,string path,User &temp){
 
 void forgot(vector<User> &U,int point,string path,User &temp){
     string suserID,spass;
+    bool found = false;
     system("cls");
     cout << "-- Trouble logging in? --" <<endl;
     cout << "Please Enter your username \n" <<endl;
@@ -182,14 +183,16 @@ void forgot(vector<User> &U,int point,string path,User &temp){
         if(user.username == suserID){
             cout << "Your account is found!" << endl;
             cout << "Your password is : " << user.password << endl << endl;
+            found = true;
             system("pause");
             displaymem(U,point,path,temp);
         }
     }
+    if (!found) {
         cout << "Sorry! Your account is not found.\n" << endl;
         system("pause");
         forgot(U,point,path,temp);
-        
+    }
 }
 
 
@@ -219,7 +222,7 @@ void displaymem(vector<User> &U,int point,string path,User &temp){
     }
     if(ch == '4'){ // exit
         system("cls");
-        cout << "Thank You for using our service.";   
+        cout << "Thank You for using our service.\n";   
     }
 
 
@@ -248,7 +251,7 @@ void displaymem(vector<User> &U,int point,string path,User &temp){
         if(ch == '4'){ // exit
             system("cls");
             cout << "Thank You for using our service.\n";
-            break;
+            return;
         }
     }
    

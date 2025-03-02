@@ -9,7 +9,7 @@ using namespace std;
 stringstream FreeTemi;
 
 // string filePath = "C:\\Users\\mrcat\\Compro\\Computer-Programming-Project\\src\\bill.txt";
-string filePath = "..\\src\\test.txt";
+//string filePath = "..\\src\\test.txt";
 
 //จาก barcode
 int barcodeLength = 12;
@@ -68,23 +68,23 @@ void displayFreeItemsBill(const vector<string>& freeItems, ofstream& bill) {
 
 //member test case
 
-vector<User> user = {
-    {"Tum", "1234", 1},
-    {"Cat", "1234", 200},
-    {"Mook", "1234", 300},
-    {"Ploy", "1234", 400},
-    {"Ploy", "1234", 500}
-};
+// vector<User> user = {
+//     {"Tum", "1234", 1},
+//     {"Cat", "1234", 200},
+//     {"Mook", "1234", 300},
+//     {"Ploy", "1234", 400},
+//     {"Ploy", "1234", 500}
+// };
 //จาก calculate
-vector<order> order;
-vector<product_data> product;
+// vector<order> order;
+// vector<product_data> product;
 
 
 
-void CreateTopborder(ofstream& bill) {
+void CreateTopborder(ofstream& bill, const User U) {
     bill << " __________________________________________________________________________________________________\n";
     bill << "|                                                                                                  |\n";
-    CreateAsciiArt("TJ", bill, true); // Add spacing parameter
+    CreateAsciiArt(U.username, bill, true); // Add spacing parameter
     bill << "|                                                                                                  |\n";
     bill << "| ________________________________________________________________________________________________ |\n";
 }
@@ -120,7 +120,7 @@ void CreateBottomborder(ofstream& bill) {
     bill << "|                                        *** Thank You ***                                         |\n";
     bill << "|__________________________________________________________________________________________________|\n";
     bill.close();
-    system(("code " + filePath).c_str());
+    //system(("code " + filePath).c_str());
 }
 
 void createbill(string path,vector<ItemResult> item,vector<double> z,const User U,const vector<Item> items) {
@@ -133,32 +133,32 @@ void createbill(string path,vector<ItemResult> item,vector<double> z,const User 
         cerr << "Insufficient data in summary vector." << endl;
     }
 
-    CreateTopborder(bill);
+    CreateTopborder(bill,U);
     CreateMiddle(bill, item, z, U, items);
     CreateBottomborder(bill);
 }
 
-int main() {
-    input_product("..\\data\\products\\product_data.txt", product);
-    input_order_byfile(order ,product , "..\\order.txt");
-    srand(time(0));
-    // double totalAmount = z[2];
-    // double Vat = z[1];
-    vector<promotions_data> pointList = readGetPoinsFile("..\\data\\promotion\\getpoints.txt");
-    vector<promotions_data> discountList = readDiscountFile("..\\data\\promotion\\discount.txt");
-    vector<promotions_data> freeList = readFreeItemFile("..\\data\\promotion\\freeitem.txt");
-    vector<promotions_data> eligibleItems = readBuyOneGetOneFile("..\\data\\promotion\\buy1get1.txt");
-    vector<Item> items;
+// int main() {
+//     input_product("..\\data\\products\\product_data.txt", product);
+//     input_order_byfile(order ,product , "..\\order.txt");
+//     srand(time(0));
+//     // double totalAmount = z[2];
+//     // double Vat = z[1];
+//     vector<promotions_data> pointList = readGetPoinsFile("..\\data\\promotion\\getpoints.txt");
+//     vector<promotions_data> discountList = readDiscountFile("..\\data\\promotion\\discount.txt");
+//     vector<promotions_data> freeList = readFreeItemFile("..\\data\\promotion\\freeitem.txt");
+//     vector<promotions_data> eligibleItems = readBuyOneGetOneFile("..\\data\\promotion\\buy1get1.txt");
+//     vector<Item> items;
     
-    User luser = {"Mile", "", 20};
+//     User luser = {"Mile", "", 20};
 
-    items = convertOrdersToItems(order);
-    processItems(items, eligibleItems, pointList, discountList, freeList);
-    vector<ItemResult> result = Itemprocessor(items);
-    cout << "\n";
-    displayResults(result);
-    system("pause");
-    vector<double> z = calculateSummary(Itemprocessor(items));
-    createbill(filePath,result,z,luser,items);
-    return 0;
-}
+//     items = convertOrdersToItems(order);
+//     processItems(items, eligibleItems, pointList, discountList, freeList);
+//     vector<ItemResult> result = Itemprocessor(items);
+//     cout << "\n";
+//     displayResults(result);
+//     system("pause");
+//     vector<double> z = calculateSummary(Itemprocessor(items));
+//     createbill(filePath,result,z,luser,items);
+//     return 0;
+// }
