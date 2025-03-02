@@ -23,49 +23,38 @@ void CreateBarcode(string formattedBarcode, string barcode, ofstream& bill) {
     timenow();
 }
 
-// void displayFreeItemsL(const vector<string>& freeItems, ofstream& bill) {
-//     if (freeItems.empty()) {
-//         bill << right << setw(71) << "- |\n";
-//     }else {
-//         for (const auto& item : freeItems) {
-//             if(item == freeItems.back()) {
-//                 FreeTemi << item;
-//             }else {
-//                 FreeTemi  << item << ", ";
-//             }
-//         }
-//         if(FreeTemi.str().length() > 71) {
-//             FreeTemi.str(FreeTemi.str().substr(0, 71));
-//         }else{
-//             FreeTemi << right << setw(71 - FreeTemi.str().length()) << " ";
-//         }
-//         bill << right << setw(71) << FreeTemi.str() << " |\n";
-//     }
-// }
+
 void displayFreeItemsBill(const vector<string>& freeItems, ofstream& bill) {
     if (freeItems.empty()) {
-        bill << right << setw(91) << "- |\n";
+        bill << right << setw(90) << "- |\n";
     } else {
         stringstream FreeTemi;
-        for (int i = 0; i < freeItems.size(); i++) {
-            FreeTemi << freeItems[i];
-            if (i != freeItems.size() - 1) {
-                FreeTemi << ", ";
+        vector<string> lines;
+        string currentLine;
+        
+        for (const auto& item : freeItems) {
+            if (!currentLine.empty() && (currentLine.length() + item.length() + 2 > 88)) {
+                lines.push_back(currentLine);
+                currentLine.clear();
             }
+            if (!currentLine.empty()) {
+                currentLine += ", ";
+            }
+            currentLine += item;
+        }
+        if (!currentLine.empty()) {
+            lines.push_back(currentLine);
         }
         
-        string freeItemsStr = FreeTemi.str();
-        while (freeItemsStr.length() > 78) {
-            int pos = freeItemsStr.find_first_of(',', 78);
-            if (pos == string::npos || pos >= freeItemsStr.length()) pos = 78; // If no comma found, cut at 88
-            bill << left << setw(87) << freeItemsStr.substr(0, pos) << " |\n";
-            freeItemsStr = freeItemsStr.substr(pos + 1);
+        for (size_t i = 0; i < lines.size(); i++) {
+            if (i == 0) {
+                bill << left << setw(87) << lines[i] << " |\n";
+            } else {
+                bill << "|          " << left << setw(87) << lines[i] << " |\n";
+            }
         }
-        bill << setw(10) << "|"  << left << setw(88) << freeItemsStr << " |\n";
     }
 }
-
-
 //member test case
 
 // vector<User> user = {
@@ -109,7 +98,7 @@ void CreateMiddle(ofstream& bill, const vector<ItemResult>& results, const vecto
     bill << "| Freebie: ";
     displayFreeItemsBill(freeItems(items), bill);
     bill << "|                                                                                                  |\n";
-    CreateAsciiArt("4", bill, false);
+    CreateAsciiArt(to_string(rand()%+10), bill, false);
 }
 
 

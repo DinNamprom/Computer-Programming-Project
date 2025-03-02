@@ -1,28 +1,30 @@
-Lays Original,1
-Lays Sourcream,1
-Lays BBQ,1
-Dozo Original,1
-Dozo Corn & Cheese,1
-Dozo Sea Weed,1
-Pringles Original,2
-Pringles Sea Weed,2
-Pringles BBQ,2
-Coke Coffee,1
-Coke Zero,1
-Papsi Original,1
-Papsi Zero,1
-Ichitun Original,1
-Ichitun Honey Lemon,1
-Ichitun Rice,1
-Origami Spicy Salmon,1 
-Origami Salt Salmon,1
-Origami Shrimp Eggs,1
-Bolgogi Original,1
-Bolgogi Gimji,1
+Lays Original,15
+Lays Sea Weed,15
+Lays Sourcream,15
+Lays BBQ,15
+Dozo Original,12
+Dozo Corn & Cheese,12
+Dozo Sea Weed,12
+Pringles Original,20
+Pringles Sea Weed,20
+Pringles BBQ,20
+Coke Original,17
+Coke Coffee,17
+Coke Zero,17
+Papsi Original,17
+Papsi Zero,17
+Ichitun Original,12
+Ichitun Honey Lemon,12
+Ichitun Rice,12
+Origami Spicy Salmon,1
+Origami Salt Salmon,12
+Origami Shrimp Eggs,12
+Bolgogi Original,14
+Bolgogi Gimji,14
 Mama Tom yum,7
 Mama Moo sub,7
-Knor Pork porridge,2
-Knor Pork congee,2
-Knor Chicken porridge,2
-Knor Chicken congee ,2
-
+Knor Pork porridge,9
+Knor Pork congee,9
+Knor Chicken porridge,9
+Knor Chicken congee ,9
+Knor Mash Potato,20

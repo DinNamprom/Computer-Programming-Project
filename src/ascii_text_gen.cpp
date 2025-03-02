@@ -323,17 +323,16 @@ int countUnicodeCharacters(const string& str) {
 
 
 void CreateAsciiArt(string text, ofstream& bill, bool type) { 
-    string originalText = text; // Preserve original text
     string billText = "*s Bill";
 
-    if(type == true){
+    if(type == true){ //พิมพ์ชื่อ
         if(text.length() > 4 && text !=  "*s Bill") {
             for (int row = 0; row < 6; row++) { 
                 bill << "|";
                 bill << right << setw(5) << " "; 
         
                 stringstream line;
-                for (char c : originalText) {
+                for (char c : text) {
                     c = toupper(c);
                     if (asciiFont.find(c) != asciiFont.end()) {
                         line << asciiFont[c][row];
@@ -353,14 +352,40 @@ void CreateAsciiArt(string text, ofstream& bill, bool type) {
                 bill << asciiLine;
                 bill << right << setw(6) << "|" << endl;
             }
-            CreateAsciiArt("*s Bill", bill, NULL);
+            //CreateAsciiArt("*s Bill", bill, false);
+            for (int row = 0; row < 6; row++) { 
+                bill << "|";
+                bill << right << setw(5) << " "; 
+        
+                stringstream line;
+                for (char c : billText) {
+                    c = toupper(c);
+                    if (asciiFont.find(c) != asciiFont.end()) {
+                        line << asciiFont[c][row];
+                    } else {
+                        line << "      ";  // Add space for missing characters
+                    }
+                }
+                string asciiLine = line.str();
+                int charCount = countUnicodeCharacters(asciiLine);
+    
+                if (charCount < 88) {
+                asciiLine.append(88 - charCount, ' ');
+                } else if (charCount > 88) {
+                asciiLine = asciiLine.substr(0, 88);
+                }
+    
+                bill << asciiLine;
+                bill << right << setw(6) << "|" << endl;
+            }
+            
         }else {
             for (int row = 0; row < 6; row++) { 
                 bill << "|";
                 bill << right << setw(5) << " "; 
         
                 stringstream line;
-                for (char c : originalText) {
+                for (char c : text) {
                     c = toupper(c);
                     if (asciiFont.find(c) != asciiFont.end()) {
                         line << asciiFont[c][row];
@@ -393,13 +418,13 @@ void CreateAsciiArt(string text, ofstream& bill, bool type) {
                 bill << right << setw(6) << "|" << endl;
             }
         }
-    }else{
+    }else{ //พิมพ์การ์ตูน
         for (int row = 0; row < 6; row++) { 
             bill << "|";
             bill << right << setw(40) << " "; 
     
             stringstream line;
-            for (char c : originalText) {
+            for (char c : text) {
                 c = toupper(c);
                 if (pics.find(c) != pics.end()) {
                     line << pics[c][row];
