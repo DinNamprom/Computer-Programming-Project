@@ -1,6 +1,28 @@
-lays Origenel,1
-lays Origenel,1
-lays Origenel,1
-lays Origenel,1
-lays Origenel,1
+Lays Original,1
+Lays Sourcream,1
+Lays BBQ,1
+Dozo Original,1
+Dozo Corn & Cheese,1
+Dozo Sea Weed,1
+Pringles Original,2
+Pringles Sea Weed,2
+Pringles BBQ,2
+Coke Coffee,1
+Coke Zero,1
+Papsi Original,1
+Papsi Zero,1
+Ichitun Original,1
+Ichitun Honey Lemon,1
+Ichitun Rice,1
+Origami Spicy Salmon,1 
+Origami Salt Salmon,1
+Origami Shrimp Eggs,1
+Bolgogi Original,1
+Bolgogi Gimji,1
+Mama Tom yum,7
+Mama Moo sub,7
+Knor Pork porridge,2
+Knor Pork congee,2
+Knor Chicken porridge,2
+Knor Chicken congee ,2
 

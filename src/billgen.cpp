@@ -75,7 +75,7 @@ void displayFreeItemsBill(const vector<string>& freeItems, ofstream& bill) {
 //     {"Ploy", "1234", 400},
 //     {"Ploy", "1234", 500}
 // };
-//จาก calculate
+// //จาก calculate
 // vector<order> order;
 // vector<product_data> product;
 
