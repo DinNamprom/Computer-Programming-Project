@@ -1,11 +1,15 @@
 Alex,3727,50
 Nick,0809,75
 Zeline,1409,56
-Dinn,8793,372
+Dinn,8793,504
 Tjay,3412,355
 Punn,7893,46
 AeKk,6546,86
 AScI,3457,32
-TJTJ,5555,0
+TJTJ,5555,28
 Boss,1234,20
+<<<<<<< HEAD
 Ligmaball,1414,20
+=======
+Char,0079,417
+>>>>>>> 960b7fa6372a4c9385a966b8fa1f5aaa823fa77d
