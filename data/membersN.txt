@@ -8,4 +8,3 @@ AeKk,6546,86
 AScI,3457,32
 TJTJ,5555,0
 Boss,1234,20
-Ligmaball,1414,20
