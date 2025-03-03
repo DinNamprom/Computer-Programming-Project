@@ -1,5 +1,5 @@
  #include <bits/stdc++.h>
- //#include "calculate.cpp"
+ #include "calculate.cpp"
  #include <vector>
 using namespace std;
 
@@ -11,9 +11,10 @@ struct User{
 
 void login(vector<User> &,int ,string ,User &);
 void signup(vector<User> &,int ,string ,User &);
-void forgot(vector<User> &,int ,string ,User &);
-void exit(vector<User> &);
+void forgot(vector<User> &,int ,string ,User & );
+void exit(vector<User> &,int ,string ,User &);
 void displaymem(vector<User>& U,int ,string ,User &);
+
 
 
 
@@ -23,11 +24,25 @@ void exit(vector<User> &U){
     cout << "Thank You for using our service.";
 }
 
+bool isValidUsername(const string& username) {
+    if (username.length() > 9) {
+        return false;
+    }
+    return all_of(username.begin(), username.end(), ::isalpha);
+}
+
 bool isValidPassword(const string& password) {
+    if (password.length() != 4) {
+        return false;
+    }
     return all_of(password.begin(), password.end(), ::isdigit);
 }
 
-
+bool loadpass(const string& password) {
+    return all_of(password.begin(), password.end(), ::isdigit);
+}
+ 
+ 
 
 void loadUsersFromFile(string path,vector<User> &U) {
     U.clear(); // Clear existing data before loading
@@ -82,7 +97,7 @@ void addUser(vector<User>& U, const string& username, const string& password, in
 }
 
 
-void login(vector<User> &U, int point,string path, User &temp){
+void login(vector<User> &U, int point, string path ,User &u){
     
     system("cls");
     string userID, password;
@@ -102,9 +117,6 @@ void login(vector<User> &U, int point,string path, User &temp){
             user.points += point;
             cout << "Your current points: " << user.points << " points.\n\n";
             saveUsersToFile(path,U);
-            temp.username = user.username;
-            temp.password = user.password;
-            temp.points = user.points;
             system("pause");
             exit(U); // Exit the function once a match is found
             
@@ -114,23 +126,23 @@ void login(vector<User> &U, int point,string path, User &temp){
         system("cls");
         cout << "Login failed. Incorrect username or password.\n";
         system("pause");
-        displaymem(U,point,path,temp);
+        displaymem(U,point,path,u);
         
 
 }
 
     
 
-void signup(vector<User> &U,int point,string path,User &temp){
+void signup(vector<User> &U,int point, string path ,User &u){
     string ruserID, rpassword;
     string l = "01234567890";
    
     system("cls");
 
-    cout << "------------- SIGN UP --------------" << endl;
-    cout << "!! Usernames can only use letters !!" << endl 
-         << "!! Passwords can only use numbers !!" << endl;
-    cout << "------------------------------------" << endl << endl;
+    cout << "------------------- SIGN UP --------------------" << endl;
+    cout << "!! Usernames can only use less than 9 letters !!" << endl 
+         << "!!   Passwords can only use 4 digit numbers   !!" << endl;
+    cout << "------------------------------------------------" << endl << endl;
     cout << "USERNAME : ";
     cin >> ruserID;
     cout << "PASSWORD : ";
@@ -139,13 +151,26 @@ void signup(vector<User> &U,int point,string path,User &temp){
 
     if (z == string::npos){  // Username is valid if no digits are found
 
+        if(!isValidUsername(ruserID)){
+            system("cls");
+            cout << "!! Username can only contain less than 9 letters !!" << endl;
+            system("pause");
+            signup(U,point,path,u);
+        }
+
+        if(!isValidPassword(rpassword)){
+            system("cls");
+            cout << "!! Password can only contain 4 numbers !!" << endl;
+            system("pause");
+            signup(U,point,path,u);
+        }
 
         // Validate password (only digits allowed)
-        if (!isValidPassword(rpassword)) {
+        if (!loadpass(rpassword)) {
             system("cls");
             cout << "!! Password can only contain numbers !!" << endl;
             system("pause");
-            signup(U,point,path,temp);
+            signup(U,point,path,u);
         }
     
         // Load users from file into vector before searching
@@ -153,24 +178,22 @@ void signup(vector<User> &U,int point,string path,User &temp){
         addUser(U,ruserID,rpassword,point);
         saveUsersToFile(path,U);
 
-            cout << "Your signup is COMPLETED! Welcome, " << ruserID << "\n";
-            cout << "Please login again. ";
+            cout << "Your signup is COMPLETED! Welcome, " << ruserID << "\n\n";
             system("pause");
-            login(U, point, path, temp);
+            exit(U);
         
             
     }else{
         cout << "!! Usernames can only contain letters !!\n" << endl;
         system("pause");
-        signup(U,point,path,temp);
+        signup(U,point,path,u);
             
     }
 }
 
 
-void forgot(vector<User> &U,int point,string path,User &temp){
+void forgot(vector<User> &U,int point, string path ,User &u){
     string suserID,spass;
-    bool found = false;
     system("cls");
     cout << "-- Trouble logging in? --" <<endl;
     cout << "Please Enter your username \n" <<endl;
@@ -183,21 +206,19 @@ void forgot(vector<User> &U,int point,string path,User &temp){
         if(user.username == suserID){
             cout << "Your account is found!" << endl;
             cout << "Your password is : " << user.password << endl << endl;
-            found = true;
             system("pause");
-            displaymem(U,point,path,temp);
+            displaymem(U,point,path,u);
         }
     }
-    if (!found) {
         cout << "Sorry! Your account is not found.\n" << endl;
         system("pause");
-        forgot(U,point,path,temp);
-    }
+        forgot(U,point,path,u);
+        
 }
 
 
 
-void displaymem(vector<User> &U,int point,string path,User &temp){
+void displaymem(vector<User> &U,int point, string path ,User &u){
     system("cls");
     char ch;
     cout << "-------------------------" <<endl;
@@ -212,17 +233,17 @@ void displaymem(vector<User> &U,int point,string path,User &temp){
     cout << "\n";
 
     if(ch == '1'){ // login
-        login(U,point,path,temp);
+        login(U,point,path,u);
     }
     if(ch == '2'){ // sign up
-        signup(U,point,path,temp);   
+        signup(U,point,path,u);   
     }
     if(ch == '3'){ // forgot pass
-        forgot(U,point,path,temp);   
+        forgot(U,point,path,u);   
     }
     if(ch == '4'){ // exit
         system("cls");
-        cout << "Thank You for using our service.\n";   
+        cout << "Thank You for using our service.";   
     }
 
 
@@ -237,21 +258,21 @@ void displaymem(vector<User> &U,int point,string path,User &temp){
         cout << "Please enter your choice : ";
         cin >> ch;
         if(ch == '1'){ // login
-            login(U,point,path,temp);
+            login(U,point,path,u);
             break;
         }
         if(ch == '2'){ // sign up
-            signup(U,point,path,temp);
+            signup(U,point,path,u);
             break;
         }
         if(ch == '3'){ // forgot pass
-            forgot(U,point,path,temp);
+            forgot(U,point,path,u);
             break;
         }
         if(ch == '4'){ // exit
             system("cls");
-            cout << "Thank You for using our service.\n";
-            return;
+            cout << "Thank You for using our service.";
+            break;
         }
     }
    
@@ -259,6 +280,7 @@ void displaymem(vector<User> &U,int point,string path,User &temp){
 
 // int main(){
 //     vector<User> U;
+//     User u = {"Dinn","3555",20};
 //     int point = 20;
-//     displaymem(U,point);
+//     displaymem(U,point,"..\\data\\membersN.txt",u);
 // }

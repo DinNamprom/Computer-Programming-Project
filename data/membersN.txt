@@ -8,11 +8,4 @@ AeKk,6546,86
 AScI,3457,32
 TJTJ,5555,28
 Boss,1234,20
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-Ligmaball,1414,20
-=======
-Char,0079,417
->>>>>>> 960b7fa6372a4c9385a966b8fa1f5aaa823fa77d
->>>>>>> parent of 248901d (Revert "dee dee")
+Dinnam,5932,20
