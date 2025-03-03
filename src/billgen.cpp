@@ -1,15 +1,13 @@
 #include <bits/stdc++.h>
+#include "calculate.cpp"
 #include "ascii_text_gen.cpp"
 #include "barcode.cpp"
-#include "calculate.cpp"
 #include "member.cpp"
 
 using namespace std;
 
-stringstream FreeTemi;
-
 // string filePath = "C:\\Users\\mrcat\\Compro\\Computer-Programming-Project\\src\\bill.txt";
-//string filePath = "..\\src\\test.txt";
+string filePath = "..\\src\\test.txt";
 
 //จาก barcode
 int barcodeLength = 12;
@@ -17,102 +15,87 @@ string barcode = generateBarcodeNumber(barcodeLength);
 string formattedBarcode = convertToBarcodeFormat(barcode);
 
 void CreateBarcode(string formattedBarcode, string barcode, ofstream& bill) {
-    bill <<"|" << setw(13) << " " << formattedBarcode << setw(13) << "|" << endl;
-    bill << "|" << setw(43) << " " << barcode << setw(44) << "|" << endl;
+    bill <<"|    " << formattedBarcode << "    |" << endl;
+    bill << "| " << setw(45) << barcode << setw(36) << " |" << endl;
     checkLuckyReward(barcode);
     timenow();
 }
 
-
-void displayFreeItemsBill(const vector<string>& freeItems, ofstream& bill) {
+void displayFreeItems(const vector<string>& freeItems, ofstream& bill) {
     if (freeItems.empty()) {
-        bill << right << setw(90) << "- |\n";
-    } else {
-        stringstream FreeTemi;
-        vector<string> lines;
-        string currentLine;
-        
-        for (const auto& item : freeItems) {
-            if (!currentLine.empty() && (currentLine.length() + item.length() + 2 > 88)) {
-                lines.push_back(currentLine);
-                currentLine.clear();
-            }
-            if (!currentLine.empty()) {
-                currentLine += ", ";
-            }
-            currentLine += item;
-        }
-        if (!currentLine.empty()) {
-            lines.push_back(currentLine);
-        }
-        
-        for (size_t i = 0; i < lines.size(); i++) {
-            if (i == 0) {
-                bill << left << setw(87) << lines[i] << " |\n";
-            } else {
-                bill << "|          " << left << setw(87) << lines[i] << " |\n";
-            }
-        }
+        bill << "- |\n";
+    }
+    for (const auto& item : freeItems) {
+        bill << item << " /// ";
     }
 }
+
 //member test case
 
-// vector<User> user = {
-//     {"Tum", "1234", 1},
-//     {"Cat", "1234", 200},
-//     {"Mook", "1234", 300},
-//     {"Ploy", "1234", 400},
-//     {"Ploy", "1234", 500}
-// };
-// //จาก calculate
-// vector<order> order;
-// vector<product_data> product;
+vector<User> user = {
+    {"Tum", "1234", 1},
+    {"Cat", "1234", 200},
+    {"Mook", "1234", 300},
+    {"Ploy", "1234", 400},
+    {"Ploy", "1234", 500}
+};
+//จาก calculate
+vector<order> order = {
+    {"Apple", 101, 3, 21.0},
+    {"Banana", 102, 1, 12.0},
+    {"Orange", 103, 2, 15.0},
+    {"Grapes", 104, 4, 30.0},
+    {"Pine", 105, 1, 25.0},
+    {"Cat", 112, 1, 250.0}
+};
+vector<Item> items = convertOrdersToItems(order);
+vector<double> z = calculateSummary(Itemprocessor(items));
+vector<ItemResult> results = Itemprocessor(items);
 
 
-
-void CreateTopborder(ofstream& bill, const User U) {
-    bill << " __________________________________________________________________________________________________\n";
-    bill << "|                                                                                                  |\n";
-    CreateAsciiArt(U.username, bill, true); // Add spacing parameter
-    bill << "|                                                                                                  |\n";
-    bill << "| ________________________________________________________________________________________________ |\n";
+void CreateTopborder(ofstream& bill) {
+    bill << " _________________________________________________________________________________\n";
+    bill << "|                                                                                 |\n";
+    CreateAsciiArt("TJ", bill); // Add spacing parameter
+    bill << "|                                                                                 |\n";
+    bill << "| _______________________________________________________________________________ |\n";
 }
 
-void CreateMiddle(ofstream& bill, const vector<ItemResult>& results, const vector<double>& summary,const User U,const vector<Item> items) {
-    bill << "| Item Name                 | Quantity        | Price/Unit      | Discount      | Total Price      |\n";
-    bill << "|--------------------------------------------------------------------------------------------------|\n";
+void CreateMiddle(ofstream& bill, const vector<ItemResult>& results, const vector<double>& summary) {
+    bill << "| Item Name        | Quantity      | Price/Unit    | Discount    | Total Price    |\n";
+    bill << "|---------------------------------------------------------------------------------|\n";
 
     for (const auto& item : results) {
         // Print item line
-        bill << "| " << left << setw(26) << item.name
-             << "| " << setw(16) << item.quantity
-             << "| " << setw(16) << item.value1
-             << "| " << setw(14) << item.howdis << "%"
-             << "| " << setw(16) << item.discount << "|\n";
+        bill << "| " << left << setw(17) << item.name
+             << "| " << setw(14) << item.quantity
+             << "| " << setw(14) << item.value1
+             << "| " << setw(11) << item.howdis << "%"
+             << "| " << setw(15) << item.discount << "|\n";
     }
-    bill << "|--------------------------------------------------------------------------------------------------|\n";
-    bill << "| Total Amount:" << right << setw(83) << summary[0] << " |\n";
-    bill << "| VAT 7% :" << right << setw(88) << summary[1] << " |\n";
-    bill << "| Total Amount (Including VAT):" << right << setw(67) << summary[2] << " |\n";
-    bill << "| Point Remaining:" << setw(80) << U.points << " |\n";
-    bill << "| Freebie: ";
-    displayFreeItemsBill(freeItems(items), bill);
-    bill << "|                                                                                                  |\n";
-    CreateAsciiArt(to_string(rand()%+10), bill, false);
+    bill << "|---------------------------------------------------------------------------------|\n";
+    bill << "| Total Amount:" << right << setw(66) << summary[0] << " |\n";
+    bill << "| VAT 7% :" << right << setw(71) << summary[1] << " |\n";
+    bill << "| Total Amount (Including VAT):" << right << setw(50) << summary[2] << " |\n";
+    bill << "| Point Remaining:" << setw(63) << user[0].points << " |\n";
+    bill << "| Freebie:" <<setw(74);
+    displayFreeItems(freeItems(items), bill);
+    bill << "|                                                                                 |\n";
+    CreateAsciiArt(user[1].username, bill);
+    CreateAsciiArt(user[2].username, bill);
 }
-
 
 void CreateBottomborder(ofstream& bill) {
-    bill << "|                                                                                                  |\n";
+    bill << "|                                                                                 |\n";
     CreateBarcode(formattedBarcode, barcode, bill);
-    bill << "|                                                                                                  |\n";
-    bill << "|                                        *** Thank You ***                                         |\n";
-    bill << "|__________________________________________________________________________________________________|\n";
+    bill << "| _______________________________________________________________________________ |\n";
+    bill << "|                                *** Thank You ***                                |\n";
+    bill << "|_________________________________________________________________________________|\n";
     bill.close();
-    //system(("code " + filePath).c_str());
+    system(("code " + filePath).c_str());
 }
 
-void createbill(string path,vector<ItemResult> item,vector<double> z,const User U,const vector<Item> items) {
+void createbill(string path,vector<ItemResult> item,vector<double> z) {
     ofstream bill(path);
     if (!bill.is_open()) {
         cerr << "Failed to open the file." << endl;
@@ -122,32 +105,15 @@ void createbill(string path,vector<ItemResult> item,vector<double> z,const User 
         cerr << "Insufficient data in summary vector." << endl;
     }
 
-    CreateTopborder(bill,U);
-    CreateMiddle(bill, item, z, U, items);
+    CreateTopborder(bill);
+    CreateMiddle(bill, item, z);
     CreateBottomborder(bill);
 }
 
-// int main() {
-//     input_product("..\\data\\products\\product_data.txt", product);
-//     input_order_byfile(order ,product , "..\\order.txt");
-//     srand(time(0));
-//     // double totalAmount = z[2];
-//     // double Vat = z[1];
-//     vector<promotions_data> pointList = readGetPoinsFile("..\\data\\promotion\\getpoints.txt");
-//     vector<promotions_data> discountList = readDiscountFile("..\\data\\promotion\\discount.txt");
-//     vector<promotions_data> freeList = readFreeItemFile("..\\data\\promotion\\freeitem.txt");
-//     vector<promotions_data> eligibleItems = readBuyOneGetOneFile("..\\data\\promotion\\buy1get1.txt");
-//     vector<Item> items;
-    
-//     User luser = {"Mile", "", 20};
-
-//     items = convertOrdersToItems(order);
-//     processItems(items, eligibleItems, pointList, discountList, freeList);
-//     vector<ItemResult> result = Itemprocessor(items);
-//     cout << "\n";
-//     displayResults(result);
-//     system("pause");
-//     vector<double> z = calculateSummary(Itemprocessor(items));
-//     createbill(filePath,result,z,luser,items);
-//     return 0;
-// }
+int main() {
+    srand(time(0));
+    // double totalAmount = z[2];
+    // double Vat = z[1];
+    createbill(filePath,results,z);
+    return 0;
+}
