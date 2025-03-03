@@ -18,16 +18,31 @@ void displaymem(vector<User>& U,int );
 
 
 
+
 void exit(vector<User> &U){
     system("cls");
     cout << "Thank You for using our service.";
 }
 
+bool isValidUsername(const string& username) {
+    if (username.length() > 9) {
+        return false;
+    }
+    return all_of(username.begin(), username.end(), ::isalpha);
+}
+
 bool isValidPassword(const string& password) {
+    if (password.length() != 4) {
+        return false;
+    }
     return all_of(password.begin(), password.end(), ::isdigit);
 }
 
-
+bool loadpass(const string& password) {
+    return all_of(password.begin(), password.end(), ::isdigit);
+}
+ 
+ 
 
 void loadUsersFromFile(string path,vector<User> &U) {
     U.clear(); // Clear existing data before loading
@@ -124,10 +139,10 @@ void signup(vector<User> &U,int point){
    
     system("cls");
 
-    cout << "------------- SIGN UP --------------" << endl;
-    cout << "!! Usernames can only use letters !!" << endl 
-         << "!! Passwords can only use numbers !!" << endl;
-    cout << "------------------------------------" << endl << endl;
+    cout << "-------------------- SIGN UP --------------------" << endl;
+    cout << "!!  Usernames can only use less than 9 letters !!" << endl 
+         << "!!    Passwords can only use 4 digit numbers   !!" << endl;
+    cout << "-------------------------------------------------" << endl << endl;
     cout << "USERNAME : ";
     cin >> ruserID;
     cout << "PASSWORD : ";
@@ -136,9 +151,22 @@ void signup(vector<User> &U,int point){
 
     if (z == string::npos){  // Username is valid if no digits are found
 
+        if(!isValidUsername(ruserID)){
+            system("cls");
+            cout << "!! Username can only contain less than 9 letters !!" << endl;
+            system("pause");
+            signup(U,point);
+        }
+
+        if(!isValidPassword(rpassword)){
+            system("cls");
+            cout << "!! Password can only contain 4 numbers !!" << endl;
+            system("pause");
+            signup(U,point);
+        }
 
         // Validate password (only digits allowed)
-        if (!isValidPassword(rpassword)) {
+        if (!loadpass(rpassword)) {
             system("cls");
             cout << "!! Password can only contain numbers !!" << endl;
             system("pause");
