@@ -1,9 +1,30 @@
-lays Origenel,2
-Lays Larb,1
-lays seee weed,1
-Lays Sourcream,1
-Lay Prick Noom,1
-Knor Chicken porridge,3
-coke coffee,2
-Ichitun Original,1
-Coke Original,3
+Lays Original,15
+Lays Sea Weed,15
+Lays Sourcream,15
+Lays BBQ,15
+Dozo Original,12
+Dozo Corn & Cheese,12
+Dozo Sea Weed,12
+Pringles Original,20
+Pringles Sea Weed,20
+Pringles BBQ,20
+Coke Original,17
+Coke Coffee,17
+Coke Zero,17
+Papsi Original,17
+Papsi Zero,17
+Ichitun Original,12
+Ichitun Honey Lemon,12
+Ichitun Rice,12
+Origami Spicy Salmon,1
+Origami Salt Salmon,12
+Origami Shrimp Eggs,12
+Bolgogi Original,14
+Bolgogi Gimji,14
+Mama Tom yum,7
+Mama Moo sub,7
+Knor Pork porridge,9
+Knor Pork congee,9
+Knor Chicken porridge,9
+Knor Chicken congee ,9
+Knor Mash Potato,20

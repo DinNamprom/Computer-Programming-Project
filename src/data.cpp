@@ -30,7 +30,7 @@ bool similar(const string a, const string b) {
             }
         }
     }
-    if (point/b.length() >= 0.7) return true;
+    if (point/b.length() >= 0.65) return true;
     return false;
 }
 
@@ -38,7 +38,7 @@ void input_order(vector<order> &list,vector<product_data> d) {
     order o;
     unsigned int a,n;
     do{
-        cout << "input number of product you want (key 0 to exite): ";
+        cout << "input number of product you want (0 to exite): ";
         cin >> a;
         if (a == 0) continue;
         if (a > d.size()) {
@@ -51,7 +51,17 @@ void input_order(vector<order> &list,vector<product_data> d) {
         cout << "How much do you want: ";
         cin >> n;
         o.n = n;
-        list.push_back(o);
+        bool found = false;
+        for (unsigned int i = 0;i < list.size(); i++) {
+            if (o.name == list[i].name) {
+                list[i].n += o.n;
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            list.push_back(o);
+        }
     }while (a != 0);
 }
 
@@ -71,7 +81,17 @@ void input_order_byfile(vector<order> &list,vector<product_data> d,string filepa
             continue;
         }
         o.name = tempn;
-        list.push_back(o);
+        bool foundw = false;
+        for (unsigned int i = 0;i < list.size(); i++) {
+            if (o.name == list[i].name) {
+                list[i].n += o.n;
+                foundw = true;
+                break;
+            }
+        }
+        if (!foundw) {
+            list.push_back(o);
+        }
     }
     source.close();
     for (int i = list.size() - 1; i >= 0; --i) {
@@ -88,7 +108,7 @@ void input_order_byfile(vector<order> &list,vector<product_data> d,string filepa
             }
         }
         if (!found) {
-            cout << "No match found. Removing order: " << list[i].name << endl;
+            //cout << "No match found. Removing order: " << list[i].name << endl;
             list.erase(list.begin() + i);
         }
     }
@@ -117,18 +137,17 @@ void input_product(string filename,vector<product_data> &list) {
 
 void showdata(vector<product_data> product) {
     cout << "-----------------------------------------------------------------" << endl;
-        cout << left << setw(40) << "product";
+        cout << "| " << left << setw(40) << "product";
         cout << left << setw(15) << "code";
-        cout << left << setw(5) << "price" << endl;
+        cout << left << setw(5) << " price |" << endl;
         cout << "-----------------------------------------------------------------" << endl;
         for (unsigned int i = 0;i < product.size();i++) {
-            cout << left << setw(2) << i+1 ;
+            cout << "| " << left << setw(2) << i+1 ;
             cout << left << setw(1) << ".";
-            cout << left << setw(40) << product[i].name;
+            cout << left << setw(37) << product[i].name;
             cout << left << setw(15) << product[i].code;
-            cout << left << setw(5) << fixed << setprecision(2) << product[i].price << "$" << endl;
+            cout << left << setw(5) << fixed << setprecision(2) << product[i].price << "$ |" << endl;
         }
-        cout << "0 .exite \n";
         cout << "-----------------------------------------------------------------" << endl;
 }
 

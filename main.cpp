@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 //#include ".\src\calculate.cpp"
 #include ".\src\billgen.cpp"
-#include ".\src\member.cpp"
+//#include ".\src\member.cpp"
 using namespace std;
 
 int main() {
@@ -16,21 +16,17 @@ int main() {
     loadUsersFromFile(".\\data\\membersN.txt", U);
     char choice;
     input_product(".\\data\\products\\product_data.txt",product);
-    system("pause");
+    //system("pause");
     do {
         system("cls");
-        cout << right << setw(40) << "CUSTOMER SERVICE" << endl;
-        cout << "-----------------------------------------------------------------" << endl;
-        cout << endl;
-        cout << left << setw(15) << " ";
-        cout << left << setw(25) << "(1) Self";
-        cout << left << setw(20) << "(2) File" << endl;
-        cout << left << setw(15) << " ";
-        cout << left << setw(25) << "(3) Member";
-        cout << left << setw(20) << "(4) Exit" << endl;
-        cout << endl;
-        cout << "-----------------------------------------------------------------" << endl;
-        cout << "Command: ";
+        cout << "--------------------------" <<endl;
+        cout << "     Customer Service     " << endl;
+        cout << "--------------------------" <<endl;
+        cout << " [1] Order youself " << endl;
+        cout << " [2] Order by file" << endl;
+        cout << " [3] Member Menu " << endl;
+        cout << " [4] EXIT " << endl;
+        cout << "Please enter your choice : ";
         cin >> choice;
 
         if (choice == '1'){
@@ -38,6 +34,11 @@ int main() {
             system("cls");
             showdata(product);
             input_order(customer_order, product);
+
+            showorder(customer_order);
+            cout << "Please confirm your order.\n";
+            system("pause");
+
             items = convertOrdersToItems(customer_order);
             processItems(items, eligibleItems, pointList, discountList, freeList);
             vector<ItemResult> result = Itemprocessor(items);
@@ -48,25 +49,25 @@ int main() {
             displaySummary(z);
             displayFreeItems(freeItems(items));
 
+            system("cls");
             char ans;
-            cout << "\nDo you have member?(1)yes (2)no: ";
+            cout << "\nDo you have member?\n";
+            cout << "[1]yes \n[2]no \nPlease enter your choice : ";
             cin >> ans;
+            User luser;
             if (ans == '1') {
-                string uuser;
-                cout << "username: ";
-                cin >> uuser;
-                for (auto& user : U) {
-                    if (toUpperCase(user.username) == toUpperCase(uuser)) {
-                        cout << "Login successful! Welcome, " << user.username << "!\n";
-                        user.point += calculatetpoint(result);
-                        cout << "You have " << user.point << " point \n";
-                    }
-                }
-                rewrite(".\\data\\membersN.txt", U);
+                displaymem(U, calculatetpoint(result),".\\data\\membersN.txt",luser);
+            }else {
+                string tname;
+                cout << "What's your nickname?: ";
+                cin >> tname;
+                luser.username = tname;
+                luser.points = calculatetpoint(result);
             }
             system("pause");
+
             double totalAmount = z[2];
-            createbill(".\\bill.txt",totalAmount,result,z);
+            createbill(".\\bill.txt",result,z,luser,items);
         }else if (choice == '2') {
             customer_order.clear();
             system("cls");
@@ -75,6 +76,11 @@ int main() {
             cin >> file;
             string filen = ".\\" + file + ".txt";
             input_order_byfile(customer_order ,product , filen);
+
+            showorder(customer_order);
+            cout << "Please confirm your order.\n";
+            system("pause");
+            
             items = convertOrdersToItems(customer_order);
             processItems(items, eligibleItems, pointList, discountList, freeList);
             vector<ItemResult> result = Itemprocessor(items);
@@ -85,27 +91,26 @@ int main() {
             displaySummary(z);
             displayFreeItems(freeItems(items));
 
+            system("cls");
             char ans;
             cout << "\nDo you have member?(1)yes (2)no: ";
             cin >> ans;
+            User luser;
             if (ans == '1') {
-                string uuser;
-                cout << "username: ";
-                cin >> uuser;
-                for (auto& user : U) {
-                    if (toUpperCase(user.username) == toUpperCase(uuser)) {
-                        cout << "Login successful! Welcome, " << user.username << "!\n";
-                        user.point += calculatetpoint(result);
-                        cout << "You have " << user.point << " point \n";
-                    }
-                }
-                rewrite(".\\data\\membersN.txt", U);
+                displaymem(U, calculatetpoint(result),".\\data\\membersN.txt",luser);
+            }else {
+                string tname;
+                cout << "What's your nickname?: ";
+                cin >> tname;
+                luser.username = tname;
+                luser.points = calculatetpoint(result);
             }
             system("pause");
             double totalAmount = z[2];
-            createbill(".\\bill.txt",totalAmount,result,z);
+            createbill(".\\bill.txt",result,z,luser,items);
         }else if (choice == '3'){
-
+            User luser;
+            displaymem(U, 0,".\\data\\membersN.txt",luser);
         }else if (choice == '4') {
             break;
         }
