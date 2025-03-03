@@ -1,5 +1,5 @@
  #include <bits/stdc++.h>
- #include "calculate.cpp"
+ //#include "calculate.cpp"
  #include <vector>
 using namespace std;
 
@@ -117,6 +117,9 @@ void login(vector<User> &U, int point, string path ,User &u){
             user.points += point;
             cout << "Your current points: " << user.points << " points.\n\n";
             saveUsersToFile(path,U);
+            u.username = user.username;
+            u.password = user.password;
+            u.points = user.points;
             system("pause");
             exit(U); // Exit the function once a match is found
             
@@ -194,6 +197,7 @@ void signup(vector<User> &U,int point, string path ,User &u){
 
 void forgot(vector<User> &U,int point, string path ,User &u){
     string suserID,spass;
+    bool found = false;
     system("cls");
     cout << "-- Trouble logging in? --" <<endl;
     cout << "Please Enter your username \n" <<endl;
@@ -206,13 +210,17 @@ void forgot(vector<User> &U,int point, string path ,User &u){
         if(user.username == suserID){
             cout << "Your account is found!" << endl;
             cout << "Your password is : " << user.password << endl << endl;
+            found = true;
             system("pause");
             displaymem(U,point,path,u);
         }
     }
+    if (!found) {
         cout << "Sorry! Your account is not found.\n" << endl;
         system("pause");
         forgot(U,point,path,u);
+        
+    }
         
 }
 
@@ -271,7 +279,7 @@ void displaymem(vector<User> &U,int point, string path ,User &u){
         }
         if(ch == '4'){ // exit
             system("cls");
-            cout << "Thank You for using our service.";
+            cout << "Thank You for using our service.\n";
             break;
         }
     }
