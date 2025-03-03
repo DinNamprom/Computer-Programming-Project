@@ -6,7 +6,7 @@
 
 using namespace std;
 
-stringstream FreeTemi;
+
 
 // string filePath = "C:\\Users\\mrcat\\Compro\\Computer-Programming-Project\\src\\bill.txt";
 //string filePath = "..\\src\\test.txt";
@@ -17,8 +17,8 @@ string barcode = generateBarcodeNumber(barcodeLength);
 string formattedBarcode = convertToBarcodeFormat(barcode);
 
 void CreateBarcode(string formattedBarcode, string barcode, ofstream& bill) {
-    bill <<"|" << setw(13) << " " << formattedBarcode << setw(13) << "|" << endl;
-    bill << "|" << setw(43) << " " << barcode << setw(44) << "|" << endl;
+    bill <<"|" << setw(15) << " " << formattedBarcode << setw(15) << "|" << endl;
+    bill << "|" << setw(45) << " " << barcode << setw(46) << "|" << endl;
     checkLuckyReward(barcode);
     timenow();
 }
@@ -26,14 +26,13 @@ void CreateBarcode(string formattedBarcode, string barcode, ofstream& bill) {
 
 void displayFreeItemsBill(const vector<string>& freeItems, ofstream& bill) {
     if (freeItems.empty()) {
-        bill << right << setw(90) << "- |\n";
+        bill << right << setw(94) << "- |\n";
     } else {
-        stringstream FreeTemi;
         vector<string> lines;
         string currentLine;
         
         for (const auto& item : freeItems) {
-            if (!currentLine.empty() && (currentLine.length() + item.length() + 2 > 88)) {
+            if (!currentLine.empty() && (currentLine.length() + item.length() + 2 > 91)) {
                 lines.push_back(currentLine);
                 currentLine.clear();
             }
@@ -48,9 +47,9 @@ void displayFreeItemsBill(const vector<string>& freeItems, ofstream& bill) {
         
         for (size_t i = 0; i < lines.size(); i++) {
             if (i == 0) {
-                bill << left << setw(87) << lines[i] << " |\n";
+                bill << left << setw(91) << lines[i] << " |\n";
             } else {
-                bill << "|          " << left << setw(87) << lines[i] << " |\n";
+                bill << "|          " << left << setw(91) << lines[i] << " |\n";
             }
         }
     }
@@ -71,43 +70,43 @@ void displayFreeItemsBill(const vector<string>& freeItems, ofstream& bill) {
 
 
 void CreateTopborder(ofstream& bill, const User U) {
-    bill << " __________________________________________________________________________________________________\n";
-    bill << "|                                                                                                  |\n";
+    bill << " ______________________________________________________________________________________________________\n";
+    bill << "|                                                                                                      |\n";
     CreateAsciiArt(U.username, bill, true); // Add spacing parameter
-    bill << "|                                                                                                  |\n";
-    bill << "| ________________________________________________________________________________________________ |\n";
+    bill << "|                                                                                                      |\n";
+    bill << "| ____________________________________________________________________________________________________ |\n";
 }
 
 void CreateMiddle(ofstream& bill, const vector<ItemResult>& results, const vector<double>& summary,const User U,const vector<Item> items) {
-    bill << "| Item Name                 | Quantity        | Price/Unit      | Discount      | Total Price      |\n";
-    bill << "|--------------------------------------------------------------------------------------------------|\n";
+    bill << "| Item Name                     | Quantity        | Price/Unit      | Discount      | Total Price      |\n";
+    bill << "|------------------------------------------------------------------------------------------------------|\n";
 
     for (const auto& item : results) {
         // Print item line
-        bill << "| " << left << setw(26) << item.name
+        bill << "| " << left << setw(30) << item.name
              << "| " << setw(16) << item.quantity
              << "| " << setw(16) << item.value1
              << "| " << setw(14) << item.howdis << "%"
              << "| " << setw(16) << item.discount << "|\n";
     }
-    bill << "|--------------------------------------------------------------------------------------------------|\n";
-    bill << "| Total Amount:" << right << setw(83) << summary[0] << " |\n";
-    bill << "| VAT 7% :" << right << setw(88) << summary[1] << " |\n";
-    bill << "| Total Amount (Including VAT):" << right << setw(67) << summary[2] << " |\n";
-    bill << "| Point Remaining:" << setw(80) << U.points << " |\n";
+    bill << "|------------------------------------------------------------------------------------------------------|\n";
+    bill << "| Total Amount:" << right << setw(87) << summary[0] << " |\n";
+    bill << "| VAT 7% :" << right << setw(92) << summary[1] << " |\n";
+    bill << "| Total Amount (Including VAT):" << right << setw(71) << summary[2] << " |\n";
+    bill << "| Point Remaining:" << setw(84) << U.points << " |\n";
     bill << "| Freebie: ";
     displayFreeItemsBill(freeItems(items), bill);
-    bill << "|                                                                                                  |\n";
+    bill << "|                                                                                                      |\n";
     CreateAsciiArt(to_string(rand()%+10), bill, false);
 }
 
 
 void CreateBottomborder(ofstream& bill) {
-    bill << "|                                                                                                  |\n";
+    bill << "|                                                                                                      |\n";
     CreateBarcode(formattedBarcode, barcode, bill);
-    bill << "|                                                                                                  |\n";
-    bill << "|                                        *** Thank You ***                                         |\n";
-    bill << "|__________________________________________________________________________________________________|\n";
+    bill << "|                                                                                                      |\n";
+    bill << "|                                          *** Thank You ***                                           |\n";
+    bill << "|______________________________________________________________________________________________________|\n";
     bill.close();
     //system(("code " + filePath).c_str());
 }

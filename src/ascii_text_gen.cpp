@@ -107,20 +107,20 @@ map<char, vector<string>> asciiFont = {
         "╚══════╝ "
     }},
     {'M', {
-        " ███╗   ███╗ ",
-        " ████╗ ████║ ",
-        " ██╔████╔██║ ",
-        " ██║╚██╔╝██║ ",
-        " ██║ ╚═╝ ██║ ",
-        " ╚═╝     ╚═╝ "
+        "██╗   ██╗ ",
+        "███╗ ███║ ",
+        "████████║ ",
+        "██╔██╔██║ ",
+        "██║╚═╝██║ ",
+        "╚═╝   ╚═╝ "
     }},
     {'N', {
-        "███╗   ██╗ ",
-        "████╗  ██║ ",
-        "██╔██╗ ██║ ",
-        "██║╚██╗██║ ",
-        "██║ ╚████║ ",
-        "╚═╝  ╚═══╝ "
+        "██╗   ██╗ ",
+        "███╗  ██║ ",
+        "████╗ ██║ ",
+        "██║██╗██║ ",
+        "██║╚████║ ",
+        "╚═╝  ╚══╝ "
     }},
     {'O', {
         " █████╗  ",
@@ -343,10 +343,10 @@ void CreateAsciiArt(string text, ofstream& bill, bool type) {
                 string asciiLine = line.str();
                 int charCount = countUnicodeCharacters(asciiLine);
     
-                if (charCount < 88) {
-                asciiLine.append(88 - charCount, ' ');
-                } else if (charCount > 88) {
-                asciiLine = asciiLine.substr(0, 88);
+                if (charCount < 92) {
+                asciiLine.append(92 - charCount, ' ');
+                } else if (charCount > 92) {
+                asciiLine = asciiLine.substr(0, 92);
                 }
     
                 bill << asciiLine;
@@ -369,10 +369,10 @@ void CreateAsciiArt(string text, ofstream& bill, bool type) {
                 string asciiLine = line.str();
                 int charCount = countUnicodeCharacters(asciiLine);
     
-                if (charCount < 88) {
-                asciiLine.append(88 - charCount, ' ');
-                } else if (charCount > 88) {
-                asciiLine = asciiLine.substr(0, 88);
+                if (charCount < 92) {
+                asciiLine.append(92 - charCount, ' ');
+                } else if (charCount > 92) {
+                asciiLine = asciiLine.substr(0, 92);
                 }
     
                 bill << asciiLine;
@@ -408,10 +408,10 @@ void CreateAsciiArt(string text, ofstream& bill, bool type) {
                 string asciiLine = line.str();
                 int charCount = countUnicodeCharacters(asciiLine);
         
-                if (charCount < 88) {
-                    asciiLine.append(88 - charCount, ' ');
-                } else if (charCount > 88) {
-                    asciiLine = asciiLine.substr(0, 88);
+                if (charCount < 92) {
+                    asciiLine.append(92 - charCount, ' ');
+                } else if (charCount > 92) {
+                    asciiLine = asciiLine.substr(0, 92); 
                 }
         
                 bill << asciiLine;
@@ -421,7 +421,7 @@ void CreateAsciiArt(string text, ofstream& bill, bool type) {
     }else{ //พิมพ์การ์ตูน
         for (int row = 0; row < 6; row++) { 
             bill << "|";
-            bill << right << setw(40) << " "; 
+            bill << right << setw(42) << " "; 
     
             stringstream line;
             for (char c : text) {
@@ -435,10 +435,10 @@ void CreateAsciiArt(string text, ofstream& bill, bool type) {
             string asciiLine = line.str();
             int charCount = countUnicodeCharacters(asciiLine);
     
-            if (charCount < 52) {
-            asciiLine.append(52 - charCount, ' ');
-            } else if (charCount > 52) {
-            asciiLine = asciiLine.substr(0, 52);
+            if (charCount < 54) {
+            asciiLine.append(54 - charCount, ' ');
+            } else if (charCount > 54) {
+            asciiLine = asciiLine.substr(0, 54);
             }
     
             bill << asciiLine;
@@ -447,6 +447,7 @@ void CreateAsciiArt(string text, ofstream& bill, bool type) {
     }
 
 }
+
 
 
 // int main() {
