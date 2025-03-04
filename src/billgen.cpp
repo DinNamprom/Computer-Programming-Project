@@ -45,7 +45,7 @@ void displayFreeItemsBill(const vector<string>& freeItems, ofstream& bill) {
             lines.push_back(currentLine);
         }
         
-        for (size_t i = 0; i < lines.size(); i++) {
+        for (int i = 0; i < lines.size(); i++) {
             if (i == 0) {
                 bill << left << setw(91) << lines[i] << " |\n";
             } else {
