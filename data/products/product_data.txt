@@ -1,30 +1,101 @@
+Monk Gift,1000,100
 Lays Original,15,101
-Lays Sea Weed,15,102
+Lays Seaweed,15,102
 Lays Sourcream,15,103
 Lays BBQ,15,104
 Dozo Original,12,105
-Dozo Corn & Cheese,12,106
-Dozo Sea Weed,12,107
+Dozo Corn Cheese,12,106
+Dozo Seaweed,12,107
 Pringles Original,20,108
-Pringles Sea Weed,20,109
+Pringles Seaweed,20,109
 Pringles BBQ,20,110
 Coke Original,17,111
 Coke Coffee,17,112
 Coke Zero,17,113
-Papsi Original,17,114
-Papsi Zero,17,115
+Pepsi Original,17,114
+Pepsi Zero,17,115
 Ichitun Original,12,116
-Ichitun Honey Lemon,12,117
+Ichitun Honey,12,117
 Ichitun Rice,12,118
-Origami Spicy Salmon,12,119
-Origami Salt Salmon,12,120
-Origami Shrimp Eggs,12,121
-Bolgogi Original,14,122
-Bolgogi Gimji,14,123
-Mama Tom yum,7,124
-Mama Moo sub,7,125
-Knor Pork porridge,9,126
-Knor Pork congee,9,127
-Knor Chicken porridge,9,128
-Knor Chicken congee ,9,129
-Knor Mash Potato,20,130
+Origami Spicy,12,119
+Origami Salt,12,120
+Origami Shrimp,12,121
+Bulgogi Original,14,122
+Bulgogi Kimchi,14,123
+Mama Tom Yum,7,124
+Mama Moo Sub,7,125
+Knorr Pork Porridge,9,126
+Knorr Pork Congee,9,127
+Knorr Chicken Por,9,128
+Knorr Chicken Pro,9,129
+Knorr Mash Potato,20,130
+Pringles Sour,20,131
+Pringles Pizza,20,132
+Lays Nori,15,133
+Lays Chili Squid,15,134
+Lays Truffle,15,135
+Lays Salt Vinegar,15,136
+Doritos Nacho,18,137
+Doritos Ranch,18,138
+Doritos Spicy,18,139
+Tostitos Orig,19,140
+Tostitos Lime,19,141
+Tostitos Scoops,19,142
+Cheetos Crunchy,16,143
+Cheetos Spicy,16,144
+Cheetos Puffs,16,145
+Oreo Original,14,146
+Oreo Double,14,147
+Oreo Choco,14,148
+Oreo Strawberry,14,149
+KitKat Original,12,150
+KitKat Dark,12,151
+KitKat Green Tea,12,152
+Snickers Bar,15,153
+Twix Bar,15,154
+Mars Bar,15,155
+Bounty Bar,15,156
+M&M's Peanut,14,157
+M&M's Choco,14,158
+M&M's Crispy,14,159
+Skittles Orig,13,160
+Skittles Sour,13,161
+Hershey's Choco,16,162
+Hershey's C&C,16,163
+Toblerone Milk,17,164
+Toblerone Dark,17,165
+Toblerone White,17,166
+Ferrero Rocher,20,167
+Ritter Almonds,18,168
+Ritter Hazelnut,18,169
+Ritter Cornflakes,18,170
+Coca-Cola Cherry,17,171
+Coca-Cola Lemon,17,172
+Fanta Grape,16,173
+Fanta Orange,16,174
+Sprite Original,16,175
+Sprite Lemon,16,176
+Red Bull Classic,12,177
+Red Bull Sugar,12,178
+Gatorade Blue,18,179
+Gatorade Lemon,18,180
+Holy Water Plus,999999,181
+Milo Choco,15,182
+Ovaltine Malt,15,183
+Dutch Yogurt Straw,13,184
+Dutch Yogurt Blue,13,185
+Dutch Yogurt Ora,13,186
+Foremost Choco,14,187
+Foremost Straw,14,188
+Meiji Banana,14,189
+Meiji Melon,14,190
+Meiji Matcha,14,191
+Vitamilk Orig,13,192
+Vitamilk Banana,13,193
+Vitamilk Choco,13,194
+Tipco Pom Juice,20,195
+Tipco Carrot,20,196
+Zico Coconut,18,197
+Malee Apple,19,198
+Malee Berry,19,199
+UFC Coconut,18,200
