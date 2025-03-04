@@ -314,7 +314,7 @@ map<char, vector<string>> pics = {
 int countUnicodeCharacters(const string& str) {
     int count = 0;
     for (int i = 0; i < str.length(); i++) {
-        if ((str[i] & 0xC0) != 0x80) {  // Count only UTF-8 leading bytes
+        if ((str[i] & 0xC0) != 0x80) {  //นับตัวอักษร
             count++;
         }
     }
@@ -326,7 +326,7 @@ void CreateAsciiArt(string text, ofstream& bill, bool type) {
     string billText = "*s Bill";
 
     if(type == true){ //พิมพ์ชื่อ
-        if(text.length() > 4 && text !=  "*s Bill") {
+        if(text.length() > 4 && text !=  "*s Bill") { //ถ้าชื่อยาวกว่า4
             for (int row = 0; row < 6; row++) { 
                 bill << "|";
                 bill << right << setw(5) << " "; 
@@ -350,7 +350,6 @@ void CreateAsciiArt(string text, ofstream& bill, bool type) {
                 bill << asciiLine;
                 bill << right << setw(6) << "|" << endl;
             }
-            //CreateAsciiArt("*s Bill", bill, false);
             for (int row = 0; row < 6; row++) { 
                 bill << "|";
                 bill << right << setw(5) << " "; 
@@ -425,11 +424,7 @@ void CreateAsciiArt(string text, ofstream& bill, bool type) {
             string asciiLine = line.str();
             int charCount = countUnicodeCharacters(asciiLine);
     
-            if (charCount < 54) {
             asciiLine.append(54 - charCount, ' ');
-            } else if (charCount > 54) {
-            asciiLine = asciiLine.substr(0, 54);
-            }
     
             bill << asciiLine;
             bill << right << setw(7) << "|" << endl;
