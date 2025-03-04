@@ -336,8 +336,6 @@ void CreateAsciiArt(string text, ofstream& bill, bool type) {
                     c = toupper(c);
                     if (asciiFont.find(c) != asciiFont.end()) {
                         line << asciiFont[c][row];
-                    } else {
-                        line << "      ";  // Add space for missing characters
                     }
                 }
                 string asciiLine = line.str();
@@ -362,8 +360,6 @@ void CreateAsciiArt(string text, ofstream& bill, bool type) {
                     c = toupper(c);
                     if (asciiFont.find(c) != asciiFont.end()) {
                         line << asciiFont[c][row];
-                    } else {
-                        line << "      ";  // Add space for missing characters
                     }
                 }
                 string asciiLine = line.str();
@@ -389,8 +385,6 @@ void CreateAsciiArt(string text, ofstream& bill, bool type) {
                     c = toupper(c);
                     if (asciiFont.find(c) != asciiFont.end()) {
                         line << asciiFont[c][row];
-                    } else {
-                        line << "      ";  // Add space for missing characters
                     }
                 }
                 if(text != "*s Bill"){
@@ -398,8 +392,6 @@ void CreateAsciiArt(string text, ofstream& bill, bool type) {
                         c = toupper(c);
                         if (asciiFont.find(c) != asciiFont.end()) {
                             line << asciiFont[c][row];
-                        } else {
-                            line << "      ";  // Add space for missing characters
                         }
                     }
             
@@ -428,8 +420,6 @@ void CreateAsciiArt(string text, ofstream& bill, bool type) {
                 c = toupper(c);
                 if (pics.find(c) != pics.end()) {
                     line << pics[c][row];
-                } else {
-                    line << "      ";  // Add space for missing characters
                 }
             }
             string asciiLine = line.str();

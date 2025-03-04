@@ -7,7 +7,10 @@
 #include <vector>
 using namespace std;
 
+string annoucement;
+
 string generateBarcodeNumber(int length = 12) {  
+    srand(time(0));
     string barcode = "";  
     for (int i = 0; i < length; i++) {  
         barcode += to_string(rand() % 10); 
@@ -48,8 +51,8 @@ void checkLuckyReward(const string& barcode) {
     string lastThreeDigits = barcode.substr(barcode.length() - 3);
     string FullDigits = barcode.substr(barcode.length() - 12);  
 
-    string luckyTwo = luckyReward("55");  
-    string luckyThree = luckyReward("759");  
+    string luckyTwo = luckyReward("04");  
+    string luckyThree = luckyReward("455");  
     string luckyFull = luckyReward("123456789012");
     bool hasReward = false;  
 
@@ -60,7 +63,7 @@ void checkLuckyReward(const string& barcode) {
         cout << "Congratulations! You won with the last 2 digits: " << luckyTwo << "\n";  
         hasReward = true;
         cout << "                        ";
-        cout << "You won a free softdink!\n";  
+        annoucement = "You won a free softdink!";  
     }  
 
     if (lastThreeDigits == luckyThree) {  
@@ -68,7 +71,7 @@ void checkLuckyReward(const string& barcode) {
         cout << "Congratulations! You won with the last 3 digits: " << luckyThree << "\n";  
         hasReward = true;
         cout << "                           ";
-        cout << "You won a free meal!\n";  
+        annoucement = "You won a free meal!";  
     }  
 
     if (FullDigits == luckyFull) {
@@ -76,12 +79,12 @@ void checkLuckyReward(const string& barcode) {
         cout << "Jackpot! You won with the full barcode: " << luckyFull << "\n";  
         hasReward = true;  
         cout << "            ";
-        cout << "You won a free 10 meal or you can exchange to 18$!\n";
+        annoucement = "You won a free 10 meal or you can exchange to 18$!";
     }  
 
     if (!hasReward) { 
         cout << "                    ";
-        cout << "Sorry, you didn't win the rewards.\n";
+        annoucement = "Sorry, you didn't win the rewards.";
 
     }  
 }  

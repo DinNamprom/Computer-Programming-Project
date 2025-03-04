@@ -126,6 +126,8 @@ int main() {
             User luser;
             displaymem(U, 0,".\\data\\membersN.txt",luser);
         }else if (choice == '4') {
+            string filePath = ".\\bill.txt";
+            system(("code " + filePath).c_str());
             break;
         }
 

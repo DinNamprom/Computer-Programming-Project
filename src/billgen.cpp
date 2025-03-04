@@ -105,6 +105,8 @@ void CreateBottomborder(ofstream& bill) {
     bill << "|                                                                                                      |\n";
     CreateBarcode(formattedBarcode, barcode, bill);
     bill << "|                                                                                                      |\n";
+    bill << "|" << right << setw(68) << annoucement << setw(36) << " |\n";
+    bill << "|                                                                                                      |\n";
     bill << "|                                          *** Thank You ***                                           |\n";
     bill << "|______________________________________________________________________________________________________|\n";
     bill.close();
