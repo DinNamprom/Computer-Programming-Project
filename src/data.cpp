@@ -142,11 +142,11 @@ void showdata(vector<product_data> product) {
         cout << left << setw(5) << " price |" << endl;
         cout << "-----------------------------------------------------------------" << endl;
         for (unsigned int i = 0;i < product.size();i++) {
-            cout << "| " << left << setw(2) << i+1 ;
+            cout << "| " << left << setw(3) << i+1 ;
             cout << left << setw(1) << ".";
             cout << left << setw(37) << product[i].name;
-            cout << left << setw(15) << product[i].code;
-            cout << left << setw(5) << fixed << setprecision(2) << product[i].price << "$ |" << endl;
+            cout << left << setw(10) << product[i].code;
+            cout << left << setw(9) << fixed << setprecision(2) << product[i].price << "$ |" << endl;
         }
         cout << "-----------------------------------------------------------------" << endl;
 }
