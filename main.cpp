@@ -59,8 +59,15 @@ int main() {
                 displaymem(U, calculatetpoint(result),".\\data\\membersN.txt",luser);
             }else {
                 string tname;
-                cout << "What's your nickname?: ";
-                cin >> tname;
+                do {
+                    bool isValid = true;
+                    cout << "What's your nickname?: ";
+                    cin >> tname;
+                    if(tname.length() > 8){
+                        system("cls");
+                        cout << "!! Username can only contain less than 9 letters !!" << endl;
+                    }
+                }while(tname.length() > 8);
                 luser.username = tname;
                 luser.points = calculatetpoint(result);
             }
@@ -100,8 +107,15 @@ int main() {
                 displaymem(U, calculatetpoint(result),".\\data\\membersN.txt",luser);
             }else {
                 string tname;
-                cout << "What's your nickname?: ";
-                cin >> tname;
+                do {
+                    bool isValid = true;
+                    cout << "What's your nickname?: ";
+                    cin >> tname;
+                    if(tname.length() > 8){
+                        system("cls");
+                        cout << "!! Username can only contain less than 9 letters !!" << endl;
+                    }
+                }while(tname.length() > 8);
                 luser.username = tname;
                 luser.points = calculatetpoint(result);
             }
