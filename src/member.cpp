@@ -25,7 +25,7 @@ void exit(vector<User> &U){
 }
 
 bool isValidUsername(const string& username) {
-    if (username.length() > 9) {
+    if (username.length() > 8) {
         return false;
     }
     return all_of(username.begin(), username.end(), ::isalpha);
@@ -143,7 +143,7 @@ void signup(vector<User> &U,int point, string path ,User &u){
     system("cls");
 
     cout << "------------------- SIGN UP --------------------" << endl;
-    cout << "!! Usernames can only use less than 9 letters !!" << endl 
+    cout << "!! Usernames can only use less than 8 letters !!" << endl 
          << "!!   Passwords can only use 4 digit numbers   !!" << endl;
     cout << "------------------------------------------------" << endl << endl;
     cout << "USERNAME : ";
