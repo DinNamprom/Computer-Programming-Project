@@ -79,7 +79,7 @@ Red Bull Classic,12,177
 Red Bull Sugar,12,178
 Gatorade Blue,18,179
 Gatorade Lemon,18,180
-Holy Water Plus,999999,181
+Holy Water Plus,9999,181
 Milo Choco,15,182
 Ovaltine Malt,15,183
 Dutch Yogurt Straw,13,184

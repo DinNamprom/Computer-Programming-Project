@@ -31,8 +31,9 @@ vector<ItemResult> Itemprocessor(const vector<Item>& orders) {
         double totalValue = item.value * item.quantity; // ราคาทั้งหมดก่อนหักส่วนลด
         double worth = totalValue * (item.discount / 100.0); // คำนวณส่วนลดที่ถูกหักไป
         double discountValue = totalValue - worth; // ราคาหลังหักส่วนลด
+        int fullpoint = item.points * item.quantity; // คำนวณ point ทั้งหมด
 
-        results.push_back({item.name, newQuantity, (int)item.value, (int)totalValue, item.points, worth, discountValue});
+        results.push_back({item.name, newQuantity, (int)item.value, (int)totalValue, fullpoint, worth, discountValue});
     } //จบด้วยการอัดเข้า vector result และส่งต่อไปให้ฝ่ายแสดงผล
     return results;
 }

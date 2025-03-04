@@ -12,11 +12,11 @@ struct promotions_data {
 };
 
 struct Item {
-    int code; // เปลี่ยนจาก id เป็น code
+    int code; 
     string name;
     int quantity;
     int value;
-    bool BOGO; // เพิ่ม Boolean เพื่อระบุว่าสินค้าเป็นคู่หรือไม่
+    bool BOGO; // ระบุว่าสินค้าเป็นคู่หรือไม่
     int points;
     int discount;
     int freeItem;
