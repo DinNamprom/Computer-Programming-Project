@@ -4,7 +4,7 @@
 using namespace std;
 
 
-// โครงสร้างข้อมูลสินค้าที่ถูกคำนวณแล้ว
+// struct ข้อมูลสินค้าที่ถูกคำนวณแล้ว
 struct ItemResult {
     string name;
     int quantity; // ถ้า Buy One Get One ให้คูณ 2
@@ -15,7 +15,7 @@ struct ItemResult {
     double discount; // ราคาหลังหักส่วนลด
 };
 
-// โครงสร้างผลรวมราคาสินค้า
+// struct ผลรวมราคาสินค้า
 struct Summary {
     double sum; // ราคารวมหลังหักส่วนลด
     double vat; // ภาษีมูลค่าเพิ่ม 7%
@@ -26,18 +26,18 @@ struct Summary {
 // ฟังก์ชันประมวลผลรายการสินค้า
 vector<ItemResult> Itemprocessor(const vector<Item>& orders) {
     vector<ItemResult> results;
-    for (const auto& item : orders) { 
-        int newQuantity = item.BOGO ? item.quantity * 2 : item.quantity;
+    for (const auto& item : orders) { // ให้ลูปทั้ง vector ที่ส่งเข้ามา
+        int newQuantity = item.BOGO ? item.quantity * 2 : item.quantity; // ถ้า BOGO true ให้แถมสินค้าเพิ่ม
         double totalValue = item.value * item.quantity; // ราคาทั้งหมดก่อนหักส่วนลด
         double worth = totalValue * (item.discount / 100.0); // คำนวณส่วนลดที่ถูกหักไป
         double discountValue = totalValue - worth; // ราคาหลังหักส่วนลด
 
         results.push_back({item.name, newQuantity, (int)item.value, (int)totalValue, item.points, worth, discountValue});
-    }
+    } //จบด้วยการอัดเข้า vector result และส่งต่อไปให้ฝ่ายแสดงผล
     return results;
 }
 
-int calculatetpoint(const vector<ItemResult> &items) {
+int calculatetpoint(const vector<ItemResult> &items) { //ใช้คำนวณ point โดยรวมที่ลูกค้าจะได้
     int sum = 0;
     for (const auto& item: items) {
         sum += item.points;
@@ -46,17 +46,17 @@ int calculatetpoint(const vector<ItemResult> &items) {
 }
 
 // ฟังก์ชันคำนวณราคารวม
-vector<double> calculateSummary(const vector<ItemResult>& items) {
+vector<double> calculateSummary(const vector<ItemResult>& items) { // function คำนวณราคารวม จาก vector Itemresult
     double sum = 0;
     for (const auto& item : items) {
-        sum += item.discount;
+        sum += item.discount; //รวมจากราคาที่หักส่วนลดแล้ว
     }
-    double vatValue = sum * 0.07;
-    double totalWithVat = sum + vatValue;
-    return {sum, vatValue, totalWithVat};
+    double vatValue = sum * 0.07; //คำนวณ VAT 7%
+    double totalWithVat = sum + vatValue; //รวม vat
+    return {sum, vatValue, totalWithVat}; //ส่งเป็น vector
 }
 
-unordered_map<int, string> productNames;
+unordered_map<int, string> productNames; // container ไว้เก็บ รหัสสินค้าและชื่อสินค้า
 
 // ฟังก์ชันอ่านไฟล์สินค้า
 void loadProductNames(const string& filename) {
@@ -83,7 +83,7 @@ void loadProductNames(const string& filename) {
 }
 
 // ฟังก์ชันแสดงผลข้อมูลสินค้า
-void displayResults(const vector<ItemResult>& results) {
+void displayResults(const vector<ItemResult>& results) { //แสดงตัวอย่างข้อมูล ไม่ใช้ในการแสดงผล
     cout << fixed << setprecision(2); // กำหนดให้แสดงทศนิยม 2 ตำแหน่ง
     cout << "-----------------------------------------------------------------------------------\n";
     cout << "| Name     | Qty | Price/Unit | Total  | Points | Discount (-) | Final Price  |\n";
@@ -102,7 +102,7 @@ void displayResults(const vector<ItemResult>& results) {
     cout << "-----------------------------------------------------------------------------------\n";
 }
 
-void displaySummary(const vector<double>& summary) {
+void displaySummary(const vector<double>& summary) { //แสดงตัวอย่างข้อมูล ไม่ใช้ในการแสดงผล
     cout << "\n==================== SUMMARY ====================\n";
     cout << " Total Price (After Discount): " << fixed << setprecision(2) << summary[0] << " THB\n";
     cout << " VAT 7%:                      " << summary[1] << " THB\n";
@@ -110,17 +110,17 @@ void displaySummary(const vector<double>& summary) {
     cout << "=================================================\n";
 }
 
-vector<string> freeItems(const vector<Item>& items) {
-    vector<string> itsfree;
-    vector<product_data> productList;
+vector<string> freeItems(const vector<Item>& items) { //ฟังก์ชันแปลงรหัสสินค้าเป็นชื่อสินค้าที่เป็นของแถม
+    vector<string> itsfree; //เก็บชื่อสินค้าของแถม
+    vector<product_data> productList; //เก็บข้อมูลจากการอ่านไฟล์สินค้า struct อยู่ในช่อง data.cpp
     
     // โหลดข้อมูลสินค้า
-    input_product(".\\data\\products\\product_data.txt", productList);
+    input_product(".\\data\\products\\product_data.txt", productList); //อ่านไฟล์ข้อมูลสินค้าและใส่ไว้ใน productlist
     
     // ตรวจสอบสินค้าที่มีของแถม
     for (const auto& item : items) {
         auto it = find_if(productList.begin(), productList.end(), [&](const product_data& p) {
-            return p.code == item.freeItem;
+            return p.code == item.freeItem; //ลูปหาสินค้าที่ตรงกับรหัสสินค้า
         });
         
         if (it != productList.end()) {
@@ -131,7 +131,7 @@ vector<string> freeItems(const vector<Item>& items) {
     return itsfree;
 }
 
-void displayFreeItems(const vector<string>& freeItems) {
+void displayFreeItems(const vector<string>& freeItems) { //แสดงตัวอย่างข้อมูล ไม่ใช้ในการแสดงผล
     if (freeItems.empty()) {
         cout << "see you next time\n";
         return;
