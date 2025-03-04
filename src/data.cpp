@@ -138,32 +138,32 @@ void input_product(string filename,vector<product_data> &list) {
 void showdata(vector<product_data> product) {
     cout << "-----------------------------------------------------------------" << endl;
         cout << "| " << left << setw(40) << "product";
-        cout << left << setw(1) << "code";
-        cout << left << setw(15) << " price |" << endl;
+        cout << left << setw(15) << "code";
+        cout << left << setw(5) << " price |" << endl;
         cout << "-----------------------------------------------------------------" << endl;
         for (unsigned int i = 0;i < product.size();i++) {
             cout << "| " << left << setw(2) << i+1 ;
             cout << left << setw(1) << ".";
             cout << left << setw(37) << product[i].name;
-            cout << left << setw(5) << product[i].code;
-            cout << left << setw(15) << fixed << setprecision(2) << product[i].price << "$ |" << endl;
+            cout << left << setw(15) << product[i].code;
+            cout << left << setw(5) << fixed << setprecision(2) << product[i].price << "$ |" << endl;
         }
         cout << "-----------------------------------------------------------------" << endl;
 }
 
 void showorder(vector<order> order) {
     cout << "-----------------------------ORDER-------------------------------" << endl;
-    cout << left << setw(5) << "No.";
-    cout << left << setw(30) << "product";
-    cout << left << setw(15) << "code";
-    cout << left << setw(15) << "quantity";
-    cout << left << setw(15) << "price" << endl;
-    for (unsigned int i = 0; i < order.size(); i++) {
-        cout << right << setw(5) << i + 1;
-        cout << left << setw(30) << order[i].name;
-        cout << left << setw(15) << order[i].code;
-        cout << left << setw(15) << order[i].n;
-        cout << right << setw(15) << fixed << setprecision(2) << order[i].price << "$" << endl;
+    cout << left << setw(43) << "product";
+    cout << left << setw(7) << "code";
+    cout << left << setw(10) << "quantity";
+    cout << left << setw(5) << "price" << endl;
+    for (unsigned int i = 0;i < order.size();i++) {
+        cout << left << setw(2) << i+1 ;
+        cout << left << setw(1) << ".";
+        cout << left << setw(40) << order[i].name;
+        cout << left << setw(10) << order[i].code;
+        cout << left << setw(6) << order[i].n;
+        cout << left << setw(5) << fixed << setprecision(2) << order[i].price << "$" << endl;
     }
     cout << "-----------------------------------------------------------------" << endl;
 }
